@@ -21,7 +21,7 @@ public class Main {
                     return;
 
                 } else {
-                    if (inputString.isEmpty()) {
+                    if (inputString.isEmpty() || inputString == null) {
                         System.out.println("Please, input your weight data!");
                         inputString = scanner.nextLine();
                     }
@@ -35,7 +35,7 @@ public class Main {
                     return;
 
                 } else {
-                    if (inputString.isEmpty()) {
+                    if (inputString.isEmpty() || inputString == null) {
                         System.out.println("Please, input your distance data!");
                         inputString = scanner.nextLine();
                     }
