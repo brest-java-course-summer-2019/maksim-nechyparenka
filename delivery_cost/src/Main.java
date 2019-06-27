@@ -8,62 +8,28 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        BigDecimal weight, distance, pricePerKm;
-        BigDecimal pricePerKg = new BigDecimal("30");
+        BigDecimal weight, distance, pricePerKg;
 
-        Scanner scanner = new Scanner(System.in);
+        FileReader file = new FileReader();
+        GetPriceList pricelist = new GetPriceList();
 
-        System.out.println("Enter the weight in kilograms or 'q, Q' for quit: ");
-        String inputString = scanner.nextLine();
+        DataInput input = new DataInput();
 
-                if (inputString.equals("Q") || inputString.equals("q")) {
-                    System.out.println("\nBye!");
-                    return;
+        System.out.println("Enter the weight in kilograms or 'q' for quit: ");
 
-                } else {
-                    if (inputString.isEmpty() || inputString == null) {
-                        System.out.println("Please, input your weight data!");
-                        inputString = scanner.nextLine();
-                    }
-                    weight = new BigDecimal(inputString);
+        weight = input.dataInput();
 
-        System.out.println("Enter the distance in kilometers or 'q, Q' for quit: ");
-        inputString = scanner.nextLine();
+        System.out.println("Enter the distance in kilometers or 'q' for quit: ");
 
-                if (inputString.equals("Q") || inputString.equals("q")) {
-                    System.out.println("\nBye!");
-                    return;
+        distance = input.dataInput();
 
-                } else {
-                    if (inputString.isEmpty() || inputString == null) {
-                        System.out.println("Please, input your distance data!");
-                        inputString = scanner.nextLine();
-                    }
-                    distance = new BigDecimal(inputString);
-                }
+        System.out.println("Value of weight = " + weight);
+        System.out.println("Value of distance = " + distance);
 
-            System.out.println("Value of weight = " + weight);
-            System.out.println("Value of distance = " + distance);
+        pricePerKg = new BigDecimal(file.readFile().getProperty("const.price.per.kg"));
 
-            //Get properties
-            FileInputStream fis;
-            Properties pro = new Properties();
-
-            try {
-                fis = new FileInputStream("resources/data.properties");
-                pro.load(fis);
-            } catch (FileNotFoundException e) {
-                System.out.println("Price datas not found!");
-            }
-
-            if (distance.compareTo(new BigDecimal(100)) == 1) {
-            //Get prices
-            pricePerKm = new BigDecimal(pro.getProperty("km.price.more100"));
-            } else pricePerKm = new BigDecimal(pro.getProperty("km.price.less100"));
-
-            BigDecimal price = weight.multiply(pricePerKg).add(distance.multiply(pricePerKm));
-            System.out.println("Price = " + price);
-        }
+        BigDecimal price = weight.multiply(pricePerKg).add(distance.multiply(pricelist.getPrice(distance)));
+        System.out.println("Price = " + price);
     }
 }
 
