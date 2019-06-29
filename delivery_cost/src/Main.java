@@ -1,3 +1,4 @@
+import checkdata.CheckInputData;
 import file.GetPriceList;
 import input.DataInput;
 import file.FileReader;
@@ -36,14 +37,11 @@ public class Main {
             pricePerKg = new BigDecimal(file.readFile().getProperty("const.price.per.kg"));
 
             BigDecimal price = weight.multiply(pricePerKg).add(distance.multiply(pricelist.getPrice(distance)));
-            System.out.println("Contract Price is = " + price);
+            System.out.println("Contract Total Cost is = " + price);
 
             System.out.println("Do you wish to continue? Make your choice: y / n");
             exit = scanner.next();
-            //scanner.nextLine();
 
-        } while (exit.equals("y"));
+        } while (exit.toLowerCase().equals("y"));
     }
 }
-
-
