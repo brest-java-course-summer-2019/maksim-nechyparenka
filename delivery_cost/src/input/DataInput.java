@@ -1,3 +1,5 @@
+package input;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -17,18 +19,20 @@ public class DataInput {
 
         while (inputString.isEmpty() || inputString == null) {
             inputString = scanner.nextLine();
-        }
 
-        if (inputString.toLowerCase().equals("q")) {
-            System.out.println("\nBye!");
-            System.exit(0);
+            if (inputString.toLowerCase().equals("q")) {
+                System.out.println("\nBye!");
+                System.exit(0);
+                //scanner.close();
+                return null;
 
-        } else {
+            } else {
 
-            try {
-                data = new BigDecimal(inputString);
-            } catch (NumberFormatException e) {
-                System.out.println("Please, input correct data!");
+                try {
+                    data = new BigDecimal(inputString);
+                } catch (NumberFormatException e) {
+                    System.out.println("Please, input correct data!");
+                }
             }
         }
 

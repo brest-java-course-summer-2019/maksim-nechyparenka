@@ -1,3 +1,5 @@
+package file;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -6,22 +8,23 @@ import java.util.Properties;
 public class FileReader {
 
     FileInputStream fis;
-    Properties pro = new Properties();
+    static private final String FILE_PATH = "resources/data.properties";
+    Properties properties = new Properties();
 
     public FileReader() {
         this.fis = fis;
-        this.pro = pro;
+        this.properties = properties;
     }
 
     public Properties readFile() throws IOException {
 
         try {
-            fis = new FileInputStream("resources/data.properties");
-            pro.load(fis);
+            fis = new FileInputStream(FILE_PATH);
+            properties.load(fis);
         } catch (FileNotFoundException e) {
             System.out.println("PriceList not found!");
         }
 
-        return pro;
+        return properties;
     }
 }
