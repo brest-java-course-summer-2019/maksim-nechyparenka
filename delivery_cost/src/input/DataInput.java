@@ -23,7 +23,7 @@ public class DataInput {
             if (inputString.toLowerCase().equals("q")) {
                 System.out.println("\nBye!");
                 System.exit(0);
-                //scanner.close();
+                scanner.close();
                 return null;
 
             } else {
