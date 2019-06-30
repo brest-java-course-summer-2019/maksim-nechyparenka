@@ -4,6 +4,8 @@ body {
 
 h1, h2 {
     font-family: arial, sans-serif;
+    vertical-align: middle;
+    word-spacing: inherit;
 }
 
 table {
