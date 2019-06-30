@@ -42,6 +42,6 @@ public class Main {
             System.out.println("Do you wish to continue? Make your choice: y / n");
             exit = scanner.next();
 
-        } while (exit.toLowerCase().equals("y"));
+        } while (exit.trim().toLowerCase().equals("y"));
     }
 }

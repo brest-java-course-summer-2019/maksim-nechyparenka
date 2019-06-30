@@ -22,9 +22,11 @@ public class DataInput {
         String inputString = "";
 
         while (inputString.isEmpty() || inputString == null || flag) {
+
             inputString = scanner.nextLine();
 
             if (inputString.trim().toLowerCase().equals("q")) {
+
                 System.out.println("\nBye!");
                 System.exit(0);
                 scanner.close();
