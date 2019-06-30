@@ -1,11 +1,15 @@
 package input;
 
+import checkdata.CheckInputData;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class DataInput {
 
     BigDecimal data;
+    CheckInputData check;
+    boolean flag = true;
     Scanner scanner = new Scanner(System.in);
 
     public DataInput() {
@@ -17,10 +21,10 @@ public class DataInput {
 
         String inputString = "";
 
-        while (inputString.isEmpty() || inputString == null) {
+        while (inputString.isEmpty() || inputString == null || flag) {
             inputString = scanner.nextLine();
 
-            if (inputString.toLowerCase().equals("q")) {
+            if (inputString.trim().toLowerCase().equals("q")) {
                 System.out.println("\nBye!");
                 System.exit(0);
                 scanner.close();
@@ -28,11 +32,10 @@ public class DataInput {
 
             } else {
 
-                try {
-                    data = new BigDecimal(inputString);
-                } catch (NumberFormatException e) {
-                    System.out.println("Please, input correct data!");
-                }
+                    if (check.checkData(inputString)) {
+                        data = new BigDecimal(inputString);
+                        flag = false;
+                    } else flag = true;
             }
         }
 
