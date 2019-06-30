@@ -5,6 +5,9 @@ import java.util.regex.Pattern;
 
 public class CheckInputData {
 
+    public CheckInputData() {
+    }
+
     public static boolean checkData(String data) {
 
         Pattern pattern = Pattern.compile("(\\d*\\.?\\d*)");
