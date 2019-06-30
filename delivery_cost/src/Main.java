@@ -43,5 +43,7 @@ public class Main {
             exit = scanner.next();
 
         } while (exit.trim().toLowerCase().equals("y"));
+
+        scanner.close();
     }
 }
