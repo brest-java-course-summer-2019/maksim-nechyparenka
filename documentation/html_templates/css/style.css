@@ -11,21 +11,19 @@ h1, h2 {
 table {
     font-family: arial, sans-serif;
     font-size: 22px;
-    border-collapse: collapse;
+    border-collapse: separate;
     width: 70%;
 }
 
-th, td {
+th {
     border: 1px solid #dddddd;
+    background-color: #dddddd;
     text-align: center;
     padding: 8px;
 }
 
-tr:nth-child(odd) {
-    background-color: #dddddd;
-}
-
-tr:nth-child(even) {
+td {
     background-color: white;
+    text-align: center;
 }
 
