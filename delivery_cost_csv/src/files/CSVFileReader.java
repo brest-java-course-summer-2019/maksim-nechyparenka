@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-public class CSVFileReader implements FileReader {
+public class CSVFileReader implements DataFileReader {
 
     @Override
     public Map<Integer, BigDecimal> readData(String filePath) throws IOException {

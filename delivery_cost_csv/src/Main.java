@@ -1,3 +1,4 @@
+import calculator.Calculator;
 import calculator.ContractCost;
 import files.PriceReader;
 import input.*;
@@ -15,18 +16,26 @@ public class Main {
         PriceReader price = new PriceReader();
         Scanner scanner = new Scanner(System.in);
         ConsoleInput input = new ConsoleInput(scanner);
+        String exit;
 
-        System.out.println("Enter weight in kg or 'q' for quit:");
-        weight = input.getData();
+        do {
 
-        System.out.println("Enter distance in km or 'q' for quit:");
-        distance = input.getData();
+            System.out.println("Enter weight in kg or 'q' for quit:");
+            weight = input.getData();
 
-        System.out.println("Value of weight = " + weight);
-        System.out.println("Value of distance = " + distance);
-        System.out.println("Constant price per kg is: " + pricePerKg);
+            System.out.println("Enter distance in km or 'q' for quit:");
+            distance = input.getData();
 
-        ContractCost cost = new ContractCost(weight, pricePerKg, distance, price.getPrice(distance));
-        System.out.println("Total COST = " + cost);
+            System.out.println("Value of weight = " + weight + " kg");
+            System.out.println("Value of distance = " + distance + " km");
+            System.out.println("Constant price per kg is: " + pricePerKg);
+
+            Calculator cost = new ContractCost(weight, pricePerKg, distance, price.getPrice(distance));
+            System.out.println("Total COST = " + cost);
+
+            System.out.println("Do you wish to continue? Make your choice: y / n");
+            exit = scanner.next();
+
+        } while (exit.trim().toLowerCase().equals("y"));
     }
 }

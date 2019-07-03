@@ -7,6 +7,7 @@ public class ConsoleInput {
 
     CheckInput check = new CheckInput();
     Scanner scanner;
+    BigDecimal input;
 
     public ConsoleInput(Scanner scanner) {
         this.scanner = scanner;
@@ -19,8 +20,7 @@ public class ConsoleInput {
         if (value.getType() != EnteredValue.Types.EXIT) {
 
             CorrectValue correctValue = (CorrectValue) value;
-            //System.out.println("Value: " + correctValue.getValue());
-            return (BigDecimal) correctValue.getValue();
+            return correctValue.getValue();
 
         } else {
 
