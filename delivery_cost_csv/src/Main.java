@@ -1,6 +1,6 @@
 import calculator.Calculator;
 import calculator.ContractCost;
-import files.PriceReader;
+import price.PriceSelector;
 import input.*;
 
 import java.io.IOException;
@@ -13,7 +13,7 @@ public class Main {
 
         BigDecimal weight, distance;
         BigDecimal pricePerKg = new BigDecimal("30");
-        PriceReader price = new PriceReader();
+        PriceSelector price = new PriceSelector();
         Scanner scanner = new Scanner(System.in);
         ConsoleInput input = new ConsoleInput(scanner);
         String exit;
