@@ -30,7 +30,7 @@ public class Main {
             System.out.println("Value of distance = " + distance + " km");
             System.out.println("Constant price per kg is: " + pricePerKg);
 
-            Calculator cost = new ContractCost(weight, pricePerKg, distance, price.getPrice(distance));
+            Calculator cost = new ContractCost(weight, pricePerKg, distance, price.selectValue(distance));
             System.out.println("Total COST = " + cost);
 
             System.out.println("Do you wish to continue? Make your choice: y / n");

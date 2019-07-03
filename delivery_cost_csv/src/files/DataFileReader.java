@@ -6,8 +6,6 @@ import java.util.Map;
 
 public interface DataFileReader {
 
-    default Map<Integer, BigDecimal> readData(final String filePath) throws IOException {
-        return null;
-    }
-
+    Map<Integer, BigDecimal> readData(final String filePath) throws IOException;
+    
 }
