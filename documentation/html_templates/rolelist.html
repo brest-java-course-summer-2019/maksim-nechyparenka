@@ -3,47 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/b72194b912.js"></script>
     <title>Role List</title>
 </head>
 <body>
 
 <header>
-    <nav>
-        <table>
-            <tr>
-                <th><a href="roles.html">Roles</a></th>
-                <th><a href="goods.html">Goods</a></th>
-                <th><a href="customers.html">Customers</a></th>
-            </tr>
-        </table>
-    </nav>
-
+        <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                   <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="rolelist.html" button type="button" class="btn btn-secondary">Roles</button></a>
+                        <a href="goods.html" button type="button" class="btn btn-secondary">Goods</button></a>
+                        <a href="customers.html" button type="button" class="btn btn-secondary">Customers</button></a>
+                   </div>
+                </ul>
+            </div>
+        </nav>
 </header>
 
-<h1>ROLE LIST<a href="roles.html"><img src="img/add.png" alt="Add role" width="35" height="35"
-                                       align="absmiddle" hspace="20"></a></h1>
+<nav id="main-header"
+     class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
+    <span class="navbar-brand text-uppercase mr-auto"><h1>ROLE LIST</h1></span>
+    <ul class="navbar-nav float-right">
+        <li class="nav-item">
+            <a href="roles.html"
+               align="absmiddle" hspace="20"
+               class="btn btn-light"
+               title="Add role"
+               data-toggle="tooltip"
+               data-placement="bottom">
+                <i class="fas fa-user-plus fa-2x"></i>
+                <span class="d-none d-sm-inline"></span></a>
+        </li>
+    </ul>
+</nav>
 
-<table>
-    <thead>
-    <tr>
-        <th>Role Name</a></th>
-        <th>Qty</a></th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    <tr>
-    <td>Admnistrator</td>
-    <td>1</td>
-        <td width="5%"><a href="editrole.html"><img src="img/pen.png" alt="Edit" width="22" height="22"></a></td>
-        <td width="5%"><a href="#"><img src="img/trash.png" alt="Delete" width="22" height="22"></a></td>
-    </tr>
-    <tr>
-    <td>Customer</td>
-    <td>11</td>
-        <td width="5%"><a href="editrole.html"><img src="img/pen.png" alt="Edit" width="22" height="22"></a></td>
-        <td width="5%"><a href="#"><img src="img/trash.png" alt="Delete" width="22" height="22"></a></td>
-    </tr>
-</table>
+<section id="roles">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+
+                <table class="table table-striped">
+                    <thead class="thead-blue">
+                    <tr align="center">
+                        <th>Role name</th>
+                        <th>Quantity</th>
+                        <th>Edit/Delete role</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Administrator</td>
+                        <td>1</td>
+                        <td class="text-center">
+                            <a href="roles.html"
+                               class="btn-sm btn-outline-secondary"
+                               title="Edit role"
+                               data-toggle="tooltip"
+                               data-placement="center">
+                                <i class="fa fa-pencil"></i> <span
+                                    class="d-none d-md-inline">Edit</span></a>
+                            <span data-toggle="modal" data-target="#deleteDialog">
+                                <a href="#" class="btn-sm btn-outline-secondary"
+                                   title="delete department"
+                                   data-toggle="tooltip"
+                                   data-placement="top">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
+                                </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Customer</td>
+                        <td>11</td>
+                        <td class="text-center">
+                            <a href="roles.html"
+                               class="btn-sm btn-outline-secondary"
+                               title="Edit role"
+                               data-toggle="tooltip"
+                               data-placement="center">
+                                <i class="fa fa-pencil"></i> <span
+                                    class="d-none d-md-inline">Edit</span></a>
+                            <span data-toggle="modal" data-target="#deleteDialog">
+                                <a href="#" class="btn-sm btn-outline-secondary"
+                                   title="delete department"
+                                   data-toggle="tooltip"
+                                   data-placement="top">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
+                                </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+</section>
 
 
 <footer>
@@ -51,5 +114,15 @@
     &copy Maksim Nechyparenka
 </footer>
 
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="js/jquery-3.3.1.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 </body>
 </html>

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <title>Administrator</title>
 </head>
 
@@ -10,20 +12,30 @@
 <h1>Administrator</h1>
 
 <header>
-    <nav>
-        <table>
-            <tr>
-            <th><a href="roles.html">Roles</a></th>
-            <th><a href="goods.html">Goods</a></th>
-            <th><a href="customers.html">Customers</a></th>
-            </tr>
-        </table>
+    <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="rolelist.html" button type="button" class="btn btn-secondary">Roles</button></a>
+                    <a href="goods.html" button type="button" class="btn btn-secondary">Goods</button></a>
+                    <a href="customers.html" button type="button" class="btn btn-secondary">Customers</button></a>
+                </div>
+            </ul>
+        </div>
     </nav>
-
 </header>
 <footer>
     <p></p>
     &copy Maksim Nechyparenka
 </footer>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="js/jquery-3.3.1.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
