@@ -28,7 +28,7 @@ public class Main {
 
             System.out.println("Value of weight = " + weight + " kg");
             System.out.println("Value of distance = " + distance + " km");
-            System.out.println("Constant price per kg is: " + pricePerKg);
+            System.out.println("Constant price per kg is: " + pricePerKg + " USD");
 
             Calculator cost = new ContractCost(weight, pricePerKg, distance, price.selectValue(distance));
             System.out.println("Total COST = " + cost);
