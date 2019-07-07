@@ -10,17 +10,17 @@ public class ContractCost implements Calculator {
     private BigDecimal pricePerKm;
     private BigDecimal totalCost;
 
-    public ContractCost(BigDecimal weight, BigDecimal pricePerKg, BigDecimal distance, BigDecimal pricePerKm) {
-
-        this.weight = weight;
-        this.pricePerKg = pricePerKg;
-        this.distance = distance;
-        this.pricePerKm = pricePerKm;
-        this.totalCost = calculateContractCost();
-    }
+//    public ContractCost() {
+//
+//        this.weight = weight;
+//        this.pricePerKg = pricePerKg;
+//        this.distance = distance;
+//        this.pricePerKm = pricePerKm;
+//        this.totalCost = calculateContractCost(weight, pricePerKg, distance, pricePerKm);
+//    }
 
     @Override
-    public BigDecimal calculateContractCost() {
+    public BigDecimal calculateContractCost(BigDecimal weight, BigDecimal pricePerKg, BigDecimal distance, BigDecimal pricePerKm) {
 
         return weight.multiply(pricePerKg).add(distance.multiply(pricePerKm));
     }

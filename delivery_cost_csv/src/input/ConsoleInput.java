@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class ConsoleInput {
 
-    CheckInput check = new CheckInput();
-    Scanner scanner;
+    private CheckInput check = new CheckInput();
+    private Scanner scanner;
     BigDecimal input;
 
     public ConsoleInput(Scanner scanner) {
@@ -30,7 +30,7 @@ public class ConsoleInput {
         }
     }
 
-    public EnteredValue receiveValueFromConsole() {
+    private EnteredValue receiveValueFromConsole() {
 
         EnteredValue enteredValue = new IncorrectValue();
 

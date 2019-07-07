@@ -10,14 +10,14 @@ import java.util.Map;
 
 public class PriceSelector implements ValueSelector {
 
-    static private final String CSV_FILE_PATH = "/resources/price_per_km.csv";
+    //static private final String CSV_FILE_PATH = "/price_per_km.csv";
 
-    DataFileReader fileReader = new CSVFileReader();
-    BigDecimal price;
+    private DataFileReader fileReader = new CSVFileReader();
+    private BigDecimal price;
 
-    public BigDecimal selectValue(BigDecimal distance) throws IOException {
+    public BigDecimal selectValue(BigDecimal distance, String path) throws IOException {
 
-        Map<Integer, BigDecimal> Prices = fileReader.readData(CSV_FILE_PATH);
+        Map<Integer, BigDecimal> Prices = fileReader.readData(path);
 
         if (Prices == null || Prices.isEmpty()) {
 

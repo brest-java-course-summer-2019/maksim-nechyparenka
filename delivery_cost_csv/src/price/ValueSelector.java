@@ -5,6 +5,6 @@ import java.math.BigDecimal;
 
 public interface ValueSelector {
 
-    BigDecimal selectValue(BigDecimal value) throws IOException;
+    BigDecimal selectValue(BigDecimal value, String path) throws IOException;
 
 }
