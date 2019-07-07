@@ -14,9 +14,9 @@ public class PriceSelector implements ValueSelector {
     Integer desiredKey;
     private BigDecimal price;
 
-    public BigDecimal selectValue(BigDecimal distance, String path) throws IOException {
+    public BigDecimal selectValue(BigDecimal distance, String filePath) throws IOException {
 
-        SortedMap<Integer, BigDecimal> Prices = new TreeMap<>(fileReader.readData(path));
+        SortedMap<Integer, BigDecimal> Prices = new TreeMap<>(fileReader.readData(filePath));
 
         desiredKey = Prices.firstKey();
 
