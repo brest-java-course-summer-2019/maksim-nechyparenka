@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         BigDecimal weight, distance;
-        BigDecimal pricePerKg = new BigDecimal("30");
+        BigDecimal pricePerKg = new BigDecimal("10");
         PriceSelector price = new PriceSelector();
         Scanner scanner = new Scanner(System.in);
         ConsoleInput input = new ConsoleInput(scanner);
@@ -35,7 +35,7 @@ public class Main {
             Calculator cost = new ContractCost();
 
             System.out.println("Total COST = " + cost.calculateContractCost(weight, pricePerKg, distance, price
-                    .selectValue(distance, CSV_FILE_PATH)));
+                    .selectValue(distance, CSV_FILE_PATH)) + " USD");
 
             System.out.println("Do you wish to continue? Make your choice: y / n");
             exit = scanner.next();
