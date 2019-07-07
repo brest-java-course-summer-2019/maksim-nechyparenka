@@ -10,8 +10,6 @@ import java.util.Map;
 
 public class PriceSelector implements ValueSelector {
 
-    //static private final String CSV_FILE_PATH = "/price_per_km.csv";
-
     private DataFileReader fileReader = new CSVFileReader();
     private BigDecimal price;
 

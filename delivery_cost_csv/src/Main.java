@@ -2,7 +2,6 @@ import calculator.Calculator;
 import calculator.ContractCost;
 import price.PriceSelector;
 import input.*;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Scanner;
