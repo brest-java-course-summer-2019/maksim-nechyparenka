@@ -11,18 +11,17 @@
 <nav id="main-header"
      class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
     <span class="navbar-brand text-uppercase mr-auto"><h1>PRODUCTS LIST</h1></span>
-    <ul class="navbar-nav float-right">
-        <li class="nav-item">
-            <a href="roles.html"
+    <span class="navbar-nav float-right">
+            <a href="#"
                align="absmiddle"
                class="btn btn-light"
                title="Add product"
-               data-toggle="tooltip"
+               data-target="#addModal"
+               data-toggle="modal"
                data-placement="left">
-                <i class="far fa-plus-square fa-3x"></i>
+                <i class="fa fa-plus-square fa-3x"></i>
                 <span class="d-none d-sm-inline"></span></a>
-        </li>
-    </ul>
+    </span>
 </nav>
 
 <section id="roles">
@@ -30,12 +29,25 @@
         <div class="row">
             <div class="col">
                 <div class="card">
-                    <table class="table table-hover table-borderless">
-                        <thead class="thead-dark">
-                        <tr align="center">
+                    <table class="table table-hover table-borderless" class="align-middle">
+                        <thead class="thead-dark" class="align-middle">
+                        <tr align="center" class="align-middle">
                             <th>No.</th>
                             <th>Product name</th>
-                            <th>Category</th>
+                            <th>
+                                <!-- Category sorting in table -->
+                                <div class="dropdown" align="center" class="align-middle">
+                                    <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" type="button" id="categorySoting" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="align-middle">
+                                        Category
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Cell phones & Accessories</a>
+                                        <a class="dropdown-item" href="#">Clothing</a>
+                                        <a class="dropdown-item" href="#">Computers, Tablets</a>
+                                    </div>
+                                </div>
+
+                            </th>
                             <th>Quantity</th>
                             <th>Price, USD</th>
                             <th>Edit / Delete product</th>
@@ -127,12 +139,12 @@
     </div>
 </section>
 
-<!-- EditModal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="EditModal" aria-hidden="true">
+<!-- AddModal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="AddModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModaltitle">Edit product</h5>
+                <h5 class="modal-title" id="addModaltitle">Add product</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -140,7 +152,7 @@
             <div class="modal-body">
                 <div class="input-group flex-nowrap">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="addon-wrapping">Product name</span>
+                        <span class="input-group-text" id="addon-wrapping">New Product</span>
                     </div>
                     <input type="text" class="form-control" placeholder="Product name" aria-label="Username" aria-describedby="addon-wrapping">
                 </div>
@@ -188,6 +200,93 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- EditModal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="EditModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModaltitle">Edit product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping">Product name</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Product name" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+                <p></p>
+
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="categoryChoosing" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Choose category
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Cell phones & Accessories</a>
+                        <a class="dropdown-item" href="#">Clothing</a>
+                        <a class="dropdown-item" href="#">Computers, Tablets</a>
+                    </div>
+                </div>
+
+                <p></p>
+
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping">Quantity</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Product quantity" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+
+                <p></p>
+
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping">Price, USD</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Product price" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+
+                <p></p>
+
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping">Notes</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Some notes" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DeleteModal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModaltitle">Delete confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you really want to delete this product?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Delete</button>
             </div>
         </div>
     </div>
