@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 
-import static java.util.Map.Entry.comparingByKey;
-
 
 public class PriceSelector implements ValueSelector {
 
@@ -18,11 +16,9 @@ public class PriceSelector implements ValueSelector {
 
     public BigDecimal selectValue(BigDecimal distance, String path) throws IOException {
 
-        Map<Integer, BigDecimal> Prices = fileReader.readData(path);
+        SortedMap<Integer, BigDecimal> Prices = new TreeMap<>(fileReader.readData(path));
 
-        SortedMap<Integer, BigDecimal> sortedPrices = new TreeMap<>(Prices);
-
-        desiredKey = sortedPrices.firstKey();
+        desiredKey = Prices.firstKey();
 
         if (Prices == null || Prices.isEmpty()) {
 
@@ -30,15 +26,15 @@ public class PriceSelector implements ValueSelector {
 
         } else {
 
-            for (Map.Entry<Integer, BigDecimal> priceMap : sortedPrices.entrySet()) {
+            for (Map.Entry<Integer, BigDecimal> priceMap : Prices.entrySet()) {
 
                 if(distance.doubleValue() < desiredKey.doubleValue()) {
-                    price = sortedPrices.get(desiredKey);
+                    price = Prices.get(desiredKey);
 
                 } else {
 
                     if (distance.doubleValue() >= priceMap.getKey().doubleValue()) {
-                        price = sortedPrices.get(priceMap.getKey());
+                        price = Prices.get(priceMap.getKey());
                     }
                 }
             }
