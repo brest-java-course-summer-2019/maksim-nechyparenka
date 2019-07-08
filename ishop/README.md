@@ -1,3 +1,3 @@
-###### **MAVEN project**
+#### **MAVEN project**
 
 Maven home project initialisation
