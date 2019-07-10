@@ -1,4 +1,4 @@
-package com.epam.brest2019;
+package com.epam.brest2019.model;
 
 /**
  * Hello world!

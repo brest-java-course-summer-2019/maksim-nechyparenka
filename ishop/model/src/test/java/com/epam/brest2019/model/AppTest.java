@@ -1,4 +1,4 @@
-package com.epam.brest2019;
+package com.epam.brest2019.model;
 
 import static org.junit.Assert.assertTrue;
 

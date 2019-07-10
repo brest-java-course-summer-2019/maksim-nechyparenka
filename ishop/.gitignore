@@ -11,8 +11,9 @@ Compiled class file
 .mtj.tmp/
 
 .idea/
-out/
+/out/
 *.iml
+/target/
 
 # Package Files #
 *.jar
