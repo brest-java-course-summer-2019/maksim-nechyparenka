@@ -14,7 +14,7 @@ public class PriceSelector implements ValueSelector {
     Integer desiredKey;
     private BigDecimal price;
 
-    public BigDecimal selectValue(BigDecimal distance, String filePath) throws IOException {
+    public BigDecimal selectValue(BigDecimal value, String filePath) throws IOException {
 
         SortedMap<Integer, BigDecimal> Prices = new TreeMap<>(fileReader.readData(filePath));
 
@@ -28,12 +28,12 @@ public class PriceSelector implements ValueSelector {
 
             for (Map.Entry<Integer, BigDecimal> priceMap : Prices.entrySet()) {
 
-                if(distance.doubleValue() < desiredKey.doubleValue()) {
+                if(value.doubleValue() < desiredKey.doubleValue()) {
                     price = Prices.get(desiredKey);
 
                 } else {
 
-                    if (distance.doubleValue() >= priceMap.getKey().doubleValue()) {
+                    if (value.doubleValue() >= priceMap.getKey().doubleValue()) {
                         price = Prices.get(priceMap.getKey());
                     }
                 }
