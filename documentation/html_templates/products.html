@@ -4,13 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <title>Goods</title>
+    <title>Products</title>
 </head>
 <body>
 
+<header>
+    <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="administrator.html"
+                       align="absmiddle"
+                       class="btn btn-light"
+                       title="Administrator console"
+                       data-placement="right">
+                        <i class="fas fa-user-shield"></i>
+                        <span class="d-none d-sm-inline"></span></a>
+                    <a href="roles.html" button type="button" class="btn btn-secondary">Roles</button></a>
+                    <a href="products.html" button type="button" class="btn btn-secondary">Products</button></a>
+                    <a href="customers.html" button type="button" class="btn btn-secondary">Customers</button></a>
+                </div>
+            </ul>
+        </div>
+    </nav>
+</header>
+
 <nav id="main-header"
      class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
-    <span class="navbar-brand text-uppercase mr-auto"><h1>PRODUCTS LIST</h1></span>
+    <span class="navbar-brand text-uppercase mr-auto"><h1>PRODUCTS</h1></span>
     <span class="navbar-nav float-right">
             <a href="#"
                align="absmiddle"
@@ -37,7 +61,7 @@
                             <th>
                                 <!-- Category sorting in table -->
                                 <div class="dropdown" align="center" class="align-middle">
-                                    <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" type="button" id="categorySoting" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="align-middle">
+                                    <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-toggle-split" type="button" id="categorySoting" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="align-middle">
                                         Category
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -48,10 +72,10 @@
                                 </div>
 
                             </th>
+                            <th>Receipt Date</th>
                             <th>Quantity</th>
                             <th>Price, USD</th>
-                            <th>Edit / Delete product</th>
-                            <th>Notes</th>
+                            <th>Edit / Delete</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -59,6 +83,7 @@
                             <td>1</td>
                             <td>Samsung galaxy s8 plus g955f</td>
                             <td>Cell phones & Accessories</td>
+                            <td>28.12.2018</td>
                             <td>8</td>
                             <td>350.00</td>
                             <td class="text-center">
@@ -79,12 +104,12 @@
                                     <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
                             </span>
                             </td>
-                            <td></td>
                         </tr>
                         <tr align="center">
                             <td>2</td>
                             <td>Puma Retro Womens Short Sleeves Black Top T-Shirt</td>
                             <td>Clothing</td>
+                            <td>08.11.2018</td>
                             <td>5</td>
                             <td>15.00</td>
                             <td class="text-center">
@@ -104,12 +129,12 @@
                                     <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
                                 </span>
                             </td>
-                            <td></td>
                         </tr>
                         <tr align="center">
                             <td>3</td>
                             <td>Lenovo ThinkPad X240</td>
                             <td>Computers, Tablets</td>
+                            <td>10.02.2019</td>
                             <td>7</td>
                             <td>550.00</td>
                             <td class="text-center">
@@ -129,7 +154,6 @@
                                     <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
                                 </span>
                             </td>
-                            <td></td>
                         </tr>
                         </tbody>
                     </table>
@@ -218,7 +242,7 @@
             <div class="modal-body">
                 <div class="input-group flex-nowrap">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="addon-wrapping">Product name</span>
+                        <span class="input-group-text" id="addon-product">Edit product name</span>
                     </div>
                     <input type="text" class="form-control" placeholder="Product name" aria-label="Username" aria-describedby="addon-wrapping">
                 </div>
@@ -239,7 +263,16 @@
 
                 <div class="input-group flex-nowrap">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="addon-wrapping">Quantity</span>
+                        <span class="input-group-text" id="addon-date">Edit receipt date</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Receipt date" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+
+                <p></p>
+
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-quantity">Edit quantity</span>
                     </div>
                     <input type="text" class="form-control" placeholder="Product quantity" aria-label="Username" aria-describedby="addon-wrapping">
                 </div>
@@ -248,7 +281,7 @@
 
                 <div class="input-group flex-nowrap">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="addon-wrapping">Price, USD</span>
+                        <span class="input-group-text" id="addon-price">Edit price, USD</span>
                     </div>
                     <input type="text" class="form-control" placeholder="Product price" aria-label="Username" aria-describedby="addon-wrapping">
                 </div>
@@ -257,7 +290,7 @@
 
                 <div class="input-group flex-nowrap">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="addon-wrapping">Notes</span>
+                        <span class="input-group-text" id="addon-notes">Edit notes</span>
                     </div>
                     <input type="text" class="form-control" placeholder="Some notes" aria-label="Username" aria-describedby="addon-wrapping">
                 </div>
