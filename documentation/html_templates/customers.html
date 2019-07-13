@@ -35,6 +35,7 @@
 <nav id="main-header"
      class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
     <span class="navbar-brand text-uppercase mr-auto"><h1>CUSTOMERS</h1></span>
+
     <span class="navbar-nav float-right">
             <a href="#"
                align="absmiddle"
@@ -47,6 +48,34 @@
                 <span class="d-none d-sm-inline"></span></a>
     </span>
 </nav>
+
+    <!-- DateSorting -->
+    <div class="container justify-content-left" style="margin-left:30px">
+        <div class="row align-items-center justify-content-start">
+            <p>Sort by registration period:</p>
+        <div class='col-sm-3'>
+            <div class="form-group">
+                <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
+                    <div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='col-sm-3'>
+            <div class="form-group">
+                <div class="input-group date" id="datetimepicker8" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
+                    <div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
 
 <section id="roles">
     <div class="container-fluid">
@@ -333,10 +362,27 @@
 <script src="js/jquery-3.4.1.slim.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/moment.js"></script>
+<script type="text/javascript" src="js/tempusdominus-bootstrap-4.min.js"></script>
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+</script>
+
+<script>
+    $(function () {
+        $('#datetimepicker7').datetimepicker();
+        $('#datetimepicker8').datetimepicker({
+            useCurrent: false
+        });
+        $("#datetimepicker7").on("change.datetimepicker", function (e) {
+            $('#datetimepicker8').datetimepicker('minDate', e.date);
+        });
+        $("#datetimepicker8").on("change.datetimepicker", function (e) {
+            $('#datetimepicker7').datetimepicker('maxDate', e.date);
+        });
+    });
 </script>
 
 </body>
