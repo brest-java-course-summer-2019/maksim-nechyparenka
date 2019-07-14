@@ -1,14 +1,11 @@
 package com.epam.brest.summer.courses2019.model;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 public class Customer {
 
     private Integer customerId;
     private String customerFirstName;
     private String customerLastName;
-    private Date registrationDate;
+    private String registrationDate;
     private String customerLogin;
     private String customerPassword;
     private String customerCardNumber;
@@ -26,7 +23,7 @@ public class Customer {
         return customerLastName;
     }
 
-    public Date getRegistrationDate() {
+    public String getRegistrationDate() {
         return registrationDate;
     }
 
@@ -42,7 +39,6 @@ public class Customer {
         return customerCardNumber;
     }
 
-
     public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
@@ -55,7 +51,7 @@ public class Customer {
         this.customerLastName = customerLastName;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
+    public void setRegistrationDate(String registrationDate) {
         this.registrationDate = registrationDate;
     }
 

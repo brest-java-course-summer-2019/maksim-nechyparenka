@@ -1,7 +1,6 @@
 package com.epam.brest.summer.courses2019.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class Product {
 
