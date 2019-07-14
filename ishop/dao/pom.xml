@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.brest.summer.courses2019</groupId>
-    <artifactId>model</artifactId>
+    <artifactId>dao</artifactId>
     <packaging>jar</packaging>
 
-    <name>ishop</name>
+    <name>ishop DAO</name>
 
     <parent>
         <groupId>com.epam.brest.summer.courses2019</groupId>
@@ -17,6 +17,10 @@
     </parent>
 
     <dependencies>
+        <dependency>
+            <groupId>com.epam.brest.summer.courses2019</groupId>
+            <artifactId>model</artifactId>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
