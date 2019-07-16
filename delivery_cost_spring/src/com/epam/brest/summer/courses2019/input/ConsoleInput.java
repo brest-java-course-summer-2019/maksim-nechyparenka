@@ -7,7 +7,6 @@ public class ConsoleInput {
 
     private CheckInput check = new CheckInput();
     private Scanner scanner;
-    BigDecimal input;
 
     public ConsoleInput() {
         this.scanner = scanner;
