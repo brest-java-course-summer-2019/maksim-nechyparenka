@@ -1,16 +1,12 @@
 package com.epam.brest.summer.courses2019.input;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+@Component
 public class ConsoleInput {
-
-    private CheckInput check = new CheckInput();
-    private Scanner scanner;
-
-    public ConsoleInput() {
-        this.scanner = scanner;
-    }
 
     public BigDecimal getData() {
 
@@ -31,11 +27,14 @@ public class ConsoleInput {
 
     private EnteredValue receiveValueFromConsole() {
 
+        Scanner scanner = new Scanner(System.in);
+        CheckInput check = new CheckInput();
         EnteredValue enteredValue = new IncorrectValue();
 
         while (enteredValue.getType() == EnteredValue.Types.INCORRECT) {
 
             enteredValue = check.checkInputValue(scanner.nextLine());
+
         }
         return enteredValue;
     }

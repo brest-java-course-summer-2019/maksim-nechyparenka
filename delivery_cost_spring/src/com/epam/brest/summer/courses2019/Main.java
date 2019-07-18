@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -35,10 +34,25 @@ public class Main {
     @Value("${distance.message}")
     private String messageDistance;
 
-    public Main(ConsoleInput input, Calculator cost, PriceSelector price) {
+    @Value("${wvalue.message}")
+    private String messageWValue;
+
+    @Value("${dvalue.message}")
+    private String messageDValue;
+
+    @Value("${priceKG.message}")
+    private String messagePriceKG;
+
+    @Value("${priceKM.message}")
+    private String messagePriceKM;
+
+    @Value("${continue.message}")
+    private String messageContinue;
+
+    public Main(ConsoleInput input, PriceSelector price, Calculator cost) {
         this.input = input;
-        this.cost = cost;
         this.price = price;
+        this.cost = cost;
     }
 
         private void run() throws IOException {
@@ -58,14 +72,14 @@ public class Main {
                 BigDecimal pricePerKG = price.selectValue(weight, CSV_KG_PATH);
                 BigDecimal pricePerKM = price.selectValue(distance, CSV_KM_PATH);
 
-                System.out.println("Value of weight = " + weight + " kg");
-                System.out.println("Value of distance = " + distance + " km");
-                System.out.println("Selected price per kg is: " + pricePerKG + " USD");
-                System.out.println("Selected price per km is: " + pricePerKM + " USD");
+                System.out.println(messageWValue + weight + " kg");
+                System.out.println(messageDValue + distance + " km");
+                System.out.println(messagePriceKG + pricePerKG + " USD");
+                System.out.println(messagePriceKM + pricePerKM + " USD");
 
                 System.out.println("Total COST = " + cost.calculateContractCost(weight, pricePerKG, distance, pricePerKM) + " USD");
 
-                System.out.println("Do you wish to continue? Make your choice: y / n");
+                System.out.println(messageContinue);
                 exit = scanner.next();
                 scanner.nextLine();
 
