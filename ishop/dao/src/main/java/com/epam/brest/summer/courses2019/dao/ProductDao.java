@@ -3,6 +3,7 @@ package com.epam.brest.summer.courses2019.dao;
 import com.epam.brest.summer.courses2019.model.Product;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductDao {
 
@@ -13,4 +14,6 @@ public interface ProductDao {
     void delete(Integer productId);
 
     List<Product> findAll();
+
+    Optional<Product> findById(Integer productId);
 }
