@@ -19,22 +19,26 @@ public class ProductDaoJdbcImpl implements ProductDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final static String SELECT_ALL =
-            "select p.product_id, p.product_name, p.product_category, p.product_receiptdate," +
-                    "p.product_quantity, p.product_price from product p order by 1";
+            "select p.product_id, p.product_name, p.product_category_id, p.product_receiptdate, "
+                    + "p.product_quantity, p.product_price from product p order by 2";
 
     private static final String FIND_BY_ID =
-            "select product_id, product_name, product_category, product_receiptdate," +
-                    "product_quantity, product_price from product where product_id = :productId";
+            "select product_id, product_name, product_category_id, product_receiptdate, "
+                    + "product_quantity, product_price from product where product_id = :productId";
+
+    private static final String FIND_BY_CATEGORY =
+            "select product_id, product_name, product_category_id, product_receiptdate, "
+                    + "product_quantity, product_price from product where product_category = :productCategory";
 
     private final static String ADD_PRODUCT =
-            "insert into product (product_name, product_category, product_receiptdate," +
-                    "product_quantity, product_price) values (:productName, :productCategory, :productReceiptDate," +
-                    ":productQuantity, :productPrice)";
+            "insert into product (product_name, product_category_id, product_receiptdate, "
+                    + "product_quantity, product_price) values (:productName, :productCategoryId, :productReceiptDate, "
+                    + ":productQuantity, :productPrice)";
 
     private static final String UPDATE =
-            "update product set product_name = :productName, product_category = :productCategory," +
-                    "product_receiptdate = :productReceiptDate, product_quantity = :productQuantity," +
-                    "product_price = :productPrice where product_id = :productId";
+            "update product set product_name = :productName, product_category_id = :productCategoryId, "
+                    + "product_receiptdate = :productReceiptDate, product_quantity = :productQuantity, "
+                    + "product_price = :productPrice where product_id = :productId";
 
     private static final String DELETE =
             "delete from product where product_id = :productId";
@@ -49,7 +53,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
     public Product add(Product product) {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("productName", product.getProductName());
-        parameters.addValue("productCategory", product.getCategoryId());
+        parameters.addValue("productCategoryId", product.getProductCategoryId());
         parameters.addValue("productReceiptDate", product.getReceiptDate());
         parameters.addValue("productQuantity", product.getProductQuantity());
         parameters.addValue("productPrice", product.getProductPrice());
@@ -64,7 +68,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
     public void update(Product product) {
         Optional.of(namedParameterJdbcTemplate.update(UPDATE, new BeanPropertySqlParameterSource(product)))
                 .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to update product in DB"));
+                .orElseThrow(() -> new RuntimeException("Failed to update product in DataBase!"));
     }
 
     private boolean successfullyUpdated(int numRowsUpdated) {
@@ -77,7 +81,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
         mapSqlParameterSource.addValue(PRODUCT_ID, productId);
         Optional.of(namedParameterJdbcTemplate.update(DELETE, mapSqlParameterSource))
                 .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to delete product from DB"));
+                .orElseThrow(() -> new RuntimeException("Failed to delete product from DataBase!"));
 
     }
 
@@ -101,7 +105,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             Product product = new Product();
             product.setProductId(resultSet.getInt("product_id"));
             product.setProductName(resultSet.getString("product_name"));
-            product.setCategoryId(resultSet.getInt("product_category"));
+            product.setProductCategoryId(resultSet.getInt("product_category_id"));
             product.setReceiptDate(resultSet.getString("product_receiptdate"));
             product.setProductQuantity(resultSet.getBigDecimal("product_quantity"));
             product.setProductPrice(resultSet.getBigDecimal("product_price"));

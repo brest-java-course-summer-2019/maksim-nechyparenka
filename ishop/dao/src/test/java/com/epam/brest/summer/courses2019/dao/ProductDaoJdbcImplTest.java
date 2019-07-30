@@ -52,12 +52,22 @@ public class ProductDaoJdbcImplTest {
 
     @Test
     public void updateProduct() {
-        Product newProduct = new Product();
+        Product newProduct = new Product(CELLPHONE);
         newProduct = productDao.add(newProduct);
         newProduct.setProductName(CELLPHONE);
         productDao.update(newProduct);
         Product updatedProduct = productDao.findById(newProduct.getProductId()).get();
         assertTrue(newProduct.getProductId().equals(updatedProduct.getProductId()));
         assertTrue(newProduct.getProductName().equals(updatedProduct.getProductName()));
+    }
+
+    @Test
+    public void deleteProduct() {
+        Product product = new Product(CELLPHONE);
+        product = productDao.add(product);
+        List<Product> products = productDao.findAll();
+        int sizeBefore = products.size();
+        productDao.delete(product.getProductId());
+        assertTrue((sizeBefore - 1) == productDao.findAll().size());
     }
 }

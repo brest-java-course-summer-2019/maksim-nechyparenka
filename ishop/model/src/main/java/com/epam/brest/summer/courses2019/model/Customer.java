@@ -9,7 +9,7 @@ public class Customer {
     private String customerLogin;
     private String customerPassword;
     private String customerCardNumber;
-
+    private String customerCategoryId;
 
     public Integer getCustomerId() {
         return customerId;
@@ -37,6 +37,10 @@ public class Customer {
 
     public String getCustomerCardNumber() {
         return customerCardNumber;
+    }
+
+    public String getCustomerCategoryId() {
+        return customerCategoryId;
     }
 
     public void setCustomerId(Integer customerId) {
@@ -67,6 +71,10 @@ public class Customer {
         this.customerCardNumber = customerCardNumber;
     }
 
+    public void setCustomerCategoryId(String customerCategoryId) {
+        this.customerCategoryId = customerCategoryId;
+    }
+
     public String toString() {
         return "Customer{"
                 + "customerId=" + customerId
@@ -75,7 +83,8 @@ public class Customer {
                 + ", registrationDate=" + registrationDate + '\''
                 + ", customerLogin=" + customerLogin + '\''
                 + ", customerPassword=" + customerPassword + '\''
-                + ", customerCardNumber=" + customerCardNumber
+                + ", customerCardNumber=" + customerCardNumber + '\''
+                + ", customerCategory=" + customerCategoryId + '\''
                 + '}';
     }
 }

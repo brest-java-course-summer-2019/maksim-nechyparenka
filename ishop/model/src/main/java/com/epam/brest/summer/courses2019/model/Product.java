@@ -6,10 +6,18 @@ public class Product {
 
     private Integer productId;
     private String productName;
-    private Integer categoryId;
+    private Integer productCategoryId;
     private String receiptDate;
     private BigDecimal productQuantity;
     private BigDecimal productPrice;
+
+    public Product() {
+
+    }
+
+    public Product(String productName) {
+        this.productName = productName;
+    }
 
     public Integer getProductId() {
         return productId;
@@ -19,8 +27,8 @@ public class Product {
         return productName;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public Integer getProductCategoryId() {
+        return productCategoryId;
     }
 
     public String getReceiptDate() {
@@ -43,8 +51,8 @@ public class Product {
         this.productName = productName;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setProductCategoryId(Integer productCategoryId) {
+        this.productCategoryId = productCategoryId;
     }
 
     public void setReceiptDate(String receiptDate) {
@@ -63,7 +71,7 @@ public class Product {
         return "Product{"
                 + "productId=" + productId
                 + ", productName='" + productName + '\''
-                + ", productCategory=" + categoryId + '\''
+                + ", productCategory=" + productCategoryId + '\''
                 + ", receiptDate=" + receiptDate + '\''
                 + ", productQuantity" + productQuantity + '\''
                 + ", productPrice=" + productPrice

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Products</title>
+</head>
+<body>
+
+<header>
+    <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="administrator.html"
+                       align="absmiddle"
+                       class="btn btn-light"
+                       title="Administrator console"
+                       data-placement="right">
+                        <i class="fas fa-user-shield"></i>
+                        <span class="d-none d-sm-inline"></span></a>
+                    <a href="roles.html" button type="button" class="btn btn-secondary">Roles</button></a>
+                    <a href="products.html" button type="button" class="btn btn-secondary">Products</button></a>
+                    <a href="customers.html" button type="button" class="btn btn-secondary">Customers</button></a>
+                </div>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<nav id="main-header"
+     class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
+    <span class="navbar-brand text-uppercase mr-auto"><h1>PRODUCTS</h1></span>
+    <span class="navbar-nav float-right">
+            <a href="#"
+               align="absmiddle"
+               class="btn btn-light"
+               title="Add product"
+               data-target="#addModal"
+               data-toggle="modal"
+               data-placement="left">
+                <i class="fa fa-plus-square fa-3x"></i>
+                <span class="d-none d-sm-inline"></span></a>
+    </span>
+</nav>
+
+<section id="roles">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <table class="table table-hover table-borderless" class="align-middle">
+                        <thead class="thead-dark">
+                        <tr align="center">
+                            <th>No.</th>
+                            <th>Product name</th>
+                            <th>
+                                <!-- Category sorting in table -->
+                                <div class="dropdown" align="center" class="align-middle">
+                                    <button class="btn btn-secondary btn-sm dropdown-toggle dropdown-toggle-split" type="button" id="categorySoting" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="align-middle">
+                                        Category
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Cell phones & Accessories</a>
+                                        <a class="dropdown-item" href="#">Clothing</a>
+                                        <a class="dropdown-item" href="#">Computers, Tablets</a>
+                                    </div>
+                                </div>
+
+                            </th>
+                            <th>Receipt Date</th>
+                            <th>Quantity</th>
+                            <th>Price, USD</th>
+                            <th>Edit / Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr align="center">
+                            <td>1</td>
+                            <td>Samsung galaxy s8 plus g955f</td>
+                            <td>Cell phones & Accessories</td>
+                            <td>28.12.2018</td>
+                            <td>8</td>
+                            <td>350.00</td>
+                            <td class="text-center">
+                            <span data-toggle="modal" data-target="#editModal">
+                                <a href="#"
+                                   class="btn-sm btn-outline-secondary"
+                                   title="Edit product"
+                                   data-toggle="tooltip"
+                                   data-placement="left">
+                                    <i class="fa fa-pencil"></i> <span class="d-none d-md-inline">Edit</span></a>
+                            </span>
+                                <span data-toggle="modal" data-target="#deleteModal">
+                                <a href="#"
+                                   class="btn-sm btn-outline-secondary"
+                                   title="Delete product"
+                                   data-toggle="tooltip"
+                                   data-placement="right">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
+                            </span>
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td>2</td>
+                            <td>Puma Retro Womens Short Sleeves Black Top T-Shirt</td>
+                            <td>Clothing</td>
+                            <td>08.11.2018</td>
+                            <td>5</td>
+                            <td>15.00</td>
+                            <td class="text-center">
+                            <span data-toggle="modal" data-target="#editModal">
+                                <a href="#"
+                                   class="btn-sm btn-outline-secondary"
+                                   title="Edit product"
+                                   data-toggle="tooltip"
+                                   data-placement="left">
+                                    <i class="fa fa-pencil"></i> <span class="d-none d-md-inline">Edit</span></a>
+                            </span>
+                                <span data-toggle="modal" data-target="#deleteModal">
+                                <a href="#" class="btn-sm btn-outline-secondary"
+                                   title="Delete product"
+                                   data-toggle="tooltip"
+                                   data-placement="right">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td>3</td>
+                            <td>Lenovo ThinkPad X240</td>
+                            <td>Computers, Tablets</td>
+                            <td>10.02.2019</td>
+                            <td>7</td>
+                            <td>550.00</td>
+                            <td class="text-center">
+                            <span data-toggle="modal" data-target="#editModal">
+                                <a href="#"
+                                   class="btn-sm btn-outline-secondary"
+                                   title="Edit product"
+                                   data-toggle="tooltip"
+                                   data-placement="left">
+                                    <i class="fa fa-pencil"></i> <span class="d-none d-md-inline">Edit</span></a>
+                            </span>
+                                <span data-toggle="modal" data-target="#deleteModal">
+                                <a href="#" class="btn-sm btn-outline-secondary"
+                                   title="Delete product"
+                                   data-toggle="tooltip"
+                                   data-placement="right">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
+                                </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AddModal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="AddModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModaltitle">Add product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping">New Product</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Product name" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+                <p></p>
+
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Choose category
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Cell phones & Accessories</a>
+                        <a class="dropdown-item" href="#">Clothing</a>
+                        <a class="dropdown-item" href="#">Computers, Tablets</a>
+                    </div>
+                </div>
+
+                <p></p>
+
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping">Quantity</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Product quantity" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+
+                <p></p>
+
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping">Price, USD</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Product price" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+
+                <p></p>
+
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping">Notes</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Some notes" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- EditModal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="EditModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModaltitle">Edit product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-product">Edit product name</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Product name" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+                <p></p>
+
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="categoryChoosing" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Choose category
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Cell phones & Accessories</a>
+                        <a class="dropdown-item" href="#">Clothing</a>
+                        <a class="dropdown-item" href="#">Computers, Tablets</a>
+                    </div>
+                </div>
+
+                <p></p>
+
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-date">Edit receipt date</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Receipt date" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+
+                <p></p>
+
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-quantity">Edit quantity</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Product quantity" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+
+                <p></p>
+
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-price">Edit price, USD</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Product price" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+
+                <p></p>
+
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-notes">Edit notes</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Some notes" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DeleteModal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModaltitle">Delete confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you really want to delete this product?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center" style="font-size: 12px">
+    <p></p>
+    &copy Maksim Nechyparenka, 2019
+</footer>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://kit.fontawesome.com/b72194b912.js"></script>
+<script src="js/jquery-3.4.1.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    $('.dropdown-toggle').dropdown()
+</script>
+
+</body>
+</html>
