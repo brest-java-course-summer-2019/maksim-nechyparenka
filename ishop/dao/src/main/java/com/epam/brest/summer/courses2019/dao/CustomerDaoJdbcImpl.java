@@ -25,16 +25,16 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
         + "card_number, customer_category from customer order by 2, 3";
 
     private static final String FIND_BY_ID =
-            "select customer_id, first_name, last_name, registration_date, login, password, card_number, " +
-                    "customer_category_id from customer where customer_id = :customerId";
+            "select customer_id, first_name, last_name, registration_date, login, password, card_number, "
+                    + "customer_category_id from customer where customer_id = :customerId";
 
     private static final String FIND_BY_CUSTOMER_CATEGORY_ID =
-            "select customer_id, first_name, last_name, registration_date, login, password, card_number, " +
-                    "customer_category_id from customer where customer_category_id = :customerCategoryId";
+            "select customer_id, first_name, last_name, registration_date, login, password, card_number, "
+                    + "customer_category_id from customer where customer_category_id = :customerCategoryId";
 
     private final static String ADD_CUSTOMER =
-            "insert into customer (first_name, last_name, registration_date, login, password, card_number, customer_category_id) " +
-                    "values (:firstName, :lastName, :registrationDate, :login, :password, :cardNumber, :customerCategoryId)";
+            "insert into customer (first_name, last_name, registration_date, login, password, card_number, customer_category_id) "
+                    + "values (:firstName, :lastName, :registrationDate, :login, :password, :cardNumber, :customerCategoryId)";
 
     private static final String UPDATE =
             "update customer set first_name = :firstName, last_name = :lastName, registration_date = :registrationDate, "

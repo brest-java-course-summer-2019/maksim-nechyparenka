@@ -42,7 +42,7 @@ public class ProductDaoJdbcImplTest {
     public void addProduct() {
         Product testProduct = new Product();
         testProduct.setProductName("Samsung");
-        testProduct.setCategoryId(1);
+        testProduct.setProductCategoryId(1);
         testProduct.setReceiptDate("28.07.2019");
         testProduct.setProductQuantity(new BigDecimal("5"));
         testProduct.setProductPrice(new BigDecimal("555.55"));
