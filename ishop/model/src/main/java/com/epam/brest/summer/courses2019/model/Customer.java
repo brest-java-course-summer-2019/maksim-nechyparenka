@@ -11,6 +11,17 @@ public class Customer {
     private String customerCardNumber;
     private String customerCategoryId;
 
+    public Customer(String customerFirstName, String customerLastName, String registrationDate, String customerLogin,
+                    String customerPassword, String customerCardNumber, String customerCategoryId) {
+        this.customerFirstName = customerFirstName;
+        this.customerLastName = customerLastName;
+        this.registrationDate = registrationDate;
+        this.customerLogin = customerLogin;
+        this.customerPassword = customerPassword;
+        this.customerCardNumber = customerCardNumber;
+        this.customerCategoryId = customerCategoryId;
+    }
+
     public Integer getCustomerId() {
         return customerId;
     }

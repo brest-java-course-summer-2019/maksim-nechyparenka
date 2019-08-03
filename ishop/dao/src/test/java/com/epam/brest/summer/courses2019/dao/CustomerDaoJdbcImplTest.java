@@ -8,10 +8,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
 import java.util.List;
-
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -56,16 +53,51 @@ public class CustomerDaoJdbcImplTest {
     public void add() {
         List<Customer> customers = customerDao.findAll();
         int sizeBefore = customers.size();
-        Customer customer = new Customer("email2", "firstName2", "lastName2", new BigDecimal("302"), 1);
-        Employee newEmployee = employeeDao.add(employee);
-        assertNotNull(newEmployee.getEmployeeId());
-        assertTrue(newEmployee.getFirstName().equals(employee.getFirstName()));
-        assertTrue(newEmployee.getLastName().equals(employee.getLastName()));
-        assertTrue(newEmployee.getEmail().equals(employee.getEmail()));
-        assertTrue(newEmployee.getSalary().equals(employee.getSalary()));
-        assertTrue(newEmployee.getDepartmentId().equals(employee.getDepartmentId()));
-        assertTrue((sizeBefore + 1) == employeeDao.findAll().size());
+        Customer customer = new Customer("firstName3", "lastName3", "regDate3",
+                "login03", "password03", "cardNum03", "normal");
+        Customer newCustomer = customerDao.add(customer);
+        assertNotNull(newCustomer.getCustomerId());
+        assertTrue(newCustomer.getCustomerFirstName().equals(customer.getCustomerFirstName()));
+        assertTrue(newCustomer.getCustomerLastName().equals(customer.getCustomerLastName()));
+        assertTrue(newCustomer.getRegistrationDate().equals(customer.getRegistrationDate()));
+        assertTrue(newCustomer.getCustomerLogin().equals(customer.getCustomerLogin()));
+        assertTrue(newCustomer.getCustomerPassword().equals(customer.getCustomerPassword()));
+        assertTrue(newCustomer.getCustomerCardNumber().equals(customer.getCustomerCardNumber()));
+        assertTrue(newCustomer.getCustomerCategoryId().equals(customer.getCustomerCategoryId()));
+        assertTrue((sizeBefore + 1) == customerDao.findAll().size());
     }
 
+    @Test
+    public void update() {
+        Customer customer = customerDao.findById(1).get();
+        customer.setCustomerFirstName("newFirstName");
+        customer.setCustomerLastName("newLastName");
+        customer.setRegistrationDate("08.08.19");
+        customer.setCustomerLogin("newLogin");
+        customer.setCustomerPassword("newPassword");
+        customer.setCustomerCardNumber("1111-1111-1111-1111");
+        customer.setCustomerCategoryId("normal");
 
+        customerDao.update(customer);
+        Customer updatedCustomer = customerDao.findById(customer.getCustomerId()).get();
+        assertTrue(updatedCustomer.getCustomerId().equals(customer.getCustomerId()));
+        assertTrue(updatedCustomer.getCustomerFirstName().equals(customer.getCustomerFirstName()));
+        assertTrue(updatedCustomer.getCustomerLastName().equals(customer.getCustomerLastName()));
+        assertTrue(updatedCustomer.getRegistrationDate().equals(customer.getRegistrationDate()));
+        assertTrue(updatedCustomer.getCustomerLogin().equals(customer.getCustomerLogin()));
+        assertTrue(updatedCustomer.getCustomerPassword().equals(customer.getCustomerPassword()));
+        assertTrue(updatedCustomer.getCustomerCardNumber().equals(customer.getCustomerCardNumber()));
+        assertTrue(updatedCustomer.getCustomerCategoryId().equals(customer.getCustomerCategoryId()));
+    }
+
+    @Test
+    public void delete() {
+        Customer customer = new Customer("firstName3", "lastName3", "regDate3",
+                "login03", "password03", "cardNum03", "normal");
+        customerDao.add(customer);
+        List<Customer> customers = customerDao.findAll();
+        int sizeBefore = customers.size();
+        customerDao.delete(customer.getCustomerId());
+        assertTrue((sizeBefore - 1) == customerDao.findAll().size());
+    }
 }
