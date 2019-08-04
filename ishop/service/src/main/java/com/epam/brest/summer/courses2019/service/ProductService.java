@@ -1,4 +1,4 @@
-package com.epam.brest.summer.courses2019.services;
+package com.epam.brest.summer.courses2019.service;
 
 import com.epam.brest.summer.courses2019.model.Product;
 

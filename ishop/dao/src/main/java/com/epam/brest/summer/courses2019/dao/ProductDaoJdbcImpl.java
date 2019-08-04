@@ -1,15 +1,13 @@
 package com.epam.brest.summer.courses2019.dao;
 import com.epam.brest.summer.courses2019.model.Product;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.support.DataAccessUtils;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -93,11 +91,16 @@ public class ProductDaoJdbcImpl implements ProductDao {
     }
 
     @Override
-    public Optional<Product> findById(Integer productId) {
-        SqlParameterSource namedParameters = new MapSqlParameterSource(PRODUCT_ID, productId);
-        List<Product> results = namedParameterJdbcTemplate.query(FIND_BY_ID, namedParameters,
-                BeanPropertyRowMapper.newInstance(Product.class));
-        return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
+    public Product findById(Integer productId) {
+        List<Product> products = namedParameterJdbcTemplate.query(SELECT_ALL, new ProductRowMapper());
+        return products.get(productId);
+    }
+    @Override
+    public BigDecimal findBalanceById(Integer productId) {
+        List<Product> products = namedParameterJdbcTemplate.query(SELECT_ALL, new ProductRowMapper());
+
+        BigDecimal balance = new BigDecimal(String.valueOf(products.get(productId).getProductQuantity()));
+        return balance;
     }
 
     private class ProductRowMapper implements RowMapper<Product> {

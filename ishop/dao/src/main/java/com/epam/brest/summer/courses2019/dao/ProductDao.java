@@ -2,6 +2,7 @@ package com.epam.brest.summer.courses2019.dao;
 
 import com.epam.brest.summer.courses2019.model.Product;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,12 +16,12 @@ public interface ProductDao {
 
     List<Product> findAll();
 
-    Optional<Product> findById(Integer productId);
+    Product findById(Integer productId);
 
     /**
      * Get balance of Product by ID.
      *
      * @return Product quantity.
      */
-    List<Product> findBalanceById();
+    BigDecimal findBalanceById(Integer productId);
 }
