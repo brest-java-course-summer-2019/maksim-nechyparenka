@@ -4,7 +4,9 @@ import com.epam.brest.summer.courses2019.dao.ProductDao;
 import com.epam.brest.summer.courses2019.model.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *  Product Service Interface implementation.
@@ -27,16 +29,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findBalanceById() {
+    public BigDecimal findBalanceById(Integer productId) {
         LOGGER.debug("Find Product balance by Product ID!");
-        return dao.findBalanceById();
+        return dao.findBalanceById(productId);
     }
 
     @Override
     public Product findById(Integer id) {
         LOGGER.debug("findById({})", id);
-        return dao.findById(id)
-                .orElseThrow(() -> new RuntimeException("Failed to get Product from DataBase!"));
+        return dao.findById(id);
+                //.orElseThrow(() -> new RuntimeException("Failed to get Product from DataBase!")));
     }
 
     @Override

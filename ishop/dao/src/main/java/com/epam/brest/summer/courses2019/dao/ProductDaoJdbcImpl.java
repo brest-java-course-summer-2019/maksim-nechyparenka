@@ -98,7 +98,6 @@ public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public BigDecimal findBalanceById(Integer productId) {
         List<Product> products = namedParameterJdbcTemplate.query(SELECT_ALL, new ProductRowMapper());
-
         BigDecimal balance = new BigDecimal(String.valueOf(products.get(productId).getProductQuantity()));
         return balance;
     }

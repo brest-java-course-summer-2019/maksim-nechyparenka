@@ -2,6 +2,7 @@ package com.epam.brest.summer.courses2019.service;
 
 import com.epam.brest.summer.courses2019.model.Product;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ProductService {
@@ -18,7 +19,7 @@ public interface ProductService {
      *
      * @return Product quantity.
      */
-    List<Product> findBalanceById();
+    BigDecimal findBalanceById(Integer productId);
 
     /**
      * Find Product By Id.

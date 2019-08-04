@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testng.annotations.Test;
-
-import java.math.BigDecimal;
 import java.util.List;
 
 import static junit.framework.TestCase.assertNotNull;
@@ -34,7 +32,6 @@ public class ProductServiceImplTest {
     void findBalanceById() {
         int id = 1;
         List<Product> products = productService.findAll();
-        BigDecimal balance = products.get(id).getProductQuantity();
 
         assertNotNull(products);
         assertEquals("8", products.get(id).getProductQuantity());
