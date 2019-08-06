@@ -41,12 +41,11 @@ public class CustomerServiceImpl  implements CustomerService {
     @Override
     public Optional<Customer> findById(Integer customerId) {
         LOGGER.debug("findById({})", customerId);
-        return Optional.of(customerDao.findById(customerId).orElseThrow(()
-                -> new RuntimeException("Failed to get Customer from DataBase!")));
+        return customerDao.findById(customerId);
     }
 
     @Override
-    public Customer add(Customer customer) {
+    public Customer add(Customer customer1, Customer customer) {
         LOGGER.debug("add({})", customer);
         return customerDao.add(customer);
     }

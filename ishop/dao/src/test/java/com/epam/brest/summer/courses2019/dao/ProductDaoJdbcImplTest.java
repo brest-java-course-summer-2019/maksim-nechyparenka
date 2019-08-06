@@ -30,7 +30,7 @@ public class ProductDaoJdbcImplTest {
 
     @Test
     public void getProductById() {
-        Product product = productDao.findById(1).get();
+        Product product = productDao.findById(1);
         assertNotNull(product);
         assertTrue(product.getProductId().equals(1));
         assertTrue(product.getProductName().equals(CELLPHONE));
@@ -54,7 +54,7 @@ public class ProductDaoJdbcImplTest {
         newProduct = productDao.add(newProduct);
         newProduct.setProductName(CELLPHONE);
         productDao.update(newProduct);
-        Product updatedProduct = productDao.findById(newProduct.getProductId()).get();
+        Product updatedProduct = productDao.findById(newProduct.getProductId());
         assertTrue(newProduct.getProductId().equals(updatedProduct.getProductId()));
         assertTrue(newProduct.getProductName().equals(updatedProduct.getProductName()));
     }

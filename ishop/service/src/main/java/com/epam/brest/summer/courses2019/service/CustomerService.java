@@ -38,10 +38,12 @@ public interface CustomerService {
     /**
      * Persist new customer.
      *
+     *
+     * @param customer1
      * @param customer customer
      * @return customer
      */
-    Customer add(Customer customer);
+    Customer add(Customer customer1, Customer customer);
 
     /**
      * Update customer.

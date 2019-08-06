@@ -1,8 +1,10 @@
 package com.epam.brest.summer.courses2019.service;
 
 import com.epam.brest.summer.courses2019.model.Product;
+import org.junit.Assert;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testng.annotations.Test;
@@ -45,6 +47,14 @@ public class ProductServiceImplTest {
 
         assertNotNull(product);
         assertEquals("Samsung galaxy s8 plus g955f", product.getProductName());
+    }
+
+    @Test
+    void add() {
+        long count = productService.findAll().size();
+        assertThrows(DuplicateKeyException.class, () -> productService.add(create(), create()));
+        long newCount = productService.findAll().size();
+        assertEquals(count, newCount);
     }
 
     @Test

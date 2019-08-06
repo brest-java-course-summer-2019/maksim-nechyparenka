@@ -9,10 +9,14 @@ public class Customer {
     private String customerLogin;
     private String customerPassword;
     private String customerCardNumber;
-    private String customerCategoryId;
+    private Integer customerCategoryId;
+
+    public Customer() {
+
+    }
 
     public Customer(String customerFirstName, String customerLastName, String registrationDate, String customerLogin,
-                    String customerPassword, String customerCardNumber, String customerCategoryId) {
+                    String customerPassword, String customerCardNumber, Integer customerCategoryId) {
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
         this.registrationDate = registrationDate;
@@ -50,7 +54,7 @@ public class Customer {
         return customerCardNumber;
     }
 
-    public String getCustomerCategoryId() {
+    public Integer getCustomerCategoryId() {
         return customerCategoryId;
     }
 
@@ -82,7 +86,7 @@ public class Customer {
         this.customerCardNumber = customerCardNumber;
     }
 
-    public void setCustomerCategoryId(String customerCategoryId) {
+    public void setCustomerCategoryId(Integer customerCategoryId) {
         this.customerCategoryId = customerCategoryId;
     }
 

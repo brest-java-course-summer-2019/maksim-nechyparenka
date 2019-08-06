@@ -30,6 +30,16 @@ public interface ProductService {
     Product findById(Integer id);
 
     /**
+     * Persist new product.
+     *
+     *
+     * @param product1
+     * @param product product
+     * @return product
+     */
+    Product add(Product product1, Product product);
+
+    /**
      * Update Product.
      *
      * @param product product

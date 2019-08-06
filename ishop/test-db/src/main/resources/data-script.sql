@@ -9,3 +9,15 @@ INSERT INTO customer (customer_id, first_name, last_name, registration_date, log
 VALUES (1, 'Danila', 'Kozlovsky', '08-08-2018', 'login01', 'password01', '1234 5678 9012 3456', 'normal');
 INSERT INTO customer (customer_id, first_name, last_name, registration_date, login, password, card_number, customer_category_id)
 VALUES (2, 'Ivan', 'Ivanov', '08-06-2019', 'login02', 'password02', '1234 5678 9012 3456', 'normal');
+
+INSERT INTO customerCategory (customer_category_id, customer_category_name)
+VALUES (1, 'normal');
+INSERT INTO customerCategory (customer_category_id, customer_category_name)
+VALUES (2, 'special');
+
+INSERT INTO productCategory (product_category_id, producr_category_name)
+VALUES (1, 'Cell phones & Accessories');
+INSERT INTO productCategory (product_category_id, producr_category_name)
+VALUES (2, 'Clothing');
+INSERT INTO productCategory (product_category_id, producr_category_name)
+VALUES (3, 'Computers, Tablets');

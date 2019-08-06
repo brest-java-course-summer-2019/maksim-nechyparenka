@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 /**
  *  Product Service Interface implementation.
@@ -39,6 +38,12 @@ public class ProductServiceImpl implements ProductService {
         LOGGER.debug("findById({})", id);
         return dao.findById(id);
                 //.orElseThrow(() -> new RuntimeException("Failed to get Product from DataBase!")));
+    }
+
+    @Override
+    public Product add(Product product1, Product product) {
+        LOGGER.debug("add({})", product);
+        return dao.add(product);
     }
 
     @Override

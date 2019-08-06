@@ -46,7 +46,7 @@ public class CustomerDaoJdbcImplTest {
         assertTrue(customer.getCustomerLogin().equals("login01"));
         assertTrue(customer.getCustomerPassword().equals("password01"));
         assertTrue(customer.getCustomerCardNumber().equals("1234 5678 9012 3456"));
-        assertTrue(customer.getCustomerCategoryId().equals("normal"));
+        assertTrue(customer.getCustomerCategoryId().equals(1));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class CustomerDaoJdbcImplTest {
         List<Customer> customers = customerDao.findAll();
         int sizeBefore = customers.size();
         Customer customer = new Customer("firstName3", "lastName3", "regDate3",
-                "login03", "password03", "cardNum03", "normal");
+                "login03", "password03", "cardNum03", 1);
         Customer newCustomer = customerDao.add(customer);
         assertNotNull(newCustomer.getCustomerId());
         assertTrue(newCustomer.getCustomerFirstName().equals(customer.getCustomerFirstName()));
@@ -76,7 +76,7 @@ public class CustomerDaoJdbcImplTest {
         customer.setCustomerLogin("newLogin");
         customer.setCustomerPassword("newPassword");
         customer.setCustomerCardNumber("1111-1111-1111-1111");
-        customer.setCustomerCategoryId("normal");
+        customer.setCustomerCategoryId(1);
 
         customerDao.update(customer);
         Customer updatedCustomer = customerDao.findById(customer.getCustomerId()).get();
@@ -93,7 +93,7 @@ public class CustomerDaoJdbcImplTest {
     @Test
     public void delete() {
         Customer customer = new Customer("firstName3", "lastName3", "regDate3",
-                "login03", "password03", "cardNum03", "normal");
+                "login03", "password03", "cardNum03", 1);
         customerDao.add(customer);
         List<Customer> customers = customerDao.findAll();
         int sizeBefore = customers.size();
