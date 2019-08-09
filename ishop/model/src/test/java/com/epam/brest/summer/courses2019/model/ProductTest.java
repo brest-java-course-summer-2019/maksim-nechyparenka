@@ -22,8 +22,8 @@ public class ProductTest {
 
     @Test
     public void getProductCategory() {
-        product.setProductCategory("Cell phones and Accessories");
-        Assert.assertTrue(product.getProductCategory().equals("Cell phones and Accessories"));
+        product.setProductCategoryId(1);
+        Assert.assertTrue(product.getProductCategoryId().equals("Cell phones and Accessories"));
     }
 
     @Test

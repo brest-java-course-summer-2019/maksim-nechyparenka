@@ -16,6 +16,7 @@ public class ProductController {
      * @param model model
      * @return view name
      */
+    @GetMapping(value = "/products")
     public final String products(Model model) {
         return "products";
     }
