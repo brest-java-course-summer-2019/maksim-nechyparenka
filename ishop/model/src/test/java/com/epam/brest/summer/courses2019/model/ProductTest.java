@@ -16,14 +16,14 @@ public class ProductTest {
 
     @Test
     public void getProductName() {
-        product.setProductName("Cell phone");
-        Assert.assertTrue(product.getProductName().equals("Cell phone"));
+        product.setProductName("Samsung galaxy s8 plus g955fe");
+        Assert.assertTrue(product.getProductName().equals("Samsung galaxy s8 plus g955fe"));
     }
 
     @Test
-    public void getProductCategory() {
+    public void getProductCategoryId() {
         product.setProductCategoryId(1);
-        Assert.assertTrue(product.getProductCategoryId().equals("Cell phones and Accessories"));
+        Assert.assertTrue(product.getProductCategoryId().equals(1));
     }
 
     @Test
@@ -34,13 +34,13 @@ public class ProductTest {
 
     @Test
     public void getProductQuantity() {
-        product.setProductQuantity(new BigDecimal("7"));
-        Assert.assertTrue(product.getProductQuantity().compareTo(new BigDecimal("7")) == 0);
+        product.setProductQuantity(new BigDecimal("8"));
+        Assert.assertTrue(product.getProductQuantity().compareTo(new BigDecimal("8")) == 0);
     }
 
     @Test
     public void getProductPrice() {
-        product.setProductPrice(new BigDecimal("77"));
-        Assert.assertTrue(product.getProductPrice().compareTo(new BigDecimal("77")) == 0);
+        product.setProductPrice(new BigDecimal("350"));
+        Assert.assertTrue(product.getProductPrice().compareTo(new BigDecimal("350")) == 0);
     }
 }

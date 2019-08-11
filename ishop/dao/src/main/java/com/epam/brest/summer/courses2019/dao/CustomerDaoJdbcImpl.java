@@ -1,9 +1,9 @@
 package com.epam.brest.summer.courses2019.dao;
 
 import com.epam.brest.summer.courses2019.model.Customer;
-import com.epam.brest.summer.courses2019.model.Product;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -11,6 +11,9 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,27 +23,27 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final static String SELECT_ALL =
-            "select customer_id, first_name, last_name, registration_date, login, password, "
-        + "card_number, customer_category from customer order by 2, 3";
+            "SELECT customer_id, first_name, last_name, registration_date, login, password, "
+        + "card_number, customer_category_id FROM customer ORDER BY 2, 3";
 
     private static final String FIND_BY_ID =
-            "select customer_id, first_name, last_name, registration_date, login, password, card_number, "
-                    + "customer_category_id from customer where customer_id = :customerId";
+            "SELECT customer_id, first_name, last_name, registration_date, login, password, card_number, "
+                    + "customer_category_id FROM customer WHERE customer_id = :customerId";
 
     private static final String FIND_BY_CUSTOMER_CATEGORY_ID =
-            "select customer_id, first_name, last_name, registration_date, login, password, card_number, "
-                    + "customer_category_id from customer where customer_category_id = :customerCategoryId";
+            "SELECT customer_id, first_name, last_name, registration_date, login, password, card_number, "
+                    + "customer_category_id FROM customer WHERE customer_category_id = :customerCategoryId";
 
     private final static String ADD_CUSTOMER =
-            "insert into customer (first_name, last_name, registration_date, login, password, card_number, customer_category_id) "
-                    + "values (:firstName, :lastName, :registrationDate, :login, :password, :cardNumber, :customerCategoryId)";
+            "INSERT INTO customer (first_name, last_name, registration_date, login, password, card_number, customer_category_id) "
+                    + "VALUES (:firstName, :lastName, :registrationDate, :login, :password, :cardNumber, :customerCategoryId)";
 
     private static final String UPDATE =
-            "update customer set first_name = :firstName, last_name = :lastName, registration_date = :registrationDate, "
-                    + "login = :login, password = :password, card_number = :cardNumber, customer_category_id = :customerCategoryId where customer_id = :customerId";
+            "UPDATE customer SET first_name = :firstName, last_name = :lastName, registration_date = :registrationDate, "
+                    + "login = :login, password = :password, card_number = :cardNumber, customer_category_id = :customerCategoryId WHERE customer_id = :customerId";
 
     private static final String DELETE =
-            "delete from customer where customer_id = :customerId";
+            "DELETE FROM customer WHERE customer_id = :customerId";
 
     private static final String CUSTOMER_CATEGORY_ID = "customerCategoryId";
     private static final String CUSTOMER_ID = "customerId";
@@ -57,19 +60,17 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
     }
 
     @Override
-    public List<Customer> findByCustomerCategoryId(Integer customerCategoryId) {
+    public Optional<Customer> findByCustomerCategoryId(Integer customerCategoryId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(CUSTOMER_CATEGORY_ID, customerCategoryId);
         List<Customer> results = namedParameterJdbcTemplate.query(FIND_BY_CUSTOMER_CATEGORY_ID, namedParameters,
                 BeanPropertyRowMapper.newInstance(Customer.class));
-        return results;
+        return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }
 
     @Override
-    public Optional<Customer> findById(Integer customerId) {
-        SqlParameterSource namedParameters = new MapSqlParameterSource(CUSTOMER_ID, customerId);
-        List<Customer> results = namedParameterJdbcTemplate.query(FIND_BY_ID, namedParameters,
-                BeanPropertyRowMapper.newInstance(Customer.class));
-        return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
+    public Optional findById(Integer customerId) {
+        List<Customer> customers = namedParameterJdbcTemplate.query(SELECT_ALL, new CustomerRowMapper());
+        return Optional.ofNullable(customers.get(customerId));
     }
 
     @Override
@@ -107,5 +108,22 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
 
     private boolean successfullyUpdated(int numRowsUpdated) {
         return numRowsUpdated > 0;
+    }
+
+    private class CustomerRowMapper implements RowMapper<Customer> {
+        @Override
+        public Customer mapRow(ResultSet resultSet, int i) throws SQLException {
+            Customer customer = new Customer();
+            customer.setCustomerId(resultSet.getInt("customer_id"));
+            customer.setCustomerFirstName(resultSet.getString("first_name"));
+            customer.setCustomerLastName(resultSet.getString("last_name"));
+            customer.setRegistrationDate(resultSet.getString("registration_date"));
+            customer.setCustomerLogin(resultSet.getString("login"));
+            customer.setCustomerPassword(resultSet.getString("password"));
+            customer.setCustomerCardNumber(resultSet.getString("card_number"));
+            customer.setCustomerCategoryId(resultSet.getInt("customer_category_id"));
+
+            return customer;
+        }
     }
 }

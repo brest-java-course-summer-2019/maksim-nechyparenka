@@ -1,48 +1,54 @@
 package com.epam.brest.summer.courses2019.dao;
+import com.epam.brest.summer.courses2019.model.Customer;
 import com.epam.brest.summer.courses2019.model.Product;
+import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-
+import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class ProductDaoJdbcImpl implements ProductDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final static String SELECT_ALL =
-            "select p.product_id, p.product_name, p.product_category_id, p.product_receiptdate, "
-                    + "p.product_quantity, p.product_price from product p order by 2";
+            "SELECT p.product_id, p.product_name, p.product_category_id, p.product_receiptdate, "
+                    + "p.product_quantity, p.product_price FROM product p ORDER BY 2";
 
     private static final String FIND_BY_ID =
-            "select product_id, product_name, product_category_id, product_receiptdate, "
-                    + "product_quantity, product_price from product where product_id = :productId";
+            "SELECT product_id, product_name, product_category_id, product_receiptdate, "
+                    + "product_quantity, product_price FROM product WHERE product_id = :productId";
 
-    private static final String FIND_BY_CATEGORY =
-            "select product_id, product_name, product_category_id, product_receiptdate, "
-                    + "product_quantity, product_price from product where product_category = :productCategory";
+    private static final String FIND_BY_PRODUCT_CATEGORY_ID =
+            "SELECT product_id, product_name, product_category_id, product_receiptdate, "
+                    + "product_quantity, product_price FROM product WHERE product_category = :productCategory";
 
     private final static String ADD_PRODUCT =
-            "insert into product (product_name, product_category_id, product_receiptdate, "
-                    + "product_quantity, product_price) values (:productName, :productCategoryId, :productReceiptDate, "
+            "INSERT INTO product (product_name, product_category_id, product_receiptdate, "
+                    + "product_quantity, product_price) VALUES (:productName, :productCategoryId, :productReceiptDate, "
                     + ":productQuantity, :productPrice)";
 
     private static final String UPDATE =
-            "update product set product_name = :productName, product_category_id = :productCategoryId, "
+            "UPDATE product SET product_name = :productName, product_category_id = :productCategoryId, "
                     + "product_receiptdate = :productReceiptDate, product_quantity = :productQuantity, "
-                    + "product_price = :productPrice where product_id = :productId";
+                    + "product_price = :productPrice WHERE product_id = :productId";
 
     private static final String DELETE =
-            "delete from product where product_id = :productId";
+            "DELETE FROM product WHERE product_id = :productId";
 
     private static final String PRODUCT_ID = "productId";
+    private static final String PRODUCT_CATEGORY_ID = "productCategoryId";
 
     public ProductDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -100,6 +106,14 @@ public class ProductDaoJdbcImpl implements ProductDao {
         List<Product> products = namedParameterJdbcTemplate.query(SELECT_ALL, new ProductRowMapper());
         BigDecimal balance = new BigDecimal(String.valueOf(products.get(productId).getProductQuantity()));
         return balance;
+    }
+
+    @Override
+    public Optional<Product> findByProductCategoryId(Integer productCategoryId) {
+        SqlParameterSource namedParameters = new MapSqlParameterSource(PRODUCT_CATEGORY_ID, productCategoryId);
+        List<Product> results = namedParameterJdbcTemplate.query(FIND_BY_PRODUCT_CATEGORY_ID, namedParameters,
+                BeanPropertyRowMapper.newInstance(Product.class));
+        return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }
 
     private class ProductRowMapper implements RowMapper<Product> {

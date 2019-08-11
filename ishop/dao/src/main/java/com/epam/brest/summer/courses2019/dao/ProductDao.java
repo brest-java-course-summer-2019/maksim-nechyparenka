@@ -18,6 +18,8 @@ public interface ProductDao {
 
     Product findById(Integer productId);
 
+    Optional findByProductCategoryId(Integer productCategoryId);
+
     /**
      * Get balance of Product by ID.
      *

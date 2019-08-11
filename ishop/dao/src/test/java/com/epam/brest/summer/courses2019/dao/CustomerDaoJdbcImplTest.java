@@ -8,7 +8,10 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
+import java.util.Optional;
+
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -30,9 +33,10 @@ public class CustomerDaoJdbcImplTest {
 
     @Test
     public void findByCustomerCategoryId() {
-        List<Customer> customers = customerDao.findByCustomerCategoryId(1);
-        assertNotNull(customerDao);
-        assertTrue(customers.size() > 0);
+        List<Customer> customers = customerDao.findAll();
+        assertNotNull(customers);
+        Optional<Customer> result = customerDao.findByCustomerCategoryId(1);
+        assertNotNull(result);
     }
 
     @Test
@@ -42,7 +46,7 @@ public class CustomerDaoJdbcImplTest {
         assertTrue(customer.getCustomerId().equals(1));
         assertTrue(customer.getCustomerFirstName().equals("Danila"));
         assertTrue(customer.getCustomerLastName().equals("Kozlovsky"));
-        assertTrue(customer.getRegistrationDate().equals("08-08-2018"));
+        assertTrue(customer.getRegistrationDate().equals("09-08-2019"));
         assertTrue(customer.getCustomerLogin().equals("login01"));
         assertTrue(customer.getCustomerPassword().equals("password01"));
         assertTrue(customer.getCustomerCardNumber().equals("1234 5678 9012 3456"));
@@ -53,7 +57,7 @@ public class CustomerDaoJdbcImplTest {
     public void add() {
         List<Customer> customers = customerDao.findAll();
         int sizeBefore = customers.size();
-        Customer customer = new Customer("firstName3", "lastName3", "regDate3",
+        Customer customer = new Customer("firstName3", "lastName3", "09-08-2019",
                 "login03", "password03", "cardNum03", 1);
         Customer newCustomer = customerDao.add(customer);
         assertNotNull(newCustomer.getCustomerId());
@@ -72,7 +76,7 @@ public class CustomerDaoJdbcImplTest {
         Customer customer = customerDao.findById(1).get();
         customer.setCustomerFirstName("newFirstName");
         customer.setCustomerLastName("newLastName");
-        customer.setRegistrationDate("08.08.19");
+        customer.setRegistrationDate("09-08-2019");
         customer.setCustomerLogin("newLogin");
         customer.setCustomerPassword("newPassword");
         customer.setCustomerCardNumber("1111-1111-1111-1111");
@@ -92,7 +96,7 @@ public class CustomerDaoJdbcImplTest {
 
     @Test
     public void delete() {
-        Customer customer = new Customer("firstName3", "lastName3", "regDate3",
+        Customer customer = new Customer("firstName3", "lastName3", "09-08-2019",
                 "login03", "password03", "cardNum03", 1);
         customerDao.add(customer);
         List<Customer> customers = customerDao.findAll();

@@ -5,8 +5,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
 import java.util.List;
 import static junit.framework.TestCase.assertNotNull;
@@ -14,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml"})
+@Transactional
+@Rollback
 public class ProductDaoJdbcImplTest {
 
     private static final String CELLPHONE = "Samsung";
@@ -52,7 +57,7 @@ public class ProductDaoJdbcImplTest {
     public void updateProduct() {
         Product newProduct = new Product(CELLPHONE);
         newProduct = productDao.add(newProduct);
-        newProduct.setProductName(CELLPHONE);
+        newProduct.setProductName("Ericsson");
         productDao.update(newProduct);
         Product updatedProduct = productDao.findById(newProduct.getProductId());
         assertTrue(newProduct.getProductId().equals(updatedProduct.getProductId()));

@@ -11,9 +11,9 @@ INSERT INTO customer (customer_id, first_name, last_name, registration_date, log
 VALUES (2, 'Ivan', 'Ivanov', '08-06-2019', 'login02', 'password02', '1234 5678 9012 3456', 'normal');
 
 INSERT INTO customerCategory (customer_category_id, customer_category_name)
-VALUES (1, 'normal');
+VALUES (1, 'Normal');
 INSERT INTO customerCategory (customer_category_id, customer_category_name)
-VALUES (2, 'special');
+VALUES (2, 'Blacklist');
 
 INSERT INTO productCategory (product_category_id, producr_category_name)
 VALUES (1, 'Cell phones & Accessories');

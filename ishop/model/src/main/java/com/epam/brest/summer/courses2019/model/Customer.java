@@ -1,5 +1,10 @@
 package com.epam.brest.summer.courses2019.model;
 
+
+/**
+ * Customer model
+ */
+
 public class Customer {
 
     private Integer customerId;
