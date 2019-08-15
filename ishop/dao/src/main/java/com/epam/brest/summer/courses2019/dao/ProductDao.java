@@ -16,9 +16,9 @@ public interface ProductDao {
 
     List<Product> findAll();
 
-    Product findById(Integer productId);
+    Optional<Product> findById(Integer productId);
 
-    Optional findByProductCategoryId(Integer productCategoryId);
+    List<Product> findByProductCategoryId(Integer productCategoryId);
 
     /**
      * Get balance of Product by ID.

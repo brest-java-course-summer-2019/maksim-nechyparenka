@@ -27,8 +27,8 @@ public class CustomerTest {
 
     @Test
     public void getRegistrationDate() {
-        customer.setRegistrationDate("08-08-2019");
-        Assert.assertTrue(customer.getRegistrationDate().equals("08-08-2019"));
+        customer.setCustomerRegistrationDate("08-08-2019");
+        Assert.assertTrue(customer.getCustomerRegistrationDate().equals("08-08-2019"));
     }
 
     @Test

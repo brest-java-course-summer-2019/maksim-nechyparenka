@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -35,7 +34,7 @@ public class CustomerDaoJdbcImplTest {
     public void findByCustomerCategoryId() {
         List<Customer> customers = customerDao.findAll();
         assertNotNull(customers);
-        Optional<Customer> result = customerDao.findByCustomerCategoryId(1);
+        List<Customer> result = customerDao.findByCustomerCategoryId(1);
         assertNotNull(result);
     }
 
@@ -46,10 +45,10 @@ public class CustomerDaoJdbcImplTest {
         assertTrue(customer.getCustomerId().equals(1));
         assertTrue(customer.getCustomerFirstName().equals("Danila"));
         assertTrue(customer.getCustomerLastName().equals("Kozlovsky"));
-        assertTrue(customer.getRegistrationDate().equals("09-08-2019"));
+        assertTrue(customer.getCustomerRegistrationDate().equals("08-08-2018"));
         assertTrue(customer.getCustomerLogin().equals("login01"));
         assertTrue(customer.getCustomerPassword().equals("password01"));
-        assertTrue(customer.getCustomerCardNumber().equals("1234 5678 9012 3456"));
+        assertTrue(customer.getCustomerCardNumber().equals("1234 5678 9012 0001"));
         assertTrue(customer.getCustomerCategoryId().equals(1));
     }
 
@@ -63,7 +62,7 @@ public class CustomerDaoJdbcImplTest {
         assertNotNull(newCustomer.getCustomerId());
         assertTrue(newCustomer.getCustomerFirstName().equals(customer.getCustomerFirstName()));
         assertTrue(newCustomer.getCustomerLastName().equals(customer.getCustomerLastName()));
-        assertTrue(newCustomer.getRegistrationDate().equals(customer.getRegistrationDate()));
+        assertTrue(newCustomer.getCustomerRegistrationDate().equals(customer.getCustomerRegistrationDate()));
         assertTrue(newCustomer.getCustomerLogin().equals(customer.getCustomerLogin()));
         assertTrue(newCustomer.getCustomerPassword().equals(customer.getCustomerPassword()));
         assertTrue(newCustomer.getCustomerCardNumber().equals(customer.getCustomerCardNumber()));
@@ -76,7 +75,7 @@ public class CustomerDaoJdbcImplTest {
         Customer customer = customerDao.findById(1).get();
         customer.setCustomerFirstName("newFirstName");
         customer.setCustomerLastName("newLastName");
-        customer.setRegistrationDate("09-08-2019");
+        customer.setCustomerRegistrationDate("09-08-2019");
         customer.setCustomerLogin("newLogin");
         customer.setCustomerPassword("newPassword");
         customer.setCustomerCardNumber("1111-1111-1111-1111");
@@ -87,7 +86,7 @@ public class CustomerDaoJdbcImplTest {
         assertTrue(updatedCustomer.getCustomerId().equals(customer.getCustomerId()));
         assertTrue(updatedCustomer.getCustomerFirstName().equals(customer.getCustomerFirstName()));
         assertTrue(updatedCustomer.getCustomerLastName().equals(customer.getCustomerLastName()));
-        assertTrue(updatedCustomer.getRegistrationDate().equals(customer.getRegistrationDate()));
+        assertTrue(updatedCustomer.getCustomerRegistrationDate().equals(customer.getCustomerRegistrationDate()));
         assertTrue(updatedCustomer.getCustomerLogin().equals(customer.getCustomerLogin()));
         assertTrue(updatedCustomer.getCustomerPassword().equals(customer.getCustomerPassword()));
         assertTrue(updatedCustomer.getCustomerCardNumber().equals(customer.getCustomerCardNumber()));

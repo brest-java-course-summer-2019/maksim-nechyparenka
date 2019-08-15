@@ -10,7 +10,7 @@ public class Customer {
     private Integer customerId;
     private String customerFirstName;
     private String customerLastName;
-    private String registrationDate;
+    private String customerRegistrationDate;
     private String customerLogin;
     private String customerPassword;
     private String customerCardNumber;
@@ -20,11 +20,11 @@ public class Customer {
 
     }
 
-    public Customer(String customerFirstName, String customerLastName, String registrationDate, String customerLogin,
+    public Customer(String customerFirstName, String customerLastName, String customerRegistrationDate, String customerLogin,
                     String customerPassword, String customerCardNumber, Integer customerCategoryId) {
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
-        this.registrationDate = registrationDate;
+        this.customerRegistrationDate = customerRegistrationDate;
         this.customerLogin = customerLogin;
         this.customerPassword = customerPassword;
         this.customerCardNumber = customerCardNumber;
@@ -43,8 +43,8 @@ public class Customer {
         return customerLastName;
     }
 
-    public String getRegistrationDate() {
-        return registrationDate;
+    public String getCustomerRegistrationDate() {
+        return customerRegistrationDate;
     }
 
     public String getCustomerLogin() {
@@ -75,8 +75,8 @@ public class Customer {
         this.customerLastName = customerLastName;
     }
 
-    public void setRegistrationDate(String registrationDate) {
-        this.registrationDate = registrationDate;
+    public void setCustomerRegistrationDate(String customerRegistrationDate) {
+        this.customerRegistrationDate = customerRegistrationDate;
     }
 
     public void setCustomerLogin(String customerLogin) {
@@ -100,7 +100,7 @@ public class Customer {
                 + "customerId=" + customerId
                 + ", customerFirstName='" + customerFirstName + '\''
                 + ", customerLastName=" + customerLastName + '\''
-                + ", registrationDate=" + registrationDate + '\''
+                + ", registrationDate=" + customerRegistrationDate + '\''
                 + ", customerLogin=" + customerLogin + '\''
                 + ", customerPassword=" + customerPassword + '\''
                 + ", customerCardNumber=" + customerCardNumber + '\''

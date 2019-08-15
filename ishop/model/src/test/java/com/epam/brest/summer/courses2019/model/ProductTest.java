@@ -28,8 +28,8 @@ public class ProductTest {
 
     @Test
     public void getReceiptDate() {
-        product.setReceiptDate("28.12.2018");
-        Assert.assertTrue(product.getReceiptDate().equals("28.12.2018"));
+        product.setProductReceiptDate("28.12.2018");
+        Assert.assertTrue(product.getProductReceiptDate().equals("28.12.2018"));
     }
 
     @Test

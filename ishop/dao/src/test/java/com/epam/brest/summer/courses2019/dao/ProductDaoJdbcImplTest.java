@@ -12,7 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
+
 import static junit.framework.TestCase.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,11 +37,14 @@ public class ProductDaoJdbcImplTest {
     }
 
     @Test
-    public void getProductById() {
-        Product product = productDao.findById(1);
-        assertNotNull(product);
+    public void findById() {
+        assertNotNull(productDao);
+        Product product = productDao.findById(1).get();
         assertTrue(product.getProductId().equals(1));
-        assertTrue(product.getProductName().equals(CELLPHONE));
+        assertTrue(product.getProductName().equals("Samsung galaxy s8 plus g955f"));
+        assertTrue(product.getProductCategoryId().equals(1));
+        assertEquals(new BigDecimal("8"), product.getProductQuantity());
+        assertEquals(new BigDecimal("350"), product.getProductPrice());
     }
 
     @Test
@@ -46,7 +52,7 @@ public class ProductDaoJdbcImplTest {
         Product testProduct = new Product();
         testProduct.setProductName("Samsung");
         testProduct.setProductCategoryId(1);
-        testProduct.setReceiptDate("28.07.2019");
+        testProduct.setProductReceiptDate("28.07.2019");
         testProduct.setProductQuantity(new BigDecimal("5"));
         testProduct.setProductPrice(new BigDecimal("555.55"));
         Product newProduct = productDao.add(testProduct);
@@ -55,13 +61,18 @@ public class ProductDaoJdbcImplTest {
 
     @Test
     public void updateProduct() {
-        Product newProduct = new Product(CELLPHONE);
-        newProduct = productDao.add(newProduct);
-        newProduct.setProductName("Ericsson");
-        productDao.update(newProduct);
-        Product updatedProduct = productDao.findById(newProduct.getProductId());
-        assertTrue(newProduct.getProductId().equals(updatedProduct.getProductId()));
-        assertTrue(newProduct.getProductName().equals(updatedProduct.getProductName()));
+        Product product = productDao.findById(3).get();
+        product.setProductName("Samsung");
+        product.setProductCategoryId(1);
+        product.setProductReceiptDate("28.07.2019");
+        product.setProductQuantity(new BigDecimal("5"));
+        product.setProductPrice(new BigDecimal("555.55"));
+        productDao.update(product);
+
+        Product updatedProduct = productDao.findById(product.getProductId()).get();
+
+        assertTrue(updatedProduct.getProductId().equals(updatedProduct.getProductId()));
+        assertTrue(updatedProduct.getProductName().equals(updatedProduct.getProductName()));
     }
 
     @Test

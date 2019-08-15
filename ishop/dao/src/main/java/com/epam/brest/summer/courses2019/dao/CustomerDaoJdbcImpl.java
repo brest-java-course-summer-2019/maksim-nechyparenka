@@ -24,7 +24,7 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
 
     private final static String SELECT_ALL =
             "SELECT customer_id, first_name, last_name, registration_date, login, password, "
-        + "card_number, customer_category_id FROM customer ORDER BY 2, 3";
+                    + "card_number, customer_category_id FROM customer ORDER BY 2";
 
     private static final String FIND_BY_ID =
             "SELECT customer_id, first_name, last_name, registration_date, login, password, card_number, "
@@ -36,11 +36,13 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
 
     private final static String ADD_CUSTOMER =
             "INSERT INTO customer (first_name, last_name, registration_date, login, password, card_number, customer_category_id) "
-                    + "VALUES (:firstName, :lastName, :registrationDate, :login, :password, :cardNumber, :customerCategoryId)";
+                    + "VALUES (:customerFirstName, :customerLastName, :customerRegistrationDate, :customerLogin, :customerPassword, "
+                    + ":customerCardNumber, :customerCategoryId)";
 
     private static final String UPDATE =
-            "UPDATE customer SET first_name = :firstName, last_name = :lastName, registration_date = :registrationDate, "
-                    + "login = :login, password = :password, card_number = :cardNumber, customer_category_id = :customerCategoryId WHERE customer_id = :customerId";
+            "UPDATE customer SET first_name = :customerFirstName, last_name = :customerLastName, registration_date = :customerRegistrationDate, "
+                    + "login = :customerLogin, password = :customerPassword, card_number = :customerCardNumber, customer_category_id = :customerCategoryId "
+                    + "WHERE customer_id = :customerId";
 
     private static final String DELETE =
             "DELETE FROM customer WHERE customer_id = :customerId";
@@ -60,17 +62,19 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
     }
 
     @Override
-    public Optional<Customer> findByCustomerCategoryId(Integer customerCategoryId) {
+    public List<Customer> findByCustomerCategoryId(Integer customerCategoryId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(CUSTOMER_CATEGORY_ID, customerCategoryId);
         List<Customer> results = namedParameterJdbcTemplate.query(FIND_BY_CUSTOMER_CATEGORY_ID, namedParameters,
                 BeanPropertyRowMapper.newInstance(Customer.class));
-        return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
+        return results;
     }
 
     @Override
-    public Optional findById(Integer customerId) {
-        List<Customer> customers = namedParameterJdbcTemplate.query(SELECT_ALL, new CustomerRowMapper());
-        return Optional.ofNullable(customers.get(customerId));
+    public Optional<Customer> findById(Integer customerId) {
+        SqlParameterSource namedParameters = new MapSqlParameterSource(CUSTOMER_ID, customerId);
+        List<Customer> results = namedParameterJdbcTemplate.query(FIND_BY_ID, namedParameters,
+                BeanPropertyRowMapper.newInstance(Customer.class));
+        return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }
 
     @Override
@@ -78,7 +82,7 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("firstName", customer.getCustomerFirstName());
         parameters.addValue("lastName", customer.getCustomerLastName());
-        parameters.addValue("registrationDate", customer.getRegistrationDate());
+        parameters.addValue("registrationDate", customer.getCustomerRegistrationDate());
         parameters.addValue("login", customer.getCustomerLogin());
         parameters.addValue("password", customer.getCustomerPassword());
         parameters.addValue("cardNumber", customer.getCustomerCardNumber());
@@ -94,7 +98,7 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
     public void update(Customer customer) {
         Optional.of(namedParameterJdbcTemplate.update(UPDATE, new BeanPropertySqlParameterSource(customer)))
                 .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to update employee in DataBase!"));
+                .orElseThrow(() -> new RuntimeException("Failed to update Customer in DataBase!"));
     }
 
     @Override
@@ -103,27 +107,27 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
         mapSqlParameterSource.addValue(CUSTOMER_ID, customerId);
         Optional.of(namedParameterJdbcTemplate.update(DELETE, mapSqlParameterSource))
                 .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to delete department from DataBase!"));
+                .orElseThrow(() -> new RuntimeException("Failed to delete Customer from DataBase!"));
     }
 
     private boolean successfullyUpdated(int numRowsUpdated) {
         return numRowsUpdated > 0;
     }
 
-    private class CustomerRowMapper implements RowMapper<Customer> {
-        @Override
-        public Customer mapRow(ResultSet resultSet, int i) throws SQLException {
-            Customer customer = new Customer();
-            customer.setCustomerId(resultSet.getInt("customer_id"));
-            customer.setCustomerFirstName(resultSet.getString("first_name"));
-            customer.setCustomerLastName(resultSet.getString("last_name"));
-            customer.setRegistrationDate(resultSet.getString("registration_date"));
-            customer.setCustomerLogin(resultSet.getString("login"));
-            customer.setCustomerPassword(resultSet.getString("password"));
-            customer.setCustomerCardNumber(resultSet.getString("card_number"));
-            customer.setCustomerCategoryId(resultSet.getInt("customer_category_id"));
-
-            return customer;
-        }
-    }
+//    private class CustomerRowMapper implements RowMapper<Customer> {
+//        @Override
+//        public Customer mapRow(ResultSet resultSet, int i) throws SQLException {
+//            Customer customer = new Customer();
+//            customer.setCustomerId(resultSet.getInt("customer_id"));
+//            customer.setCustomerFirstName(resultSet.getString("first_name"));
+//            customer.setCustomerLastName(resultSet.getString("last_name"));
+//            customer.setRegistrationDate(resultSet.getString("registration_date"));
+//            customer.setCustomerLogin(resultSet.getString("login"));
+//            customer.setCustomerPassword(resultSet.getString("password"));
+//            customer.setCustomerCardNumber(resultSet.getString("card_number"));
+//            customer.setCustomerCategoryId(resultSet.getInt("customer_category_id"));
+//
+//            return customer;
+//        }
+//    }
 }

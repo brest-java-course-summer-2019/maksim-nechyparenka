@@ -9,7 +9,7 @@ public interface CustomerDao {
 
     List<Customer> findAll();
 
-    Optional<Customer> findByCustomerCategoryId(Integer customerCategoryId);
+    List<Customer> findByCustomerCategoryId(Integer customerCategoryId);
 
     Optional<Customer> findById(Integer customerId);
 
