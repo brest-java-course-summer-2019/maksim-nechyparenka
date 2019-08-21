@@ -11,8 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,8 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Transactional
 @Rollback
 public class ProductDaoJdbcImplTest {
-
-    private static final String CELLPHONE = "Samsung";
 
     @Autowired
     ProductDao productDao;
@@ -49,14 +47,20 @@ public class ProductDaoJdbcImplTest {
 
     @Test
     public void addProduct() {
-        Product testProduct = new Product();
-        testProduct.setProductName("Samsung");
-        testProduct.setProductCategoryId(1);
-        testProduct.setProductReceiptDate("28.07.2019");
-        testProduct.setProductQuantity(new BigDecimal("5"));
-        testProduct.setProductPrice(new BigDecimal("555.55"));
+        List<Product> products = productDao.findAll();
+        int sizeBefore = products.size();
+
+        Product testProduct = new Product("Samsung", 1, LocalDate.of(2019, 7, 28),
+                new BigDecimal("5"), new BigDecimal("555.55"));
+
+//        testProduct.setProductName("Samsung");
+//        testProduct.setProductCategoryId(1);
+//        testProduct.setProductReceiptDate("28.07.2019");
+//        testProduct.setProductQuantity(new BigDecimal("5"));
+//        testProduct.setProductPrice(new BigDecimal("555.55"));
         Product newProduct = productDao.add(testProduct);
         Assert.assertNotNull(newProduct.getProductId());
+        assertTrue((sizeBefore + 1) == productDao.findAll().size());
     }
 
     @Test
@@ -64,20 +68,25 @@ public class ProductDaoJdbcImplTest {
         Product product = productDao.findById(3).get();
         product.setProductName("Samsung");
         product.setProductCategoryId(1);
-        product.setProductReceiptDate("28.07.2019");
+        product.setProductReceiptDate(LocalDate.of(2019, 7, 28));
         product.setProductQuantity(new BigDecimal("5"));
-        product.setProductPrice(new BigDecimal("555.55"));
+        product.setProductPrice(new BigDecimal("555"));
         productDao.update(product);
 
         Product updatedProduct = productDao.findById(product.getProductId()).get();
 
-        assertTrue(updatedProduct.getProductId().equals(updatedProduct.getProductId()));
-        assertTrue(updatedProduct.getProductName().equals(updatedProduct.getProductName()));
+        assertTrue(updatedProduct.getProductId().equals(product.getProductId()));
+        assertTrue(updatedProduct.getProductName().equals(product.getProductName()));
+        assertTrue(updatedProduct.getProductCategoryId().equals(product.getProductCategoryId()));
+        assertTrue(updatedProduct.getProductReceiptDate().equals(product.getProductReceiptDate()));
+        assertTrue(updatedProduct.getProductQuantity().equals(product.getProductQuantity()));
+        assertTrue(updatedProduct.getProductPrice().equals(product.getProductPrice()));
     }
 
     @Test
     public void deleteProduct() {
-        Product product = new Product(CELLPHONE);
+        Product product = new Product("Nokia", 1, LocalDate.of(2019, 8, 1),
+                new BigDecimal("5"), new BigDecimal("350.00"));
         product = productDao.add(product);
         List<Product> products = productDao.findAll();
         int sizeBefore = products.size();

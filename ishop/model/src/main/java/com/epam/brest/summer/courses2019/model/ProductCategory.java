@@ -21,4 +21,11 @@ public class ProductCategory {
     public void setProductCategoryName(String productCategoryName) {
         this.productCategoryName = productCategoryName;
     }
+
+    public String toString() {
+        return "ProductCategory{"
+                + "productCategoryId=" + productCategoryId
+                + ", productCategoryName='" + productCategoryName
+                + '}';
+    }
 }

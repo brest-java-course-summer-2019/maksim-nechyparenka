@@ -1,21 +1,51 @@
 package com.epam.brest.summer.courses2019.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class Product {
 
+    /**
+     * Product id
+     */
+
     private Integer productId;
+
+    /**
+     * Product name
+     */
+
     private String productName;
+
+    /**
+     * Category id in which product exists
+     */
+
     private Integer productCategoryId;
-    private String productReceiptDate;
+
+    /**
+     * {@code LocalDate} as date when product was added
+     */
+
+    private LocalDate productReceiptDate;
+
+    /**
+     * Product quantity
+     */
+
     private BigDecimal productQuantity;
+
+    /**
+     * Product price
+     */
+
     private BigDecimal productPrice;
 
     public Product() {
 
     }
 
-    public Product(String productName, Integer productCategoryId, String productReceiptDate, BigDecimal productQuantity, BigDecimal productPrice) {
+    public Product(String productName, Integer productCategoryId, LocalDate productReceiptDate, BigDecimal productQuantity, BigDecimal productPrice) {
         this.productName = productName;
         this.productCategoryId = productCategoryId;
         this.productReceiptDate = productReceiptDate;
@@ -23,13 +53,21 @@ public class Product {
         this.productPrice = productPrice;
     }
 
-    public Product(String productName) {
-        this.productName = productName;
-    }
+    /**
+     * Returns product id
+     *
+     * @return {@code Integer} as product id
+     */
 
     public Integer getProductId() {
         return productId;
     }
+
+    /**
+     * Returns {@code product} name
+     *
+     * @return {@code String} as product name
+     */
 
     public String getProductName() {
         return productName;
@@ -39,9 +77,15 @@ public class Product {
         return productCategoryId;
     }
 
-    public String getProductReceiptDate() {
+    public LocalDate getProductReceiptDate() {
         return productReceiptDate;
     }
+
+    /**
+     * Returns {@code product} quantity
+     *
+     * @return {@code BigDecimal} as product quantity
+     */
 
     public BigDecimal getProductQuantity() {
         return productQuantity;
@@ -63,7 +107,7 @@ public class Product {
         this.productCategoryId = productCategoryId;
     }
 
-    public void setProductReceiptDate(String productReceiptDate) {
+    public void setProductReceiptDate(LocalDate productReceiptDate) {
         this.productReceiptDate = productReceiptDate;
     }
 

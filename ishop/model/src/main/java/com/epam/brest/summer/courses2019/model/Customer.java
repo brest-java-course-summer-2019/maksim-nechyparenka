@@ -1,5 +1,6 @@
 package com.epam.brest.summer.courses2019.model;
 
+import java.time.LocalDate;
 
 /**
  * Customer model
@@ -10,7 +11,7 @@ public class Customer {
     private Integer customerId;
     private String customerFirstName;
     private String customerLastName;
-    private String customerRegistrationDate;
+    private LocalDate customerRegistrationDate;
     private String customerLogin;
     private String customerPassword;
     private String customerCardNumber;
@@ -20,7 +21,7 @@ public class Customer {
 
     }
 
-    public Customer(String customerFirstName, String customerLastName, String customerRegistrationDate, String customerLogin,
+    public Customer(String customerFirstName, String customerLastName, LocalDate customerRegistrationDate, String customerLogin,
                     String customerPassword, String customerCardNumber, Integer customerCategoryId) {
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
@@ -43,7 +44,7 @@ public class Customer {
         return customerLastName;
     }
 
-    public String getCustomerRegistrationDate() {
+    public LocalDate getCustomerRegistrationDate() {
         return customerRegistrationDate;
     }
 
@@ -75,7 +76,7 @@ public class Customer {
         this.customerLastName = customerLastName;
     }
 
-    public void setCustomerRegistrationDate(String customerRegistrationDate) {
+    public void setCustomerRegistrationDate(LocalDate customerRegistrationDate) {
         this.customerRegistrationDate = customerRegistrationDate;
     }
 
@@ -104,7 +105,7 @@ public class Customer {
                 + ", customerLogin=" + customerLogin + '\''
                 + ", customerPassword=" + customerPassword + '\''
                 + ", customerCardNumber=" + customerCardNumber + '\''
-                + ", customerCategory=" + customerCategoryId + '\''
+                + ", customerCategoryId=" + customerCategoryId
                 + '}';
     }
 }

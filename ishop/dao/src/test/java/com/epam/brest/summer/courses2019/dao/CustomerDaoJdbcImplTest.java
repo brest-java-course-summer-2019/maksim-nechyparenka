@@ -1,7 +1,8 @@
 package com.epam.brest.summer.courses2019.dao;
 
 import com.epam.brest.summer.courses2019.model.Customer;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -9,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static junit.framework.TestCase.assertNotNull;
@@ -26,8 +28,22 @@ public class CustomerDaoJdbcImplTest {
     @Test
     public void findAll() {
         List<Customer> customers = customerDao.findAll();
-        assertNotNull(customers);
-        assertTrue(customers.size() > 0);
+        Assert.assertNotNull(customers);
+        Assert.assertTrue(customers.size() > 0);
+    }
+
+    @Test
+    public void findById() {
+        assertNotNull(customerDao);
+        Customer customer = customerDao.findById(1).get();
+        assertTrue(customer.getCustomerId().equals(1));
+        assertTrue(customer.getCustomerFirstName().equals("Danila"));
+        assertTrue(customer.getCustomerLastName().equals("Kozlovsky"));
+        assertTrue(customer.getCustomerRegistrationDate().equals(LocalDate.of(2018, 8, 8)));
+        assertTrue(customer.getCustomerLogin().equals("login01"));
+        assertTrue(customer.getCustomerPassword().equals("password01"));
+        assertTrue(customer.getCustomerCardNumber().equals("1234 5678 9012 0001"));
+        assertTrue(customer.getCustomerCategoryId().equals(1));
     }
 
     @Test
@@ -39,47 +55,36 @@ public class CustomerDaoJdbcImplTest {
     }
 
     @Test
-    public void findById() {
-        assertNotNull(customerDao);
-        Customer customer = customerDao.findById(1).get();
-        assertTrue(customer.getCustomerId().equals(1));
-        assertTrue(customer.getCustomerFirstName().equals("Danila"));
-        assertTrue(customer.getCustomerLastName().equals("Kozlovsky"));
-        assertTrue(customer.getCustomerRegistrationDate().equals("08-08-2018"));
-        assertTrue(customer.getCustomerLogin().equals("login01"));
-        assertTrue(customer.getCustomerPassword().equals("password01"));
-        assertTrue(customer.getCustomerCardNumber().equals("1234 5678 9012 0001"));
-        assertTrue(customer.getCustomerCategoryId().equals(1));
-    }
-
-    @Test
-    public void add() {
+    public void addCustomer() {
         List<Customer> customers = customerDao.findAll();
         int sizeBefore = customers.size();
-        Customer customer = new Customer("firstName3", "lastName3", "09-08-2019",
-                "login03", "password03", "cardNum03", 1);
-        Customer newCustomer = customerDao.add(customer);
+
+        Customer testCustomer = new Customer("firstName5", "lastName5",
+                LocalDate.of(2019, 8, 9), "login05", "password05",
+                "cardNum05", 1);
+        Customer newCustomer = customerDao.add(testCustomer);
+
         assertNotNull(newCustomer.getCustomerId());
-        assertTrue(newCustomer.getCustomerFirstName().equals(customer.getCustomerFirstName()));
-        assertTrue(newCustomer.getCustomerLastName().equals(customer.getCustomerLastName()));
-        assertTrue(newCustomer.getCustomerRegistrationDate().equals(customer.getCustomerRegistrationDate()));
-        assertTrue(newCustomer.getCustomerLogin().equals(customer.getCustomerLogin()));
-        assertTrue(newCustomer.getCustomerPassword().equals(customer.getCustomerPassword()));
-        assertTrue(newCustomer.getCustomerCardNumber().equals(customer.getCustomerCardNumber()));
-        assertTrue(newCustomer.getCustomerCategoryId().equals(customer.getCustomerCategoryId()));
+        assertTrue(newCustomer.getCustomerFirstName().equals(testCustomer.getCustomerFirstName()));
+        assertTrue(newCustomer.getCustomerLastName().equals(testCustomer.getCustomerLastName()));
+        assertTrue(newCustomer.getCustomerRegistrationDate().equals(testCustomer.getCustomerRegistrationDate()));
+        assertTrue(newCustomer.getCustomerLogin().equals(testCustomer.getCustomerLogin()));
+        assertTrue(newCustomer.getCustomerPassword().equals(testCustomer.getCustomerPassword()));
+        assertTrue(newCustomer.getCustomerCardNumber().equals(testCustomer.getCustomerCardNumber()));
+        assertTrue(newCustomer.getCustomerCategoryId().equals(testCustomer.getCustomerCategoryId()));
         assertTrue((sizeBefore + 1) == customerDao.findAll().size());
     }
 
     @Test
-    public void update() {
-        Customer customer = customerDao.findById(1).get();
+    public void updateCustomer() {
+        Customer customer = customerDao.findById(3).get();
         customer.setCustomerFirstName("newFirstName");
         customer.setCustomerLastName("newLastName");
-        customer.setCustomerRegistrationDate("09-08-2019");
+        customer.setCustomerRegistrationDate(LocalDate.of(2019, 8, 9));
         customer.setCustomerLogin("newLogin");
         customer.setCustomerPassword("newPassword");
         customer.setCustomerCardNumber("1111-1111-1111-1111");
-        customer.setCustomerCategoryId(1);
+        customer.setCustomerCategoryId(2);
 
         customerDao.update(customer);
         Customer updatedCustomer = customerDao.findById(customer.getCustomerId()).get();
@@ -94,9 +99,10 @@ public class CustomerDaoJdbcImplTest {
     }
 
     @Test
-    public void delete() {
-        Customer customer = new Customer("firstName3", "lastName3", "09-08-2019",
-                "login03", "password03", "cardNum03", 1);
+    public void deleteCustomer() {
+        Customer customer = new Customer("firstName6", "lastName6",
+                LocalDate.of(2019, 8, 9), "login06", "password06",
+                "cardNum06", 1);
         customerDao.add(customer);
         List<Customer> customers = customerDao.findAll();
         int sizeBefore = customers.size();

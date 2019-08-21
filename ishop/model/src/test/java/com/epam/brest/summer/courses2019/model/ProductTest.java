@@ -3,6 +3,7 @@ package com.epam.brest.summer.courses2019.model;
 import org.junit.Assert;
 import org.junit.Test;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class ProductTest {
 
@@ -28,8 +29,8 @@ public class ProductTest {
 
     @Test
     public void getReceiptDate() {
-        product.setProductReceiptDate("28.12.2018");
-        Assert.assertTrue(product.getProductReceiptDate().equals("28.12.2018"));
+        product.setProductReceiptDate(LocalDate.of(2018, 12, 28));
+        Assert.assertTrue(product.getProductReceiptDate().equals(LocalDate.of(2018, 12, 28)));
     }
 
     @Test

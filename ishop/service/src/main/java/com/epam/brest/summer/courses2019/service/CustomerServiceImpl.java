@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Component
 @Transactional
-public class CustomerServiceImpl  implements CustomerService {
+public class CustomerServiceImpl implements CustomerService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomerServiceImpl.class);
 

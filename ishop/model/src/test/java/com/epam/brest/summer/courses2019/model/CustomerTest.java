@@ -3,6 +3,8 @@ package com.epam.brest.summer.courses2019.model;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.LocalDate;
+
 public class CustomerTest {
 
     Customer customer = new Customer();
@@ -27,8 +29,8 @@ public class CustomerTest {
 
     @Test
     public void getRegistrationDate() {
-        customer.setCustomerRegistrationDate("08-08-2019");
-        Assert.assertTrue(customer.getCustomerRegistrationDate().equals("08-08-2019"));
+        customer.setCustomerRegistrationDate(LocalDate.of(2019, 8, 8));
+        Assert.assertTrue(customer.getCustomerRegistrationDate().equals(LocalDate.of(2019, 8, 8)));
     }
 
     @Test

@@ -21,4 +21,11 @@ public class CustomerCategory {
     public void setCustomerCategoryName(String customerCategoryName) {
         this.customerCategoryName = customerCategoryName;
     }
+
+    public String toString() {
+        return "CustomerCategory{"
+                + "customerCategoryId=" + customerCategoryId
+                + ", customerCategoryName='" + customerCategoryName
+                + '}';
+    }
 }
