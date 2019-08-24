@@ -3,6 +3,7 @@ package com.epam.brest.summer.courses2019.dao;
 import com.epam.brest.summer.courses2019.model.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -23,31 +24,23 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private static final String SELECT_ALL =
-            "SELECT customer_id, first_name, last_name, registration_date, login, pass_word, "
-                    + "card_number, customer_category_id FROM customer ORDER BY 2, 3";
+    @Value("${customer.findAll}")
+    private String findAllCustomersSql;
 
-    private static final String FIND_BY_ID =
-            "SELECT customer_id, first_name, last_name, registration_date, login, pass_word, card_number, "
-                    + "customer_category_id FROM customer WHERE customer_id = :customerId";
+    @Value("${customer.findById}")
+    private String findByCustomerIdSql;
 
-    private static final String FIND_BY_CUSTOMER_CATEGORY_ID =
-            "SELECT customer_id, first_name, last_name, registration_date, login, pass_word, card_number, "
-                    + "customer_category_id FROM customer WHERE customer_category_id = :customerCategoryId";
+    @Value("${customer.findByCustomerCategoryId}")
+    private String findByCustomerCategoryIdSql;
 
-    private static final String ADD_CUSTOMER =
-            "INSERT INTO customer (first_name, last_name, registration_date, login, pass_word, card_number, "
-            + "customer_category_id) VALUES (:customerFirstName, :customerLastName, :customerRegistrationDate, "
-            + ":customerLogin, :customerPassword, :customerCardNumber, :customerCategoryId)";
+    @Value("${customer.add}")
+    private String addCustomerSql;
 
-    private static final String UPDATE =
-            "UPDATE customer SET first_name = :customerFirstName, last_name = :customerLastName, "
-            + "registration_date = :customerRegistrationDate, login = :customerLogin, pass_word = :customerPassword, "
-            + "card_number = :customerCardNumber, customer_category_id = :customerCategoryId "
-            + "WHERE customer_id = :customerId";
+    @Value("${customer.update}")
+    private String updateCustomerSql;
 
-    private static final String DELETE =
-            "DELETE FROM customer WHERE customer_id = :customerId";
+    @Value("${customer.delete}")
+    private String deleteCustomerSql;
 
     private static final String CUSTOMER_ID = "customerId";
     private static final String CUSTOMER_FIRST_NAME = "customerFirstName";
@@ -79,7 +72,7 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
         parameters.addValue(CUSTOMER_CATEGORY_ID, customer.getCustomerCategoryId());
 
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
-        namedParameterJdbcTemplate.update(ADD_CUSTOMER, parameters, generatedKeyHolder);
+        namedParameterJdbcTemplate.update(addCustomerSql, parameters, generatedKeyHolder);
         customer.setCustomerId(generatedKeyHolder.getKey().intValue());
         return customer;
     }
@@ -89,14 +82,14 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
 
         LOGGER.debug("findAll({})");
 
-        List<Customer> allCustomers = namedParameterJdbcTemplate.query(SELECT_ALL, new CustomerRowMapper());
+        List<Customer> allCustomers = namedParameterJdbcTemplate.query(findAllCustomersSql, new CustomerRowMapper());
         return allCustomers;
     }
 
     @Override
     public Optional<Customer> findById(Integer customerId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(CUSTOMER_ID, customerId);
-        List<Customer> results = namedParameterJdbcTemplate.query(FIND_BY_ID, namedParameters,
+        List<Customer> results = namedParameterJdbcTemplate.query(findByCustomerIdSql, namedParameters,
                 new CustomerRowMapper());
         return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }
@@ -104,14 +97,14 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
     @Override
     public List<Customer> findByCustomerCategoryId(Integer customerCategoryId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(CUSTOMER_CATEGORY_ID, customerCategoryId);
-        List<Customer> results = namedParameterJdbcTemplate.query(FIND_BY_CUSTOMER_CATEGORY_ID, namedParameters,
+        List<Customer> results = namedParameterJdbcTemplate.query(findByCustomerCategoryIdSql, namedParameters,
                 new CustomerRowMapper());
         return results;
     }
 
     @Override
     public void update(Customer customer) {
-        Optional.of(namedParameterJdbcTemplate.update(UPDATE, new BeanPropertySqlParameterSource(customer)))
+        Optional.of(namedParameterJdbcTemplate.update(updateCustomerSql, new BeanPropertySqlParameterSource(customer)))
                 .filter(this::successfullyUpdated)
                 .orElseThrow(() -> new RuntimeException("Failed to update Customer in DataBase!"));
     }
@@ -120,7 +113,7 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
     public void delete(Integer customerId) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue(CUSTOMER_ID, customerId);
-        Optional.of(namedParameterJdbcTemplate.update(DELETE, mapSqlParameterSource))
+        Optional.of(namedParameterJdbcTemplate.update(deleteCustomerSql, mapSqlParameterSource))
                 .filter(this::successfullyUpdated)
                 .orElseThrow(() -> new RuntimeException("Failed to delete Customer from DataBase!"));
     }

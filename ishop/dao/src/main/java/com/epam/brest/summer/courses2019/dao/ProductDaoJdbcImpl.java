@@ -1,5 +1,6 @@
 package com.epam.brest.summer.courses2019.dao;
 import com.epam.brest.summer.courses2019.model.Product;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -20,34 +21,23 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private static final String SELECT_ALL =
-            "SELECT product_id, product_name, product_category_id, product_receiptdate, "
-                    + "product_quantity, product_price FROM product ORDER BY 2";
+    @Value("${product.findAll}")
+    private String findAllProductsSql;
 
-    private static final String FIND_BY_ID =
-            "SELECT product_id, product_name, product_category_id, product_receiptdate, "
-                    + "product_quantity, product_price FROM product WHERE product_id = :productId";
+    @Value("${product.findById}")
+    private String findProductByIdSql;
 
-    private static final String FIND_BY_PRODUCT_CATEGORY_ID =
-            "SELECT product_id, product_name, product_category_id, product_receiptdate, "
-                    + "product_quantity, product_price FROM product WHERE product_category_id = :productCategoryId";
+    @Value("${product.findByProductCategoryId}")
+    private String findByProductCategoryIdSql;
 
-    private static final String ADD_PRODUCT =
-            "INSERT INTO product (product_name, product_category_id, product_receiptdate, "
-                    + "product_quantity, product_price) VALUES (:productName, :productCategoryId, :productReceiptDate, "
-                    + ":productQuantity, :productPrice)";
+    @Value("${product.add}")
+    private String addProductSql;
 
-    private static final String UPDATE =
-            "UPDATE product SET product_name = :productName, product_category_id = :productCategoryId, "
-                    + "product_receiptdate = :productReceiptDate, product_quantity = :productQuantity, "
-                    + "product_price = :productPrice WHERE product_id = :productId";
+    @Value("${product.update}")
+    private String updateProductSql;
 
-    private static final String DELETE =
-            "DELETE FROM product WHERE product_id = :productId";
-
-//    private static final String FIND_BALANCE_BY_ID =
-//            "SELECT product_id, product_name, product_quantity, product_price, product_quantity * product_price FROM product "
-//                    + "WHERE product_id = :productId";
+    @Value("${product.delete}")
+    private String deleteProductSql;
 
     private static final String PRODUCT_ID = "productId";
     private static final String PRODUCT_NAME = "productName";
@@ -62,14 +52,14 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
     @Override
     public List<Product> findAll() {
-        List<Product> products = namedParameterJdbcTemplate.query(SELECT_ALL, new ProductRowMapper());
+        List<Product> products = namedParameterJdbcTemplate.query(findAllProductsSql, new ProductRowMapper());
         return products;
     }
 
     @Override
     public Optional<Product> findById(Integer productId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(PRODUCT_ID, productId);
-        List<Product> results = namedParameterJdbcTemplate.query(FIND_BY_ID, namedParameters,
+        List<Product> results = namedParameterJdbcTemplate.query(findProductByIdSql, namedParameters,
                 new ProductRowMapper());
         return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }
@@ -77,7 +67,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public List<Product> findByProductCategoryId(Integer productCategoryId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(PRODUCT_CATEGORY_ID, productCategoryId);
-        List<Product> results = namedParameterJdbcTemplate.query(FIND_BY_PRODUCT_CATEGORY_ID, namedParameters,
+        List<Product> results = namedParameterJdbcTemplate.query(findByProductCategoryIdSql, namedParameters,
                 new ProductRowMapper());
         return results;
     }
@@ -92,14 +82,14 @@ public class ProductDaoJdbcImpl implements ProductDao {
         parameters.addValue(PRODUCT_PRICE, product.getProductPrice());
 
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
-        namedParameterJdbcTemplate.update(ADD_PRODUCT, parameters, generatedKeyHolder);
+        namedParameterJdbcTemplate.update(addProductSql, parameters, generatedKeyHolder);
         product.setProductId(generatedKeyHolder.getKey().intValue());
         return product;
     }
 
     @Override
     public void update(Product product) {
-        Optional.of(namedParameterJdbcTemplate.update(UPDATE, new BeanPropertySqlParameterSource(product)))
+        Optional.of(namedParameterJdbcTemplate.update(updateProductSql, new BeanPropertySqlParameterSource(product)))
                 .filter(this::successfullyUpdated)
                 .orElseThrow(() -> new RuntimeException("Failed to update Product in DataBase!"));
     }
@@ -108,7 +98,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
     public void delete(Integer productId) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue(PRODUCT_ID, productId);
-        Optional.of(namedParameterJdbcTemplate.update(DELETE, mapSqlParameterSource))
+        Optional.of(namedParameterJdbcTemplate.update(deleteProductSql, mapSqlParameterSource))
                 .filter(this::successfullyUpdated)
                 .orElseThrow(() -> new RuntimeException("Failed to delete Product from DataBase!"));
 
@@ -116,7 +106,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
     @Override
     public BigDecimal findBalanceById(Integer productId) {
-        List<Product> products = namedParameterJdbcTemplate.query(SELECT_ALL, new ProductRowMapper());
+        List<Product> products = namedParameterJdbcTemplate.query(findAllProductsSql, new ProductRowMapper());
         BigDecimal balance = new BigDecimal(String.valueOf(products.get(productId).getProductQuantity()));
         return balance;
     }

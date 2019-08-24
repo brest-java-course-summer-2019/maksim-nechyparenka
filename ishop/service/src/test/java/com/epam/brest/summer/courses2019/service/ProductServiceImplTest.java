@@ -1,29 +1,33 @@
 package com.epam.brest.summer.courses2019.service;
 
 import com.epam.brest.summer.courses2019.model.Product;
-import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.testng.annotations.Test;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.testng.Assert.assertEquals;
+
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath:test-service.xml"})
+@Transactional
+@Rollback
 public class ProductServiceImplTest {
 
     @Autowired
     private ProductService productService;
 
     @Test
-    void findAll() {
+    public void findAll() {
         List<Product> products = productService.findAll();
 
         assertNotNull(products);
@@ -31,7 +35,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    void findBalanceById() {
+    public void findBalanceById() {
         int id = 1;
         List<Product> products = productService.findAll();
 
@@ -41,7 +45,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    void findById() {
+    public void findById() {
         int id = 1;
         Product product = productService.findById(id);
 
@@ -50,7 +54,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    void add() {
+    public void add() {
         long count = productService.findAll().size();
         assertThrows(DuplicateKeyException.class, () -> productService.add(create(), create()));
         long newCount = productService.findAll().size();
@@ -58,7 +62,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    void update() {
+    public void update() {
         int id = 2;
         Product product = create();
         product.setProductCategoryId(id);
@@ -70,7 +74,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    void delete() {
+    public void delete() {
         int id = 3;
         productService.delete(id);
         assertThrows(RuntimeException.class, () -> productService.findById(id));

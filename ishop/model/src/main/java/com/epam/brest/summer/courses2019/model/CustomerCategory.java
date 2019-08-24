@@ -5,6 +5,13 @@ public class CustomerCategory {
     private Integer customerCategoryId;
     private String customerCategoryName;
 
+    public CustomerCategory() {
+
+    }
+
+    public CustomerCategory(String customerCategoryName) {
+        this.customerCategoryName = customerCategoryName;
+    }
 
     public Integer getCustomerCategoryId() {
         return customerCategoryId;
@@ -24,7 +31,7 @@ public class CustomerCategory {
 
     public String toString() {
         return "CustomerCategory{"
-                + "customerCategoryId=" + customerCategoryId
+                + "customerCategoryId=" + customerCategoryId + '\''
                 + ", customerCategoryName='" + customerCategoryName
                 + '}';
     }

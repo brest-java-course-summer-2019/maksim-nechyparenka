@@ -34,10 +34,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product findById(Integer id) {
-        LOGGER.debug("findById({})", id);
-        return dao.findById(id);
-                //.orElseThrow(() -> new RuntimeException("Failed to get Product from DataBase!")));
+    public Product findById(Integer productId) {
+        LOGGER.debug("findById({})", productId);
+        return dao.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Failed to get Product from DataBase!"));
     }
 
     @Override

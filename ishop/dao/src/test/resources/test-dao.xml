@@ -4,6 +4,33 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+<!--                ProductDao SQL properties-->
+                <value>classpath:addProductSQL.properties</value>
+                <value>classpath:deleteProductSQL.properties</value>
+                <value>classpath:findAllProductsSQL.properties</value>
+                <value>classpath:findByProductCategoryIdSQL.properties</value>
+                <value>classpath:findProductByIdSQL.properties</value>
+                <value>classpath:updateProductSQL.properties</value>
+<!--                CustomerDao SQL properties-->
+                <value>classpath:addCustomerSQL.properties</value>
+                <value>classpath:deleteCustomerSQL.properties</value>
+                <value>classpath:findAllCustomersSQL.properties</value>
+                <value>classpath:findByCustomerCategoryIdSQL.properties</value>
+                <value>classpath:findByCustomerIdSQL.properties</value>
+                <value>classpath:updateCustomerSQL.properties</value>
+<!--                CustomerCategoryDao SQL properties-->
+                <value>classpath:addCustomerCategorySQL.properties</value>
+                <value>classpath:deleteCustomerCategorySQL.properties</value>
+                <value>classpath:findAllCustomersCategorySQL.properties</value>
+                <value>classpath:findCustomerCategoryByIdSQL.properties</value>
+                <value>classpath:updateCustomerCategorySQL.properties</value>
+            </list>
+        </property>
+    </bean>
+
     <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
@@ -13,6 +40,10 @@
     </bean>
 
     <bean id="customerDao" class="com.epam.brest.summer.courses2019.dao.CustomerDaoJdbcImpl">
+        <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+    </bean>
+
+    <bean id="customerCategoryDao" class="com.epam.brest.summer.courses2019.dao.CustomerCategoryDaoJdbcImpl">
         <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
 
