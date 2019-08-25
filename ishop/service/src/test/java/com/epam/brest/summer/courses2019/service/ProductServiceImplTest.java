@@ -55,10 +55,10 @@ public class ProductServiceImplTest {
 
     @Test
     public void add() {
-        long count = productService.findAll().size();
-        assertThrows(DuplicateKeyException.class, () -> productService.add(create(), create()));
-        long newCount = productService.findAll().size();
-        assertEquals(count, newCount);
+        long amount = productService.findAll().size();
+        assertThrows(DuplicateKeyException.class, () -> productService.add(create()));
+        long newAmount = productService.findAll().size();
+        assertEquals(amount, newAmount);
     }
 
     @Test

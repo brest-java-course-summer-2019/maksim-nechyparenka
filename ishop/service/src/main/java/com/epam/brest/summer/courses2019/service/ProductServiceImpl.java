@@ -4,58 +4,61 @@ import com.epam.brest.summer.courses2019.dao.ProductDao;
 import com.epam.brest.summer.courses2019.model.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
 import java.util.List;
 
 /**
- *  Product Service Interface implementation.
+ *  Product Service Interface implementation
  */
-
+@Component
+@Transactional
 public class ProductServiceImpl implements ProductService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
 
-    private ProductDao dao;
+    private ProductDao productDao;
 
-    public ProductServiceImpl(ProductDao dao) {
-        this.dao = dao;
+    public ProductServiceImpl(ProductDao productDao) {
+        this.productDao = productDao;
     }
 
     @Override
     public List<Product> findAll() {
-        LOGGER.debug("Find all Products!");
-        return dao.findAll();
+        LOGGER.debug("findAll({})");
+        return productDao.findAll();
     }
 
     @Override
     public BigDecimal findBalanceById(Integer productId) {
-        LOGGER.debug("Find Product balance by Product ID!");
-        return dao.findBalanceById(productId);
+        LOGGER.debug("findBalanceById({})", productId);
+        return productDao.findBalanceById(productId);
     }
 
     @Override
     public Product findById(Integer productId) {
         LOGGER.debug("findById({})", productId);
-        return dao.findById(productId)
+        return productDao.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Failed to get Product from DataBase!"));
     }
 
     @Override
-    public Product add(Product product1, Product product) {
+    public Product add(Product product) {
         LOGGER.debug("add({})", product);
-        return dao.add(product);
+        return productDao.add(product);
     }
 
     @Override
     public void update(Product product) {
         LOGGER.debug("update({})", product);
-        dao.update(product);
+        productDao.update(product);
     }
 
     @Override
     public void delete(int id) {
         LOGGER.debug("delete({})", id);
-        dao.delete(id);
+        productDao.delete(id);
     }
-
 }

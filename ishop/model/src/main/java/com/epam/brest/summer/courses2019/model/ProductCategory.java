@@ -5,6 +5,13 @@ public class ProductCategory {
     private Integer productCategoryId;
     private String productCategoryName;
 
+    public ProductCategory() {
+
+    }
+
+    public ProductCategory(String productCategoryName) {
+        this.productCategoryName = productCategoryName;
+    }
 
     public Integer getProductCategoryId() {
         return productCategoryId;

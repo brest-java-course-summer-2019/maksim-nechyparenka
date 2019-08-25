@@ -33,11 +33,11 @@ public interface ProductService {
      * Persist new product.
      *
      *
-     * @param product1
+     * @param product
      * @param product product
      * @return product
      */
-    Product add(Product product1, Product product);
+    Product add(Product product);
 
     /**
      * Update Product.
