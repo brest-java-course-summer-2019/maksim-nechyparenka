@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS customerCategory;
 
 CREATE TABLE customerCategory (
                     customer_category_id INT NOT NULL AUTO_INCREMENT,
-                    customer_category_name VARCHAR(255) NOT NULL,
+                    customer_category_name VARCHAR(255) NOT NULL UNIQUE,
                     PRIMARY KEY (customer_category_id)
 );
 

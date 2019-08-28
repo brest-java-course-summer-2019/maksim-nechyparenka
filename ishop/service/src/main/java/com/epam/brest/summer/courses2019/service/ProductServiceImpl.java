@@ -27,38 +27,46 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findAll() {
-        LOGGER.debug("findAll({})");
+        LOGGER.debug("Find all Products!");
         return productDao.findAll();
     }
 
     @Override
     public BigDecimal findBalanceById(Integer productId) {
-        LOGGER.debug("findBalanceById({})", productId);
+        LOGGER.debug("Find Product balance by product ID: ({})", productId);
         return productDao.findBalanceById(productId);
     }
 
     @Override
     public Product findById(Integer productId) {
-        LOGGER.debug("findById({})", productId);
+        LOGGER.debug("Find Product by ID: ({})", productId);
         return productDao.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Failed to get Product from DataBase!"));
     }
 
     @Override
+    public void add(Product... products) {
+        LOGGER.debug("Add new Products: ({})", products);
+        for (Product product : products) {
+            productDao.add(product);
+        }
+    }
+
+    @Override
     public Product add(Product product) {
-        LOGGER.debug("add({})", product);
+        LOGGER.debug("Add new Product: ({})", product);
         return productDao.add(product);
     }
 
     @Override
     public void update(Product product) {
-        LOGGER.debug("update({})", product);
+        LOGGER.debug("Update existing Product: ({})", product);
         productDao.update(product);
     }
 
     @Override
     public void delete(int id) {
-        LOGGER.debug("delete({})", id);
+        LOGGER.debug("Delete existing Product: ({})", id);
         productDao.delete(id);
     }
 }

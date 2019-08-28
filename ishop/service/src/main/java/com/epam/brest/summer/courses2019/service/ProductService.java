@@ -32,11 +32,11 @@ public interface ProductService {
     /**
      * Persist new product.
      *
-     *
-     * @param product
-     * @param product product
+     * @param products products
      * @return product
      */
+    void add(Product... products);
+
     Product add(Product product);
 
     /**

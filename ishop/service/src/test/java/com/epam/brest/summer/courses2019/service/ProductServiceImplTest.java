@@ -9,10 +9,14 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -40,7 +44,7 @@ public class ProductServiceImplTest {
         List<Product> products = productService.findAll();
 
         assertNotNull(products);
-        assertEquals("8", products.get(id).getProductQuantity());
+        assertEquals(new BigDecimal("8"), products.get(id).getProductQuantity());
 
     }
 
@@ -56,21 +60,21 @@ public class ProductServiceImplTest {
     @Test
     public void add() {
         long amount = productService.findAll().size();
-        assertThrows(DuplicateKeyException.class, () -> productService.add(create()));
+        productService.add(create(), create());
         long newAmount = productService.findAll().size();
-        assertEquals(amount, newAmount);
+        assertNotEquals(amount, newAmount);
     }
 
     @Test
     public void update() {
-        int id = 2;
+        int id = 5;
         Product product = create();
-        product.setProductCategoryId(id);
+        product.setProductId(id);
         productService.update(product);
         product = productService.findById(id);
 
         assertNotNull(product);
-        assertEquals("name", product.getProductName());
+        assertEquals("productName", product.getProductName());
     }
 
     @Test
@@ -81,8 +85,10 @@ public class ProductServiceImplTest {
     }
 
     private Product create() {
-        Product product = new Product();
-        product.setProductName("name");
+        Product product = new Product("productNewName", 2, LocalDate.of(2019,8,8), new BigDecimal("5"),
+                new BigDecimal("555"));
+        product.setProductName("productName");
+        product.setProductCategoryId(3);
         return product;
     }
 }
