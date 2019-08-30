@@ -6,9 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Customer Service Interface implementation.
@@ -39,13 +37,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Optional<Customer> findById(Integer customerId) {
+    public Customer findById(Integer customerId) {
         LOGGER.debug("findById({})", customerId);
-        return customerDao.findById(customerId);
+        return customerDao.findById(customerId)
+                .orElseThrow(() -> new RuntimeException("Failed to get Customer from DataBase!"));
     }
 
     @Override
-    public Customer add(Customer customer1, Customer customer) {
+    public Customer add(Customer customer) {
         LOGGER.debug("add({})", customer);
         return customerDao.add(customer);
     }

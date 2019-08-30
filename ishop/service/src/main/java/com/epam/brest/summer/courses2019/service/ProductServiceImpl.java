@@ -45,6 +45,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findByProductCategoryId(Integer productCategoryId) {
+        LOGGER.debug("Find Products by product category ID: ({})", productCategoryId);
+        return productDao.findByProductCategoryId(productCategoryId);
+    }
+
+    @Override
     public void add(Product... products) {
         LOGGER.debug("Add new Products: ({})", products);
         for (Product product : products) {

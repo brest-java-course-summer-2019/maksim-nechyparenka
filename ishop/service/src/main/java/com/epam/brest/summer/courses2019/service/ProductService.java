@@ -30,6 +30,14 @@ public interface ProductService {
     Product findById(Integer id);
 
     /**
+     * Find Products By category Id.
+     *
+     * @param productCategoryId productCategoryid
+     * @return Products
+     */
+    List<Product> findByProductCategoryId(Integer productCategoryId);
+
+    /**
      * Persist new product.
      *
      * @param products products

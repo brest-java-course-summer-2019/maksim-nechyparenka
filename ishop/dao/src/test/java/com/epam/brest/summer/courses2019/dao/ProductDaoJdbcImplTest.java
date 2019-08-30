@@ -41,8 +41,8 @@ public class ProductDaoJdbcImplTest {
         assertTrue(product.getProductId().equals(1));
         assertTrue(product.getProductName().equals("Samsung galaxy s8 plus g955f"));
         assertTrue(product.getProductCategoryId().equals(1));
-        assertEquals(new BigDecimal("8"), product.getProductQuantity());
-        assertEquals(new BigDecimal("350"), product.getProductPrice());
+        assertEquals(new BigDecimal("8.00"), product.getProductQuantity());
+        assertEquals(new BigDecimal("350.00"), product.getProductPrice());
     }
 
     @Test
@@ -53,11 +53,6 @@ public class ProductDaoJdbcImplTest {
         Product testProduct = new Product("Samsung", 1, LocalDate.of(2019, 7, 28),
                 new BigDecimal("5"), new BigDecimal("555.55"));
 
-//        testProduct.setProductName("Samsung");
-//        testProduct.setProductCategoryId(1);
-//        testProduct.setProductReceiptDate("28.07.2019");
-//        testProduct.setProductQuantity(new BigDecimal("5"));
-//        testProduct.setProductPrice(new BigDecimal("555.55"));
         Product newProduct = productDao.add(testProduct);
         Assert.assertNotNull(newProduct.getProductId());
         assertTrue((sizeBefore + 1) == productDao.findAll().size());
@@ -69,8 +64,8 @@ public class ProductDaoJdbcImplTest {
         product.setProductName("Samsung");
         product.setProductCategoryId(1);
         product.setProductReceiptDate(LocalDate.of(2019, 7, 28));
-        product.setProductQuantity(new BigDecimal("5"));
-        product.setProductPrice(new BigDecimal("555"));
+        product.setProductQuantity(new BigDecimal("5.00"));
+        product.setProductPrice(new BigDecimal("555.00"));
         productDao.update(product);
 
         Product updatedProduct = productDao.findById(product.getProductId()).get();

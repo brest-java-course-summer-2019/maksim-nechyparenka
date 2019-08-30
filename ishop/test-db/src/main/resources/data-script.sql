@@ -6,11 +6,11 @@ INSERT INTO productCategory (product_category_id, product_category_name)
 VALUES (3, 'Computers, Tablets');
 
 INSERT INTO product (product_id, product_name, product_category_id, product_receiptdate, product_quantity, product_price)
-VALUES (1, 'Samsung galaxy s8 plus g955f', 1, '2018-12-28', '8', '350');
+VALUES (1, 'Samsung galaxy s8 plus g955f', 1, '2018-12-28', 8, 350);
 INSERT INTO product (product_id, product_name, product_category_id, product_receiptdate, product_quantity, product_price)
-VALUES (2, 'Puma Retro Womens Short', 2, '2018-11-08', '5', '15');
+VALUES (2, 'Puma Retro Womens Short', 2, '2018-11-08', 5, 15);
 INSERT INTO product (product_id, product_name, product_category_id, product_receiptdate, product_quantity, product_price)
-VALUES (3, 'Lenovo ThinkPad X240', 3, '2019-02-10', '7', '550');
+VALUES (3, 'Lenovo ThinkPad X240', 3, '2019-02-10', 7, 550);
 
 INSERT INTO customerCategory (customer_category_id, customer_category_name)
 VALUES (1, 'Normal');

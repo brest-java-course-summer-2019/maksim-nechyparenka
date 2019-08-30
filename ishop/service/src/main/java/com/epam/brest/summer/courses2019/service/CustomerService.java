@@ -4,7 +4,6 @@ package com.epam.brest.summer.courses2019.service;
 import com.epam.brest.summer.courses2019.model.Customer;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Customer Service Interface.
@@ -33,17 +32,17 @@ public interface CustomerService {
      * @param customerId customer id
      * @return customer by id
      */
-    Optional<Customer> findById(Integer customerId);
+    Customer findById(Integer customerId);
 
     /**
      * Persist new customer.
      *
      *
-     * @param customer1
+     * @param customer
      * @param customer customer
      * @return customer
      */
-    Customer add(Customer customer1, Customer customer);
+    Customer add(Customer customer);
 
     /**
      * Update customer.

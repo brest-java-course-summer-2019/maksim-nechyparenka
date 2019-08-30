@@ -13,8 +13,8 @@ CREATE TABLE product (
                     product_name VARCHAR(40) NOT NULL,
                     product_category_id INT NOT NULL,
                     product_receiptdate DATE NOT NULL,
-                    product_quantity INT NOT NULL,
-                    product_price INT NOT NULL,
+                    product_quantity DECIMAL(15,2) NOT NULL,
+                    product_price DECIMAL(15,2) NOT NULL,
                     PRIMARY KEY (product_id),
                     FOREIGN KEY (product_category_id)
                     REFERENCES productCategory (product_category_id)

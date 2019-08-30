@@ -41,10 +41,10 @@ public class ProductServiceImplTest {
     @Test
     public void findBalanceById() {
         int id = 1;
-        List<Product> products = productService.findAll();
+        Product product = productService.findById(id);
 
-        assertNotNull(products);
-        assertEquals(new BigDecimal("8"), products.get(id).getProductQuantity());
+        assertNotNull(product);
+        assertEquals(new BigDecimal("8.00"), product.getProductQuantity());
 
     }
 
@@ -67,14 +67,15 @@ public class ProductServiceImplTest {
 
     @Test
     public void update() {
-        int id = 5;
+        int id = 3;
         Product product = create();
-        product.setProductId(id);
+        productService.add(product);
+        product.setProductCategoryId(id);
         productService.update(product);
-        product = productService.findById(id);
+        Product updatedProduct = productService.findById(product.getProductId());
 
-        assertNotNull(product);
-        assertEquals("productName", product.getProductName());
+        assertNotNull(updatedProduct);
+        assertEquals("productNewName", updatedProduct.getProductName());
     }
 
     @Test
@@ -85,10 +86,8 @@ public class ProductServiceImplTest {
     }
 
     private Product create() {
-        Product product = new Product("productNewName", 2, LocalDate.of(2019,8,8), new BigDecimal("5"),
-                new BigDecimal("555"));
-        product.setProductName("productName");
-        product.setProductCategoryId(3);
+        Product product = new Product("productNewName", 2, LocalDate.of(2019,8,8),
+                new BigDecimal("5"), new BigDecimal("555"));
         return product;
     }
 }
