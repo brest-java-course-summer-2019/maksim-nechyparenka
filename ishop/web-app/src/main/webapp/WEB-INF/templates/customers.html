@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.min.css}">
+    <title>Customers</title>
+</head>
+<body>
+
+<header>
+    <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="administrator.html"
+                       align="absmiddle"
+                       class="btn btn-light"
+                       title="Administrator console"
+                       data-placement="right">
+                        <i class="fas fa-user-shield"></i>
+                        <span class="d-none d-sm-inline"></span></a>
+                    <a href="roles.html" button type="button" class="btn btn-secondary">Roles</button></a>
+                    <a href="products.html" button type="button" class="btn btn-secondary">Products</button></a>
+                    <a href="customers.html" button type="button" class="btn btn-secondary">Customers</button></a>
+                </div>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<nav id="main-header"
+     class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
+    <span class="navbar-brand text-uppercase mr-auto"><h1>CUSTOMERS</h1></span>
+
+    <span class="navbar-nav float-right">
+            <a href="#"
+               align="absmiddle"
+               class="btn btn-light"
+               title="Add customer"
+               data-target="#addModal"
+               data-toggle="modal"
+               data-placement="left">
+                <i class="fas fa-user-plus fa-2x"></i>
+                <span class="d-none d-sm-inline"></span></a>
+    </span>
+</nav>
+
+    <!-- DateSorting -->
+    <div class="container justify-content-left" style="margin-left:30px">
+        <div class="row align-items-center justify-content-start">
+            <p>Sort by registration period:</p>
+        <div class='col-sm-3'>
+            <div class="form-group">
+                <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
+                    <div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='col-sm-3'>
+            <div class="form-group">
+                <div class="input-group date" id="datetimepicker8" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
+                    <div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+<section id="roles">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <table class="table table-hover table-borderless">
+                        <thead class="thead-dark">
+                        <tr align="center">
+                            <th>No.</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Registration date</th>
+                            <th>Login</th>
+                            <th>Password</th>
+                            <th>Card No.</th>
+                            <th>Rating</th>
+                            <th>Discount, %</th>
+                            <th>Order</th>
+                            <th>BlackList</th>
+                            <th>Edit / Delete customer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr align="center">
+                            <td>1</td>
+                            <td>Danila</td>
+                            <td>Kozlovsky</td>
+                            <td>08-08-2018</td>
+                            <td>login</td>
+                            <td>password</td>
+                            <td>1234 5678 9012 3456</td>
+                            <td>normal</td>
+                            <td>0</td>
+                            <td>-</td>
+                            <td>
+                                <span data-toggle="modal" data-target="#blackModal">
+                                <a href="#"
+                                   class="btn-sm btn-outline-secondary"
+                                   title="Add to BlackList"
+                                   data-toggle="tooltip"
+                                   data-placement="left">
+                                    <i class="fa fa-plus"></i> <span class="d-none d-md-inline">Add</span></a>
+                            </span>
+                            </td>
+                            <td class="text-center">
+                            <span data-toggle="modal" data-target="#editModal">
+                                <a href="#"
+                                   class="btn-sm btn-outline-secondary"
+                                   title="Edit customer"
+                                   data-toggle="tooltip"
+                                   data-placement="left">
+                                    <i class="fa fa-pencil"></i> <span class="d-none d-md-inline">Edit</span></a>
+                            </span>
+                                <span data-toggle="modal" data-target="#deleteModal">
+                                <a href="#"
+                                   class="btn-sm btn-outline-secondary"
+                                   title="Delete customer"
+                                   data-toggle="tooltip"
+                                   data-placement="right">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
+                            </span>
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td>2</td>
+                            <td>Ivan</td>
+                            <td>Ivanov</td>
+                            <td>08-06-2019</td>
+                            <td>login</td>
+                            <td>password</td>
+                            <td>1234 5678 9012 3456</td>
+                            <td>normal</td>
+                            <td>0</td>
+                            <td>+</td>
+                            <td>
+                                <span data-toggle="modal" data-target="#blackModal">
+                                <a href="#"
+                                   class="btn-sm btn-outline-secondary"
+                                   title="Add to BlackList"
+                                   data-toggle="tooltip"
+                                   data-placement="left">
+                                    <i class="fa fa-plus"></i> <span class="d-none d-md-inline">Add</span></a>
+                            </span>
+                            </td>
+                            <td class="text-center">
+                            <span data-toggle="modal" data-target="#editModal">
+                                <a href="#"
+                                   class="btn-sm btn-outline-secondary"
+                                   title="Edit customer"
+                                   data-toggle="tooltip"
+                                   data-placement="left">
+                                    <i class="fa fa-pencil"></i> <span class="d-none d-md-inline">Edit</span></a>
+                            </span>
+                                <span data-toggle="modal" data-target="#deleteModal">
+                                <a href="#" class="btn-sm btn-outline-secondary"
+                                   title="Delete customer"
+                                   data-toggle="tooltip"
+                                   data-placement="right">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
+                                </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AddModal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="AddModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModaltitle">Add Customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-firstname">First Name</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="First name" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+                <p></p>
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-lastname">Last Name</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Last name" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+                <p></p>
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-regdate">Regisration date</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Date" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+                <p></p>
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-login">Login</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="login" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+                <p></p>
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-password">Password</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="password" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+                <p></p>
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-card">Card No.</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="card number" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- EditModal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="EditModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModaltitle">Edit Customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="edit-firstname">First Name</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="First name" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+                <p></p>
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="edit-lastname">Last Name</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Last name" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+                <p></p>
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="edit-regdate">Regisration date</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Date" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+                <p></p>
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="edit-login">Login</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="login" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+                <p></p>
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="edit-password">Password</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="password" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+                <p></p>
+                <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="edit-card">Card No.</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="card number" aria-label="Username" aria-describedby="addon-wrapping">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BlackListModal -->
+<div class="modal fade" id="blackModal" tabindex="-1" role="dialog" aria-labelledby="BlackModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="blackModaltitle">BlackList adding confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you really want to add customer to BlackList?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DeleteModal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModaltitle">Delete confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you really want to delete customer?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center" style="font-size: 12px">
+    <p></p>
+    &copy Maksim Nechyparenka, 2019
+</footer>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://kit.fontawesome.com/b72194b912.js"></script>
+<script src="js/jquery-3.4.1.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/moment.js"></script>
+<script type="text/javascript" src="js/tempusdominus-bootstrap-4.min.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+
+<script>
+    $(function () {
+        $('#datetimepicker7').datetimepicker();
+        $('#datetimepicker8').datetimepicker({
+            useCurrent: false
+        });
+        $("#datetimepicker7").on("change.datetimepicker", function (e) {
+            $('#datetimepicker8').datetimepicker('minDate', e.date);
+        });
+        $("#datetimepicker8").on("change.datetimepicker", function (e) {
+            $('#datetimepicker7').datetimepicker('maxDate', e.date);
+        });
+    });
+</script>
+
+</body>
+</html>
