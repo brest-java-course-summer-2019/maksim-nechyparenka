@@ -1,4 +1,4 @@
-package com.epam.brest.summer.courses2019.dao;
+package com.epam.brest.summer.courses2019.service;
 
 import com.epam.brest.summer.courses2019.model.CustomerCategory;
 
@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Customer Category Interface.
+ * Customer Category Service Interface.
  */
 
-public interface CustomerCategoryDao {
+public interface CustomerCategoryService {
 
     /**
      * Get all customer categories

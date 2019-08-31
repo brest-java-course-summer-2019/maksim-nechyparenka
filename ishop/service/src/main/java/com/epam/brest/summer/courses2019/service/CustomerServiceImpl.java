@@ -26,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> findAll() {
-        LOGGER.debug("findAll({})");
+        LOGGER.debug("Find all Customers: ({})");
         return customerDao.findAll();
     }
 

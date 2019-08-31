@@ -62,5 +62,13 @@
         <constructor-arg ref="customerDao"/>
     </bean>
 
+    <bean id="customerCategoryDao" class="com.epam.brest.summer.courses2019.dao.CustomerCategoryDaoJdbcImpl">
+        <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+    </bean>
+
+    <bean id="customerCategoryService" class="com.epam.brest.summer.courses2019.service.CustomerCategoryServiceImpl">
+        <constructor-arg ref="customerCategoryDao"/>
+    </bean>
+
 
 </beans>
