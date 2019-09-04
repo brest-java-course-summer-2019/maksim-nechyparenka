@@ -70,5 +70,4 @@ public class CustomerCategoryServiceImplTest {
         customerCategoryService.delete(customerCategory.getCustomerCategoryId());
         assertTrue((sizeBefore - 1) == customerCategoryService.findAll().size());
     }
-
 }
