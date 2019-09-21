@@ -9,7 +9,7 @@
     <artifactId>model</artifactId>
     <packaging>jar</packaging>
 
-    <name>ishop</name>
+    <name>ISHOP MODEL MODULE</name>
 
     <parent>
         <groupId>com.epam.brest.summer.courses2019</groupId>

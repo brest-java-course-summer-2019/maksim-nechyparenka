@@ -51,9 +51,7 @@
         <constructor-arg name="productRowMapper" ref="productRowMapper"/>
     </bean>
 
-    <bean id="productRowMapper" class="com.epam.brest.summer.courses2019.dao.mapper.ProductRowMapper">
-<!--        <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>-->
-    </bean>
+    <bean id="productRowMapper" class="com.epam.brest.summer.courses2019.dao.mapper.ProductRowMapper"></bean>
 
     <bean id="productDtoRowMapper" class="com.epam.brest.summer.courses2019.dao.mapper.ProductDtoRowMapper"></bean>
 

@@ -87,7 +87,6 @@ public class ProductDaoJdbcImpl implements ProductDao {
     private static final String PRODUCT_QUANTITY = "productQuantity";
     private static final String PRODUCT_PRICE = "productPrice";
 
-    @Autowired
     public ProductDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate,
                               ProductRowMapper productRowMapper, ProductDtoRowMapper productDtoRowMapper) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -162,40 +161,6 @@ public class ProductDaoJdbcImpl implements ProductDao {
         BigDecimal balance = new BigDecimal(String.valueOf(products.get(productId).getProductQuantity()));
         return balance;
     }
-
-//    private class ProductRowMapper implements RowMapper<Product> {
-//        @Override
-//        public Product mapRow(ResultSet resultSet, int i) throws SQLException {
-//
-//            Product product = new Product();
-//
-//            product.setProductId(resultSet.getInt("product_id"));
-//            product.setProductName(resultSet.getString("product_name"));
-//            product.setProductCategoryId(resultSet.getInt("product_category_id"));
-//            product.setProductReceiptDate(resultSet.getDate("product_receiptdate").toLocalDate());
-//            product.setProductQuantity(resultSet.getBigDecimal("product_quantity"));
-//            product.setProductPrice(resultSet.getBigDecimal("product_price"));
-//
-//            return product;
-//        }
-//    }
-
-//    private class ProductDTORowMapper implements RowMapper<ProductDTO> {
-//        @Override
-//        public ProductDTO mapRow(ResultSet resultSet, int i) throws SQLException {
-//
-//            ProductDTO productDTO = new ProductDTO();
-//
-//            productDTO.setProductId(resultSet.getInt("product_id"));
-//            productDTO.setProductName(resultSet.getString("product_name"));
-//            productDTO.setProductCategoryId(resultSet.getInt("product_category_id"));
-//            productDTO.setProductReceiptDate(resultSet.getDate("product_receiptdate").toLocalDate());
-//            productDTO.setProductQuantity(resultSet.getBigDecimal("product_quantity"));
-//            productDTO.setProductPrice(resultSet.getBigDecimal("product_price"));
-//
-//            return productDTO;
-//        }
-//    }
 
     private boolean successfullyUpdated(int numRowsUpdated) {
         return numRowsUpdated > 0;

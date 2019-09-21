@@ -8,7 +8,7 @@
     <artifactId>service</artifactId>
     <packaging>jar</packaging>
 
-    <name>ishop service</name>
+    <name>ISHOP SERVICE MODULE</name>
 
     <parent>
         <groupId>com.epam.brest.summer.courses2019</groupId>

@@ -7,7 +7,7 @@
     <artifactId>dao</artifactId>
     <packaging>jar</packaging>
 
-    <name>ishop DAO</name>
+    <name>ISHOP DAO MODULE</name>
 
     <parent>
         <groupId>com.epam.brest.summer.courses2019</groupId>

@@ -6,7 +6,8 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>test-db</artifactId>
-    <name>ishop Test DB Module</name>
+
+    <name>ISHOP TEST DB MODULE</name>
 
     <parent>
         <groupId>com.epam.brest.summer.courses2019</groupId>

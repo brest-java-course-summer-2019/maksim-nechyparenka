@@ -2,6 +2,7 @@ package com.epam.brest.summer.courses2019.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Product {
 
@@ -117,6 +118,30 @@ public class Product {
 
     public void setProductPrice(BigDecimal productPrice) {
         this.productPrice = productPrice;
+    }
+
+    /**
+     * Compare products method
+     *
+     * @param object category id as {@code Object}
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Product product = (Product) object;
+        return productId.equals(product.productId) &&
+                productCategoryId.equals(product.productCategoryId) &&
+                productName.equals(product.productName) &&
+                productQuantity.equals(product.productQuantity) &&
+                productReceiptDate.equals(product.productReceiptDate) &&
+                productCategoryId.equals(product.productCategoryId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productId, productCategoryId, productName, productQuantity, productReceiptDate,
+                productCategoryId);
     }
 
     public String toString() {
