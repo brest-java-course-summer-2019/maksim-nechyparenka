@@ -14,6 +14,11 @@
                 <value>classpath:ProductDaoSQL/findByProductCategoryIdSQL.properties</value>
                 <value>classpath:ProductDaoSQL/findProductByIdSQL.properties</value>
                 <value>classpath:ProductDaoSQL/updateProductSQL.properties</value>
+<!--                ProductDto SQL properties-->
+                <value>classpath:ProductDtoSQL/findAllProductDTOsSQL.properties</value>
+
+
+
 <!--                CustomerDao SQL properties-->
                 <value>classpath:CustomerDaoSQL/addCustomerSQL.properties</value>
                 <value>classpath:CustomerDaoSQL/deleteCustomerSQL.properties</value>
@@ -43,7 +48,14 @@
 
     <bean id="productDao" class="com.epam.brest.summer.courses2019.dao.ProductDaoJdbcImpl">
         <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+        <constructor-arg name="productRowMapper" ref="productRowMapper"/>
     </bean>
+
+    <bean id="productRowMapper" class="com.epam.brest.summer.courses2019.dao.mapper.ProductRowMapper">
+<!--        <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>-->
+    </bean>
+
+    <bean id="productDtoRowMapper" class="com.epam.brest.summer.courses2019.dao.mapper.ProductDtoRowMapper"></bean>
 
     <bean id="customerDao" class="com.epam.brest.summer.courses2019.dao.CustomerDaoJdbcImpl">
         <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>

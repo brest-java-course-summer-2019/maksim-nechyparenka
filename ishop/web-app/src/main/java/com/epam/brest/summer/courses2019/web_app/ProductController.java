@@ -2,7 +2,7 @@ package com.epam.brest.summer.courses2019.web_app;
 
 import com.epam.brest.summer.courses2019.model.Product;
 import com.epam.brest.summer.courses2019.service.ProductService;
-import com.epam.brest.summer.courses2019.web_app.validators.ProductValidator;
+import com.epam.brest.summer.courses2019.web_app.validator.ProductValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,29 +46,28 @@ public class ProductController {
     }
 
     /**
-     * Goto edit Product page.
+     * Goto edit existing Product page by Id.
      *
      * @return view name
      */
+    @GetMapping(value = "/products/{id}")
+    public final String gotoEditExistingProductPage(@PathVariable Integer id, Model model) {
 
-    @GetMapping(value = "/product/{id}")
-    public final String gotoEditProductPage(@PathVariable Integer id, Model model) {
-
-        LOGGER.debug("gotoEditProductPage({},{})", id, model);
+        LOGGER.debug("Edit existing product({},{})", id, model);
         Product product = productService.findById(id);
         model.addAttribute("product", product);
         return "product";
     }
 
     /**
-     * Update product into storage.
+     * Update existing Product in the catalogue.
      *
      * @return view name
      */
     @PostMapping(value = "/product/{id}")
-    public String updateProduct(@Valid Product product, BindingResult result) {
+    public String updateExistingProduct(@Valid Product product, BindingResult result) {
 
-        LOGGER.debug("updateProduct({},{})", product, result);
+        LOGGER.debug("Update existing product({},{})", product, result);
         productValidator.validate(product, result);
         if(result.hasErrors()) {
             return "product";
@@ -76,5 +75,20 @@ public class ProductController {
             this.productService.update(product);
             return "redirect:/products";
         }
+    }
+
+    /**
+     * Goto add Product page.
+     *
+     * @return view name
+     */
+    @GetMapping(value = "/product")
+    public final String gotoAddProductPage(Model model) {
+
+        LOGGER.debug("Goto add product page({})", model);
+        Product product = new Product();
+        model.addAttribute("isNew", true);
+        model.addAttribute("product", product);
+        return "product";
     }
 }

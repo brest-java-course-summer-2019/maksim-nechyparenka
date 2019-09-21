@@ -59,5 +59,5 @@ public interface ProductService {
      *
      * @param id product id
      */
-    void delete(int id);
+    void delete(Integer id);
 }

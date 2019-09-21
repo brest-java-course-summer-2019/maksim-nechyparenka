@@ -38,6 +38,7 @@
                 <value>classpath:ProductCategoryDaoSQL/findProductCategoryByIdSQL.properties</value>
                 <value>classpath:ProductCategoryDaoSQL/updateProductCategorySQL.properties</value>
                 <value>classpath:ProductCategoryDaoSQL/deleteProductCategorySQL.properties</value>
+
             </list>
         </property>
     </bean>

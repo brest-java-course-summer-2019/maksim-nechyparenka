@@ -71,7 +71,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         LOGGER.debug("Delete existing Product: ({})", id);
         productDao.delete(id);
     }
