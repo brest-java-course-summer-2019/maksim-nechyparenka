@@ -15,13 +15,6 @@ public interface ProductService {
     List<Product> findAll();
 
     /**
-     * Get balance of Product by ID.
-     *
-     * @return Product quantity.
-     */
-    BigDecimal findBalanceById(Integer productId);
-
-    /**
      * Find Product By Id.
      *
      * @param id id

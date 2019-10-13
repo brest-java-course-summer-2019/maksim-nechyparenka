@@ -32,12 +32,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public BigDecimal findBalanceById(Integer productId) {
-        LOGGER.debug("Find Product balance by product ID: ({})", productId);
-        return productDao.findBalanceById(productId);
-    }
-
-    @Override
     public Product findById(Integer productId) {
         LOGGER.debug("Find Product by ID: ({})", productId);
         return productDao.findById(productId)

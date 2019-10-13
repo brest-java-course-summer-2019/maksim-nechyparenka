@@ -15,13 +15,13 @@
   <url>http://www.example.com</url>
 
   <modules>
+    <module>test-db</module>
     <module>model</module>
     <module>dao-api</module>
     <module>dao</module>
     <module>service-api</module>
     <module>service</module>
     <module>web-app</module>
-    <module>test-db</module>
   </modules>
 
   <distributionManagement>

@@ -1,7 +1,5 @@
 package com.epam.brest.summer.courses2019.service;
 
-import com.epam.brest.summer.courses2019.dao.CustomerCategoryDao;
-import com.epam.brest.summer.courses2019.model.CustomerCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

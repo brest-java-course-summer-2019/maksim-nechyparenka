@@ -1,4 +1,4 @@
-package com.epam.brest.summer.courses2019.dao.mapper;
+package com.epam.brest.summer.courses2019.dao.mappers;
 
 import com.epam.brest.summer.courses2019.model.Product;
 import org.springframework.jdbc.core.RowMapper;
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Product Data Transfer Object Mapper
+ * Product Object Mapper
  *
  * @see RowMapper
  * @see Product
@@ -31,6 +31,16 @@ public class ProductRowMapper implements RowMapper<Product> {
      * Product category id query parameter name
      */
     public static final String PRODUCT_CATEGORY_ID = "product_category_id";
+
+    /**
+     * Product category name query parameter name
+     */
+    public static final String PRODUCT_CATEGORY_NAME = "product_category_name";
+
+    /**
+     * Product supplier name query parameter name
+     */
+    public static final String PRODUCT_SUPPLIER_NAME = "product_supplier_name";
 
     /**
      * Product receipt date query parameter name
@@ -64,6 +74,8 @@ public class ProductRowMapper implements RowMapper<Product> {
         product.setProductId(resultSet.getInt(PRODUCT_ID));
         product.setProductName(resultSet.getString(PRODUCT_NAME));
         product.setProductCategoryId(resultSet.getInt(PRODUCT_CATEGORY_ID));
+        product.setProductCategoryName(resultSet.getString(PRODUCT_CATEGORY_NAME));
+        product.setProductSupplierName(resultSet.getString(PRODUCT_SUPPLIER_NAME));
         product.setProductReceiptDate(resultSet.getDate(PRODUCT_RECEIPTDATE).toLocalDate());
         product.setProductQuantity(resultSet.getBigDecimal(PRODUCT_QUANTITY));
         product.setProductPrice(resultSet.getBigDecimal(PRODUCT_PRICE));

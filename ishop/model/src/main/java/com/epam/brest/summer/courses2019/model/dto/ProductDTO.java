@@ -1,7 +1,6 @@
 package com.epam.brest.summer.courses2019.model.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Objects;
 
 public class ProductDTO {
@@ -17,31 +16,32 @@ public class ProductDTO {
     private String productName;
 
     /**
-     * String representing {@code category} name
-     */
-    private String productCategoryName;
-
-    /**
-     * Amount of products in {@code category}
-     */
-    private BigDecimal productQuantity;
-
-    /**
-     * Date when product have been added
-     */
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDate productReceiptDate;;
-
-    /**
-     * {@code Category id} to which product belongs
+     * String representing {@code productCategory} id
      */
     private Integer productCategoryId;
 
     /**
+     * String representing {@code productCategory} name
+     */
+    private String productCategoryName;
+
+    /**
      * Product price
      */
-
     private BigDecimal productPrice;
+
+    public ProductDTO() {
+
+    }
+
+    public ProductDTO(Integer productId, String productName, Integer productCategoryId, String productCategoryName,
+                      BigDecimal productPrice) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productCategoryId = productCategoryId;
+        this.productCategoryName = productCategoryName;
+        this.productPrice = productPrice;
+    }
 
     /**
      * Returns product DTOs id
@@ -62,30 +62,21 @@ public class ProductDTO {
     }
 
     /**
-     * Returns {@code category} name
+     * Returns {@code productCategory} id
+     *
+     * @return {@code Integer} representing category id
+     */
+    public Integer getProductCategoryId() {
+        return productCategoryId;
+    }
+
+    /**
+     * Returns {@code productCategory} name
      *
      * @return {@code String} representing category name
      */
     public String getProductCategoryName() {
         return productCategoryName;
-    }
-
-    /**
-     * Returns {@code product} quantity
-     *
-     * @return {@code Integer} as product quantity
-     */
-    public BigDecimal getProductQuantity() {
-        return productQuantity;
-    }
-
-    /**
-     * Returns date when product was added
-     *
-     * @return {@code LocalDate} as date when added
-     */
-    public LocalDate getProductReceiptDate() {
-        return productReceiptDate;
     }
 
     /**
@@ -98,15 +89,6 @@ public class ProductDTO {
     }
 
     /**
-     * Returns {@code category} id
-     *
-     * @return {@code Integer} as product category id
-     */
-    public Integer getProductCategoryId() {
-        return productCategoryId;
-    }
-
-    /**
      * Sets product id
      *
      * @param productId product id {@code Integer value}
@@ -116,7 +98,16 @@ public class ProductDTO {
     }
 
     /**
-     * Sets category name
+     * Sets product category id
+     *
+     * @param productCategoryId category id {@code Integer}
+     */
+    public void setProductCategoryId(Integer productCategoryId) {
+        this.productCategoryId = productCategoryId;
+    }
+
+    /**
+     * Sets product category name
      *
      * @param productCategoryName category name {@code String}
      */
@@ -134,15 +125,6 @@ public class ProductDTO {
     }
 
     /**
-     * Sets product quantity
-     *
-     * @param productQuantity product amount as {@code Integer}
-     */
-    public void setProductQuantity(BigDecimal productQuantity) {
-        this.productQuantity = productQuantity;
-    }
-
-    /**
      * Sets product price
      *
      * @param productPrice product price as {@code BigDecimal}
@@ -152,25 +134,7 @@ public class ProductDTO {
     }
 
     /**
-     * Sets date when product was added
-     *
-     * @param productReceiptDate date added as {@code LocalDate}
-     */
-    public void setProductReceiptDate(LocalDate productReceiptDate) {
-        this.productReceiptDate = productReceiptDate;
-    }
-
-    /**
-     * Sets product category id
-     *
-     * @param productCategoryId category id as {@code Integer}
-     */
-    public void setProductCategoryId(Integer productCategoryId) {
-        this.productCategoryId = productCategoryId;
-    }
-
-    /**
-     * Compare products method
+     * Compare method for products
      *
      * @param object category id as {@code Object}
      */
@@ -180,28 +144,23 @@ public class ProductDTO {
         if (object == null || getClass() != object.getClass()) return false;
         ProductDTO productDTO = (ProductDTO) object;
         return productId.equals(productDTO.productId) &&
-                productCategoryName.equals(productDTO.productCategoryName) &&
-                productName.equals(productDTO.productName) &&
-                productQuantity.equals(productDTO.productQuantity) &&
-                productReceiptDate.equals(productDTO.productReceiptDate) &&
-                productCategoryId.equals(productDTO.productCategoryId);
+               productName.equals(productDTO.productName) &&
+               productCategoryName.equals(productDTO.productCategoryName) &&
+               productPrice.equals(productDTO.productPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, productCategoryName, productName, productQuantity, productReceiptDate,
-                productCategoryId);
+        return Objects.hash(productId, productCategoryName, productName, productPrice);
     }
 
     @Override
     public String toString() {
         return "ProductDTO{" +
-                "productId=" + productId +
-                ", productName='" + productName + '\'' +
-                ", categoryName='" + productCategoryName + '\'' +
-                ", productQuantity=" + productQuantity +
-                ", productReceiptDate=" + productReceiptDate +
-                ", productCategoryId=" + productCategoryId +
+                "productId=" + productId + '\'' +
+                ", productName=" + productName + '\'' +
+                ", categoryName=" + productCategoryName + '\'' +
+                ", productPrice=" + productPrice +
                 '}';
     }
 }

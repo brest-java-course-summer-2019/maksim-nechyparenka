@@ -1,6 +1,7 @@
 package com.epam.brest.summer.courses2019.dao;
 
 import com.epam.brest.summer.courses2019.model.Product;
+import com.epam.brest.summer.courses2019.model.dto.ProductDTO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +25,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Rollback
 public class ProductDaoJdbcImplTest {
 
+    private static final BigDecimal PRICE_INTERVAL_START = new BigDecimal("300");
+    private static final BigDecimal PRICE_INTERVAL_END = new BigDecimal("900");
+    private static final String PRODUCT_NAME = "Samsung galaxy s8 plus g955f";
+    private static final String PRODUCT_CATEGORY_NAME = "Cell phones & Accessories";
+    private static final Integer PRODUCT_CATEGORY_ID = 1;
+    private static final Integer PRODUCTS_QANTITY_IN_PRICE_INTERVAL = 3;
+
     @Autowired
     ProductDao productDao;
 
@@ -37,12 +45,34 @@ public class ProductDaoJdbcImplTest {
     @Test
     public void findById() {
         assertNotNull(productDao);
-        Product product = productDao.findById(1).get();
-        assertTrue(product.getProductId().equals(1));
-        assertTrue(product.getProductName().equals("Samsung galaxy s8 plus g955f"));
+        Product product = productDao.findById(PRODUCT_CATEGORY_ID).get();
+        assertTrue(product.getProductId().equals(PRODUCT_CATEGORY_ID));
+        assertTrue(product.getProductName().equals(PRODUCT_NAME));
         assertTrue(product.getProductCategoryId().equals(1));
+        assertTrue(product.getProductCategoryName().equals(PRODUCT_CATEGORY_NAME));
+        assertTrue(product.getProductReceiptDate().equals(LocalDate.of(2018, 12, 28)));
+        assertTrue(product.getProductSupplierName().equals("T-Mobile"));
         assertEquals(new BigDecimal("8.00"), product.getProductQuantity());
         assertEquals(new BigDecimal("350.00"), product.getProductPrice());
+    }
+
+    @Test
+    public void findProductDtoById() {
+        assertNotNull(productDao);
+        ProductDTO productDTO = productDao.findProductDtoById(PRODUCT_CATEGORY_ID).get();
+        assertTrue(productDTO.getProductId().equals(PRODUCT_CATEGORY_ID));
+        assertTrue(productDTO.getProductName().equals(PRODUCT_NAME));
+        assertTrue(productDTO.getProductCategoryName().equals(PRODUCT_CATEGORY_NAME));
+        assertEquals(new BigDecimal("350.00"), productDTO.getProductPrice());
+    }
+
+    @Test
+    public void FindProductDTOsFromPriceIntervalInCategory() {
+
+        List<ProductDTO> productDTOs = productDao.findProductDTOsFromPriceIntervalInCategory(PRICE_INTERVAL_START,
+                PRICE_INTERVAL_END, PRODUCT_CATEGORY_ID);
+        assertNotNull(productDTOs);
+        assertTrue(PRODUCTS_QANTITY_IN_PRICE_INTERVAL == productDTOs.size());
     }
 
     @Test
@@ -50,7 +80,8 @@ public class ProductDaoJdbcImplTest {
         List<Product> products = productDao.findAll();
         int sizeBefore = products.size();
 
-        Product testProduct = new Product("Samsung", 1, LocalDate.of(2019, 7, 28),
+        Product testProduct = new Product("Samsung", PRODUCT_CATEGORY_ID,
+                PRODUCT_CATEGORY_NAME, "Samsung", LocalDate.of(2019, 7, 28),
                 new BigDecimal("5"), new BigDecimal("555.55"));
 
         Product newProduct = productDao.add(testProduct);
@@ -63,6 +94,8 @@ public class ProductDaoJdbcImplTest {
         Product product = productDao.findById(3).get();
         product.setProductName("Samsung");
         product.setProductCategoryId(1);
+        product.setProductCategoryName(PRODUCT_CATEGORY_NAME);
+        product.setProductSupplierName("T-Mobile");
         product.setProductReceiptDate(LocalDate.of(2019, 7, 28));
         product.setProductQuantity(new BigDecimal("5.00"));
         product.setProductPrice(new BigDecimal("555.00"));
@@ -73,6 +106,8 @@ public class ProductDaoJdbcImplTest {
         assertTrue(updatedProduct.getProductId().equals(product.getProductId()));
         assertTrue(updatedProduct.getProductName().equals(product.getProductName()));
         assertTrue(updatedProduct.getProductCategoryId().equals(product.getProductCategoryId()));
+        assertTrue(updatedProduct.getProductCategoryName().equals(product.getProductCategoryName()));
+        assertTrue(updatedProduct.getProductSupplierName().equals(product.getProductSupplierName()));
         assertTrue(updatedProduct.getProductReceiptDate().equals(product.getProductReceiptDate()));
         assertTrue(updatedProduct.getProductQuantity().equals(product.getProductQuantity()));
         assertTrue(updatedProduct.getProductPrice().equals(product.getProductPrice()));
@@ -80,8 +115,8 @@ public class ProductDaoJdbcImplTest {
 
     @Test
     public void deleteProduct() {
-        Product product = new Product("Nokia", 1, LocalDate.of(2019, 8, 1),
-                new BigDecimal("5"), new BigDecimal("350.00"));
+        Product product = new Product("Nokia", 1, PRODUCT_CATEGORY_NAME,
+                "Nokia", LocalDate.of(2019, 8, 1), new BigDecimal("5"), new BigDecimal("350.00"));
         product = productDao.add(product);
         List<Product> products = productDao.findAll();
         int sizeBefore = products.size();

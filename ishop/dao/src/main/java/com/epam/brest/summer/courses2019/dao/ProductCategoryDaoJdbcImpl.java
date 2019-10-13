@@ -1,5 +1,6 @@
 package com.epam.brest.summer.courses2019.dao;
 
+import com.epam.brest.summer.courses2019.dao.mappers.ProductCategoryRowMapper;
 import com.epam.brest.summer.courses2019.model.ProductCategory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
@@ -19,6 +20,7 @@ import java.util.Optional;
 public class ProductCategoryDaoJdbcImpl implements ProductCategoryDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final ProductCategoryRowMapper productCategoryRowMapper;
 
     @Value("${productCategory.add}")
     private String addProductCategorySql;
@@ -35,12 +37,14 @@ public class ProductCategoryDaoJdbcImpl implements ProductCategoryDao {
     @Value("${productCategory.delete}")
     private String deleteProductCategorySql;
 
-    public ProductCategoryDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-    }
-
     private final static String PRODUCT_CATEGORY_ID = "productCategoryId";
     private final static String PRODUCT_CATEGORY_NAME = "productCategoryName";
+
+    public ProductCategoryDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate,
+                                      ProductCategoryRowMapper productCategoryRowMapper) {
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+        this.productCategoryRowMapper = productCategoryRowMapper;
+    }
 
     @Override
     public ProductCategory add(ProductCategory productCategory) {
@@ -57,7 +61,7 @@ public class ProductCategoryDaoJdbcImpl implements ProductCategoryDao {
     public List<ProductCategory> findAll() {
 
         List<ProductCategory> allProductCategories = namedParameterJdbcTemplate.query(findAllProductsCategoriesSql,
-                BeanPropertyRowMapper.newInstance(ProductCategory.class));
+                productCategoryRowMapper);
         return allProductCategories;
     }
 
@@ -65,7 +69,7 @@ public class ProductCategoryDaoJdbcImpl implements ProductCategoryDao {
     public Optional<ProductCategory> findProductCategoryById(Integer productCategoryId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(PRODUCT_CATEGORY_ID, productCategoryId);
         List<ProductCategory> result = namedParameterJdbcTemplate.query(findProductCategoryByIdSql, namedParameters,
-                BeanPropertyRowMapper.newInstance(ProductCategory.class));
+                productCategoryRowMapper);
         return Optional.ofNullable(DataAccessUtils.uniqueResult(result));
     }
 
