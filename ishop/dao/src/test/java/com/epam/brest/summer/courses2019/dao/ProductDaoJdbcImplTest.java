@@ -1,7 +1,6 @@
 package com.epam.brest.summer.courses2019.dao;
 
 import com.epam.brest.summer.courses2019.model.Product;
-import com.epam.brest.summer.courses2019.model.dto.ProductDTO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,12 +24,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Rollback
 public class ProductDaoJdbcImplTest {
 
-    private static final BigDecimal PRICE_INTERVAL_START = new BigDecimal("300");
-    private static final BigDecimal PRICE_INTERVAL_END = new BigDecimal("900");
     private static final String PRODUCT_NAME = "Samsung galaxy s8 plus g955f";
     private static final String PRODUCT_CATEGORY_NAME = "Cell phones & Accessories";
     private static final Integer PRODUCT_CATEGORY_ID = 1;
-    private static final Integer PRODUCTS_QANTITY_IN_PRICE_INTERVAL = 3;
 
     @Autowired
     ProductDao productDao;
@@ -54,25 +50,6 @@ public class ProductDaoJdbcImplTest {
         assertTrue(product.getProductSupplierName().equals("T-Mobile"));
         assertEquals(new BigDecimal("8.00"), product.getProductQuantity());
         assertEquals(new BigDecimal("350.00"), product.getProductPrice());
-    }
-
-    @Test
-    public void findProductDtoById() {
-        assertNotNull(productDao);
-        ProductDTO productDTO = productDao.findProductDtoById(PRODUCT_CATEGORY_ID).get();
-        assertTrue(productDTO.getProductId().equals(PRODUCT_CATEGORY_ID));
-        assertTrue(productDTO.getProductName().equals(PRODUCT_NAME));
-        assertTrue(productDTO.getProductCategoryName().equals(PRODUCT_CATEGORY_NAME));
-        assertEquals(new BigDecimal("350.00"), productDTO.getProductPrice());
-    }
-
-    @Test
-    public void FindProductDTOsFromPriceIntervalInCategory() {
-
-        List<ProductDTO> productDTOs = productDao.findProductDTOsFromPriceIntervalInCategory(PRICE_INTERVAL_START,
-                PRICE_INTERVAL_END, PRODUCT_CATEGORY_ID);
-        assertNotNull(productDTOs);
-        assertTrue(PRODUCTS_QANTITY_IN_PRICE_INTERVAL == productDTOs.size());
     }
 
     @Test

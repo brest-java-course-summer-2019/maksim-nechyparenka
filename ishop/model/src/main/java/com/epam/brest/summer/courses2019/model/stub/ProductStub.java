@@ -1,12 +1,12 @@
-package com.epam.brest.summer.courses2019.model.dto;
+package com.epam.brest.summer.courses2019.model.stub;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class ProductDTO {
+public class ProductStub {
 
     /**
-     * {@code product DTO} id
+     * {@code product Stub} id
      */
     private Integer productId;
 
@@ -30,12 +30,13 @@ public class ProductDTO {
      */
     private BigDecimal productPrice;
 
-    public ProductDTO() {
+    public ProductStub() {
 
     }
 
-    public ProductDTO(Integer productId, String productName, Integer productCategoryId, String productCategoryName,
+    public ProductStub(Integer productId, String productName, Integer productCategoryId, String productCategoryName,
                       BigDecimal productPrice) {
+
         this.productId = productId;
         this.productName = productName;
         this.productCategoryId = productCategoryId;
@@ -44,7 +45,7 @@ public class ProductDTO {
     }
 
     /**
-     * Returns product DTOs id
+     * Returns Product id
      *
      * @return {@code Integer} as product id
      */
@@ -142,23 +143,25 @@ public class ProductDTO {
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
-        ProductDTO productDTO = (ProductDTO) object;
-        return productId.equals(productDTO.productId) &&
-               productName.equals(productDTO.productName) &&
-               productCategoryName.equals(productDTO.productCategoryName) &&
-               productPrice.equals(productDTO.productPrice);
+        ProductStub productStub = (ProductStub) object;
+        return productId.equals(productStub.productId) &&
+               productName.equals(productStub.productName) &&
+               productCategoryId.equals(productStub.productCategoryId) &&
+               productCategoryName.equals(productStub.productCategoryName) &&
+               productPrice.equals(productStub.productPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, productCategoryName, productName, productPrice);
+        return Objects.hash(productId, productName, productCategoryId, productCategoryName, productPrice);
     }
 
     @Override
     public String toString() {
-        return "ProductDTO{" +
+        return "ProductStub{" +
                 "productId=" + productId + '\'' +
                 ", productName=" + productName + '\'' +
+                ", categoryId=" + productCategoryId + '\'' +
                 ", categoryName=" + productCategoryName + '\'' +
                 ", productPrice=" + productPrice +
                 '}';

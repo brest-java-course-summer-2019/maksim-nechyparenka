@@ -14,19 +14,14 @@
                 <value>classpath:ProductDaoSQL/findByProductCategoryIdSQL.properties</value>
                 <value>classpath:ProductDaoSQL/findProductByIdSQL.properties</value>
                 <value>classpath:ProductDaoSQL/updateProductSQL.properties</value>
-                <!--                ProductDto SQL properties-->
-                <value>classpath:ProductDtoSQL/findAllProductDTOsSQL.properties</value>
-                <value>classpath:ProductDtoSQL/findByProdactDTOCategoryIdSQL.properties</value>
-                <value>classpath:ProductDtoSQL/findProductDTObyIdSQL.properties</value>
-                <value>classpath:ProductDtoSQL/productDTOsFromPriceIntervalInCategorySQL.properties</value>
+                <!--                ProductStub SQL properties-->
+                <value>classpath:ProductStubSQL/productStubsFromPriceIntervalInCategorySQL.properties</value>
                 <!--                ProductCategoryDao SQL properties-->
                 <value>classpath:ProductCategoryDaoSQL/addProductCategorySQL.properties</value>
                 <value>classpath:ProductCategoryDaoSQL/findAllProductsCategorySQL.properties</value>
                 <value>classpath:ProductCategoryDaoSQL/findProductCategoryByIdSQL.properties</value>
                 <value>classpath:ProductCategoryDaoSQL/updateProductCategorySQL.properties</value>
                 <value>classpath:ProductCategoryDaoSQL/deleteProductCategorySQL.properties</value>
-
-                <!--                ProductCategoryDto SQL properties-->
 
 
             </list>
@@ -37,15 +32,18 @@
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
+    <bean id="productMapper" class="com.epam.brest.summer.courses2019.dao.mappers.ProductMapper"></bean>
+    <bean id="productStubMapper" class="com.epam.brest.summer.courses2019.dao.mappers.ProductStubMapper"></bean>
+
     <bean id="productDao" class="com.epam.brest.summer.courses2019.dao.ProductDaoJdbcImpl">
         <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
-        <constructor-arg name="productRowMapper" ref="productRowMapper"/>
-        <constructor-arg name="productDtoRowMapper" ref="productDtoRowMapper"/>
+        <constructor-arg name="productMapper" ref="productMapper"/>
     </bean>
 
-    <bean id="productRowMapper" class="com.epam.brest.summer.courses2019.dao.mappers.ProductRowMapper"></bean>
-
-    <bean id="productDtoRowMapper" class="com.epam.brest.summer.courses2019.dao.mappers.ProductDtoRowMapper"></bean>
+    <bean id="productStubDao" class="com.epam.brest.summer.courses2019.dao.ProductStubDaoJdbcImpl">
+        <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+        <constructor-arg name="productStubMapper" ref="productStubMapper"/>
+    </bean>
 
     <bean id="productCategoryDao" class="com.epam.brest.summer.courses2019.dao.ProductCategoryDaoJdbcImpl">
         <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>

@@ -67,7 +67,7 @@
         <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
 
-    <bean id="customerCategoryService" class="com.epam.brest.summer.courses2019.service.CustomerCategoryServiceImpl">
+    <bean id="customerCategoryService" class="com.epam.brest.summer.courses2019.service.ProductCategoryServiceImpl">
         <constructor-arg ref="customerCategoryDao"/>
     </bean>
 

@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 
 @Component
-public class ProductRowMapper implements RowMapper<Product> {
+public class ProductMapper implements RowMapper<Product> {
 
     /**
      * Product id query parameter name

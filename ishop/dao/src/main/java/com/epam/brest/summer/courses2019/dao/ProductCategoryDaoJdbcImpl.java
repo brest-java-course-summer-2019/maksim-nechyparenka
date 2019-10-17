@@ -4,7 +4,6 @@ import com.epam.brest.summer.courses2019.dao.mappers.ProductCategoryRowMapper;
 import com.epam.brest.summer.courses2019.model.ProductCategory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
