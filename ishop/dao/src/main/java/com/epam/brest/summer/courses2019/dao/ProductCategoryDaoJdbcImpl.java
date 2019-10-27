@@ -3,7 +3,6 @@ package com.epam.brest.summer.courses2019.dao;
 import com.epam.brest.summer.courses2019.dao.mappers.ProductCategoryRowMapper;
 import com.epam.brest.summer.courses2019.model.ProductCategory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -67,9 +66,9 @@ public class ProductCategoryDaoJdbcImpl implements ProductCategoryDao {
     @Override
     public Optional<ProductCategory> findProductCategoryById(Integer productCategoryId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(PRODUCT_CATEGORY_ID, productCategoryId);
-        List<ProductCategory> result = namedParameterJdbcTemplate.query(findProductCategoryByIdSql, namedParameters,
+        ProductCategory result = namedParameterJdbcTemplate.queryForObject(findProductCategoryByIdSql, namedParameters,
                 productCategoryRowMapper);
-        return Optional.ofNullable(DataAccessUtils.uniqueResult(result));
+        return Optional.ofNullable(result);
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.epam.brest.summer.courses2019.dao;
 
 import com.epam.brest.summer.courses2019.model.Product;
+
+
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +37,12 @@ public interface ProductDao {
      */
     List<Product> findAll();
 
-
+    /**
+     * Returns product with defined id.
+     *
+     * @param productId Id of product to find
+     * @return {@code Optional} describing the value of product found
+     */
     Optional<Product> findById(Integer productId);
 
     /**

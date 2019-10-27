@@ -1,65 +1,85 @@
 package com.epam.brest.summer.courses2019.model;
 
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * POJO Product for model.
+ */
 public class Product {
 
     /**
      * Product id
      */
-
     private Integer productId;
 
     /**
      * Product name
      */
-
+    @NotEmpty(message = "Product name cannot be empty!")
+    @Size(min = 1, max = 255, message = "Product name must be between 2 and 50 characters!")
     private String productName;
 
     /**
      * Category id in which product exists
      */
-
     private Integer productCategoryId;
 
     /**
      * Category name in which product exists
      */
-
     private String productCategoryName;
 
     /**
      * Product supplier name
      */
-
+    @NotEmpty(message = "Product supplier name cannot be empty!")
+    @Size(min = 1, max = 255, message = "Product supplier name must be between 2 and 50 characters!")
     private String productSupplierName;
 
     /**
      * {@code LocalDate} as date when product was added
      */
-
+    @PastOrPresent
     private LocalDate productReceiptDate;
 
     /**
      * Product quantity
      */
-
+    @Positive
     private BigDecimal productQuantity;
 
     /**
      * Product price
      */
-
+    @Digits(integer = 7, fraction = 0, message = "Not more 7 digits!")
+    @NotEmpty
+    @Min(value = 1)
     private BigDecimal productPrice;
 
+    /**
+     * Product constructor without arguments
+     */
     public Product() {
 
     }
 
+    /**
+     * Product constructor with arguments
+     *
+     * @param productName product name
+     * @param productCategoryId product category id
+     * @param productCategoryName product category name
+     * @param productSupplierName product supplier name
+     * @param productReceiptDate product date of receipt
+     * @param productQuantity product quantity
+     * @param productPrice product price
+     */
     public Product(String productName, Integer productCategoryId, String productCategoryName, String productSupplierName,
                    LocalDate productReceiptDate, BigDecimal productQuantity, BigDecimal productPrice) {
+
         this.productName = productName;
         this.productCategoryId = productCategoryId;
         this.productCategoryName = productCategoryName;

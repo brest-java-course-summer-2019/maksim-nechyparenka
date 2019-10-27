@@ -5,42 +5,47 @@ import com.epam.brest.summer.courses2019.model.ProductCategory;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * DAO methods for work with {@code Product categories}
+ *
+ * @see ProductCategory
+ * @author Maksim Nechyparenka
+ */
 public interface ProductCategoryDao {
 
     /**
-     * Get all product categories
-     * @return
+     * Get all products categories
+     * @return {@code List} with all {@code product categories}
      */
-
     List<ProductCategory> findAll();
 
     /**
-     * Get product category by id
-     * @param productCategoryId
-     * @return
+     * Returns {@code product category} with given id
+     *
+     * @param productCategoryId category id to find {@code product category} by
+     * @return {@code product category} with specified id
      */
-
     Optional<ProductCategory> findProductCategoryById(Integer productCategoryId);
 
     /**
-     * Create new product category
-     * @param productCategory
+     * Adds {@code product category} to DataBase
+     *
+     * @param productCategory {@code product category} to add
      * @return
      */
-
     ProductCategory add(ProductCategory productCategory);
 
     /**
-     * Update product category
-     * @param productCategory
+     * Updates already existing {@code product category} by new one
+     *
+     * @param productCategory {@code product category} to update existing one
      */
-
     void update(ProductCategory productCategory);
 
     /**
-     * Delete product category
-     * @param productCategoryId
+     * Deletes already existing {@code product category} with specified id
+     *
+     * @param productCategoryId product category id to delete by
      */
-
     void delete(Integer productCategoryId);
 }

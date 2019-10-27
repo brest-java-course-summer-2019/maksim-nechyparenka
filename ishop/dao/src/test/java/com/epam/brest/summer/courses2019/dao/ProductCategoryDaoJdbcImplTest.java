@@ -11,8 +11,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static junit.framework.TestCase.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,15 +23,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Rollback
 public class ProductCategoryDaoJdbcImplTest {
 
+    private static final Integer TEST_NEW_PRODUCT_CATEGORY_ID = 4;
+    private static final String TEST_NEW_PRODUCT_CATEGORY_NAME = "Test Product Category Name";
+    private static final Integer TEST_PRODUCT_CATEGORY_ID = 1;
+    private static final String TEST_PRODUCT_CATEGORY_NAME = "Cell phones & Accessories";
+
     @Autowired
     ProductCategoryDao productCategoryDao;
 
     @Test
     public void add() {
+
         List<ProductCategory> productCategoryList = productCategoryDao.findAll();
         int sizeBefore = productCategoryList.size();
 
-        ProductCategory testProductCategory = new ProductCategory("productCategory01");
+        ProductCategory testProductCategory = new ProductCategory();
+        testProductCategory.setProductCategoryId(TEST_NEW_PRODUCT_CATEGORY_ID);
+        testProductCategory.setProductCategoryName(TEST_NEW_PRODUCT_CATEGORY_NAME);
         ProductCategory newProductCategory = productCategoryDao.add(testProductCategory);
 
         assertNotNull(newProductCategory.getProductCategoryId());
@@ -39,9 +49,19 @@ public class ProductCategoryDaoJdbcImplTest {
 
     @Test
     public void findAll() {
+
         List<ProductCategory> customersCategories = productCategoryDao.findAll();
         Assert.assertNotNull(customersCategories);
         Assert.assertTrue(customersCategories.size() > 0);
+    }
+
+    @Test
+    public void findProductCategoryById() {
+
+        ProductCategory productCategory = productCategoryDao.findProductCategoryById(TEST_PRODUCT_CATEGORY_ID).get();
+
+        assertEquals(TEST_PRODUCT_CATEGORY_NAME, productCategory.getProductCategoryName());
+        assertEquals(TEST_PRODUCT_CATEGORY_ID, productCategory.getProductCategoryId());
     }
 
     @Test

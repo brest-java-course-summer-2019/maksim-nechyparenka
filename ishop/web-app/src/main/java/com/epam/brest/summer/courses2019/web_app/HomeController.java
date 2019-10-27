@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     /**
-     * Redirect to default page Administrator.
+     * Redirect to default page Products.
      *
      * @return redirect path
      */
     @GetMapping(value = "/")
     public String defaultPageRedirect() {
-        return "redirect:administrator";
+        return "redirect:products";
     }
 }

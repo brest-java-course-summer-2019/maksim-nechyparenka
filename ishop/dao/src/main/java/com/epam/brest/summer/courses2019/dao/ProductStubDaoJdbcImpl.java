@@ -7,10 +7,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
+
+import static com.epam.brest.summer.courses2019.dao.mappers.ProductStubMapper.PRODUCT_ID;
 
 @Component
 public class ProductStubDaoJdbcImpl implements ProductStubDao {
@@ -33,7 +37,23 @@ public class ProductStubDaoJdbcImpl implements ProductStubDao {
      */
     private static final String PRICE_INTERVAL_END = "priceEnd";
 
-    //private static final String PRODUCT_CATEGORY_ID = "productCategoryId";
+    /**
+     * Sql query to select all ProductStubs from DataBase
+     */
+    @Value("${productStub.findAll}")
+    private String findAllProductStubsSql;
+
+    /**
+     * Sql query to select ProductStub by id
+     */
+    @Value("${productStub.findStubById}")
+    private String findProductStubByIdSql;
+
+    /**
+     * Sql query to select ProductStub by category id
+     */
+    @Value("${productStub.findStubsByCategoryId}")
+    private String findProductStubsByCategoryIdSql;
 
     /**
      * Sql query to select products from price interval in category
@@ -46,6 +66,38 @@ public class ProductStubDaoJdbcImpl implements ProductStubDao {
 
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
         this.productStubMapper = productStubMapper;
+    }
+
+    @Override
+    public List<ProductStub> findAllStubs() {
+
+        LOGGER.debug("Find all ProductStubs()");
+
+        List<ProductStub> productStubs = namedParameterJdbcTemplate.query(findAllProductStubsSql, productStubMapper);
+        return productStubs;
+    }
+
+    @Override
+    public Optional<ProductStub> findStubById(Integer productId) {
+
+        LOGGER.debug("Find ProductStub by id({})", productId);
+
+        SqlParameterSource namedParameters = new MapSqlParameterSource(PRODUCT_ID, productId);
+        ProductStub productStub = namedParameterJdbcTemplate.queryForObject(findProductStubByIdSql, namedParameters,
+                productStubMapper);
+        return Optional.ofNullable(productStub);
+    }
+
+    @Override
+    public List<ProductStub> findStubsByProductCategoryId(Integer productCategoryId) {
+
+        LOGGER.debug("Find ProductStubs by Category id({})", productCategoryId);
+
+        SqlParameterSource namedParameters = new MapSqlParameterSource(ProductStubMapper.PRODUCT_CATEGORY_ID,
+                productCategoryId);
+        List<ProductStub> results = namedParameterJdbcTemplate.query(findProductStubsByCategoryIdSql, namedParameters,
+                productStubMapper);
+        return results;
     }
 
     /**

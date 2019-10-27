@@ -43,54 +43,7 @@ public class ProductRestConsumer implements ProductService {
         return responseEntity.getBody();
     }
 
-//    @Override
-//    public List<ProductDTO> findAllProductDTOs() {
-//
-//        LOGGER.debug("Find all products");
-//
-//        ResponseEntity<List> responseEntity = restTemplate.getForEntity(url + "/info", List.class);
-//
-//        return (List<ProductDTO>) responseEntity.getBody();
-//    }
-//
-//    @Override
-//    public List<ProductDTO> findProductDTOsByCategoryId(Integer categoryId) {
-//
-//        LOGGER.debug("Find product dtos by category id = {}", categoryId);
-//
-//        UriComponentsBuilder builder = UriComponentsBuilder
-//                .fromUriString(url + "/filter")
-//                .queryParam("id", categoryId);
-//
-//        ResponseEntity<List> responseEntity = restTemplate.getForEntity(builder.toUriString(), List.class);
-//
-//        return (List<ProductDTO>) responseEntity.getBody();
-//    }
-//
-//    @Override
-//    public List<ProductDTO> findProductDTOsByFilter(Filter filter) {
-//
-//        LOGGER.debug("findProductDTOsByFilter({})", filter);
-//
-//        UriComponentsBuilder builder = UriComponentsBuilder
-//                .fromUriString(url + "/filter")
-//                .queryParam("id", filter.getCategoryId());
-//
-//        if (filter.getDateBegin() == null) {
-//            builder.queryParam("from", LocalDate.now().withDayOfMonth(1));
-//        } else {
-//            builder.queryParam("from", filter.getDateBegin());
-//        }
-//        if (filter.getDateEnd() == null) {
-//            builder.queryParam("to", LocalDate.now());
-//        } else {
-//            builder.queryParam("to", filter.getDateEnd());
-//        }
-//
-//        ResponseEntity<List> responseEntity = restTemplate.getForEntity(builder.toUriString(), List.class);
-//
-//        return (List<ProductDTO>) responseEntity.getBody();
-//    }
+
 
     @Override
     public Product add(Product product) {

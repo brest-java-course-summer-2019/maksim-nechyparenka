@@ -19,19 +19,13 @@
                 <value>classpath:ProductDaoSQL/findByProductCategoryIdSQL.properties</value>
                 <value>classpath:ProductDaoSQL/findProductByIdSQL.properties</value>
                 <value>classpath:ProductDaoSQL/updateProductSQL.properties</value>
-                <!--                CustomerDao SQL properties-->
-                <value>classpath:CustomerDaoSQL/addCustomerSQL.properties</value>
-                <value>classpath:CustomerDaoSQL/deleteCustomerSQL.properties</value>
-                <value>classpath:CustomerDaoSQL/findAllCustomersSQL.properties</value>
-                <value>classpath:CustomerCategoryDaoSQL/findByCustomerCategoryIdSQL.properties</value>
-                <value>classpath:CustomerDaoSQL/findByCustomerIdSQL.properties</value>
-                <value>classpath:CustomerDaoSQL/updateCustomerSQL.properties</value>
-                <!--                CustomerCategoryDao SQL properties-->
-                <value>classpath:CustomerCategoryDaoSQL/addCustomerCategorySQL.properties</value>
-                <value>classpath:CustomerCategoryDaoSQL/deleteCustomerCategorySQL.properties</value>
-                <value>classpath:CustomerCategoryDaoSQL/findAllCustomersCategorySQL.properties</value>
-                <value>classpath:CustomerCategoryDaoSQL/findCustomerCategoryByIdSQL.properties</value>
-                <value>classpath:CustomerCategoryDaoSQL/updateCustomerCategorySQL.properties</value>
+
+                <!--                ProductStub SQL properties-->
+                <value>classpath:ProductStubSQL/findAllStubsSQL.properties</value>
+                <value>classpath:ProductStubSQL/findProductStubByIdSQL.properties</value>
+                <value>classpath:ProductStubSQL/findProductStubsByCategoryId.properties</value>
+                <value>classpath:ProductStubSQL/productStubsFromPriceIntervalInCategorySQL.properties</value>
+
                 <!--                ProductCategoryDao SQL properties-->
                 <value>classpath:ProductCategoryDaoSQL/addProductCategorySQL.properties</value>
                 <value>classpath:ProductCategoryDaoSQL/findAllProductsCategorySQL.properties</value>
@@ -47,28 +41,32 @@
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
+    <bean id="productMapper" class="com.epam.brest.summer.courses2019.dao.mappers.ProductMapper"></bean>
+    <bean id="productStubMapper" class="com.epam.brest.summer.courses2019.dao.mappers.ProductStubMapper"></bean>
+    <bean id="productCategoryRowMapper" class="com.epam.brest.summer.courses2019.dao.mappers.ProductCategoryRowMapper"/>
+
     <bean id="productDao" class="com.epam.brest.summer.courses2019.dao.ProductDaoJdbcImpl">
         <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+        <constructor-arg name="productMapper" ref="productMapper"/>
+    </bean>
+
+    <bean id="productStubDao" class="com.epam.brest.summer.courses2019.dao.ProductStubDaoJdbcImpl">
+        <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+        <constructor-arg name="productStubMapper" ref="productStubMapper"/>
+    </bean>
+
+    <bean id="productCategoryDao" class="com.epam.brest.summer.courses2019.dao.ProductCategoryDaoJdbcImpl">
+        <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+        <constructor-arg name="productCategoryRowMapper" ref="productCategoryRowMapper"/>
     </bean>
 
     <bean id="productService" class="com.epam.brest.summer.courses2019.service.ProductServiceImpl">
         <constructor-arg ref="productDao"/>
+        <constructor-arg ref="productStubDao"/>
     </bean>
 
-    <bean id="customerDao" class="com.epam.brest.summer.courses2019.dao.CustomerDaoJdbcImpl">
-        <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
-    </bean>
-
-    <bean id="customerService" class="com.epam.brest.summer.courses2019.service.CustomerServiceImpl">
-        <constructor-arg ref="customerDao"/>
-    </bean>
-
-    <bean id="customerCategoryDao" class="com.epam.brest.summer.courses2019.dao.CustomerCategoryDaoJdbcImpl">
-        <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
-    </bean>
-
-    <bean id="customerCategoryService" class="com.epam.brest.summer.courses2019.service.ProductCategoryServiceImpl">
-        <constructor-arg ref="customerCategoryDao"/>
+    <bean id="productCategoryService" class="com.epam.brest.summer.courses2019.service.ProductCategoryServiceImpl">
+        <constructor-arg ref="productCategoryDao"/>
     </bean>
 
 

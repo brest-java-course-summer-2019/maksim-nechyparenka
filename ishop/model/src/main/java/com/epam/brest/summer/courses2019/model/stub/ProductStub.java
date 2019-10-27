@@ -1,43 +1,63 @@
 package com.epam.brest.summer.courses2019.model.stub;
 
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+/**
+ * ProductStub for model.
+ */
 public class ProductStub {
 
     /**
-     * {@code product Stub} id
+     * Product Id {@code product Stub} id
      */
     private Integer productId;
 
     /**
-     * String representing {@code product} name
+     * Product Name {@code product} name
      */
+    @NotEmpty(message = "Product name cannot be empty!")
+    @Size(min = 1, max = 255, message = "Product name must be between 2 and 40 characters!")
     private String productName;
 
     /**
-     * String representing {@code productCategory} id
+     * Product Category Id {@code productCategory} id
      */
     private Integer productCategoryId;
 
     /**
-     * String representing {@code productCategory} name
+     * Product Category Name {@code productCategory} name
      */
     private String productCategoryName;
 
     /**
-     * Product price
+     * Product price {@code productPrice} price
      */
+    @Digits(integer = 7, fraction = 0, message = "Not more 7 digits!")
+    @NotEmpty
+    @Positive
+    @Min(value = 1)
     private BigDecimal productPrice;
 
+    /**
+     * ProductStub constructor without arguments
+     */
     public ProductStub() {
 
     }
 
-    public ProductStub(Integer productId, String productName, Integer productCategoryId, String productCategoryName,
+    /**
+     * ProductStub constructor with arguments
+     *
+     * @param productName product name
+     * @param productCategoryId product category id
+     * @param productCategoryName product category name
+     * @param productPrice product price
+     */
+    public ProductStub(String productName, Integer productCategoryId, String productCategoryName,
                       BigDecimal productPrice) {
 
-        this.productId = productId;
         this.productName = productName;
         this.productCategoryId = productCategoryId;
         this.productCategoryName = productCategoryName;

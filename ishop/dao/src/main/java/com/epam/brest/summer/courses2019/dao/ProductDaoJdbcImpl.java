@@ -4,7 +4,6 @@ import com.epam.brest.summer.courses2019.model.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -66,6 +65,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
     private static final String PRODUCT_ID = "productId";
     private static final String PRODUCT_NAME = "productName";
     private static final String PRODUCT_CATEGORY_ID = "productCategoryId";
+    private static final String PRODUCT_SUPPLIER_NAME = "productSupplierName";
     private static final String PRODUCT_RECEIPT_DATE = "productReceiptDate";
     private static final String PRODUCT_QUANTITY = "productQuantity";
     private static final String PRODUCT_PRICE = "productPrice";
@@ -91,10 +91,10 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
         LOGGER.debug("Find Product by id({})", productId);
 
-        SqlParameterSource namedParameters = new MapSqlParameterSource(PRODUCT_ID, productId);
-        List<Product> results = namedParameterJdbcTemplate.query(findProductByIdSql, namedParameters,
+        SqlParameterSource namedParameters = new MapSqlParameterSource(ProductMapper.PRODUCT_ID, productId);
+        Product product = namedParameterJdbcTemplate.queryForObject(findProductByIdSql, namedParameters,
                 productMapper);
-        return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
+        return Optional.ofNullable(product);
     }
 
     @Override
@@ -116,6 +116,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue(PRODUCT_NAME, product.getProductName());
         parameters.addValue(PRODUCT_CATEGORY_ID, product.getProductCategoryId());
+        parameters.addValue(PRODUCT_SUPPLIER_NAME, product.getProductSupplierName());
         parameters.addValue(PRODUCT_RECEIPT_DATE, product.getProductReceiptDate());
         parameters.addValue(PRODUCT_QUANTITY, product.getProductQuantity());
         parameters.addValue(PRODUCT_PRICE, product.getProductPrice());

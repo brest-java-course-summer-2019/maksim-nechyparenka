@@ -1,8 +1,12 @@
 package com.epam.brest.summer.courses2019.model;
 
+/**
+ * POJO Product category for model.
+ */
 public class ProductCategory {
 
     private Integer productCategoryId;
+
     private String productCategoryName;
 
     public ProductCategory() {
