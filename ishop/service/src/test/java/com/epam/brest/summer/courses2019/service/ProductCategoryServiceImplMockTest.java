@@ -2,23 +2,21 @@ package com.epam.brest.summer.courses2019.service;
 
 import com.epam.brest.summer.courses2019.dao.ProductCategoryDao;
 import com.epam.brest.summer.courses2019.model.ProductCategory;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
-import org.mockito.junit.MockitoJUnitRunner;
-
+import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-import static junit.framework.TestCase.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ProductCategoryServiceImplMockTest {
 
     private static final String TEST_FIRST_PRODUCT_CATEGORY_NAME = "firstCategoryName";
@@ -47,7 +45,7 @@ public class ProductCategoryServiceImplMockTest {
     }
 
     @Test
-    public void findAllCategories() {
+    void findAllCategories() {
 
         Mockito.when(productCategoryDao.findAll()).thenReturn(Arrays.asList(TEST_FIRST_PRODUCT_CATEGORY,
                 TEST_SECOND_PRODUCT_CATEGORY));
@@ -62,7 +60,7 @@ public class ProductCategoryServiceImplMockTest {
     }
 
     @Test
-    public void findCategoryById() {
+    void findCategoryById() {
 
         Mockito.when(productCategoryDao.findProductCategoryById(any()))
                 .thenReturn(Optional.of(createCategory(TEST_FIRST_PRODUCT_CATEGORY_ID, TEST_FIRST_PRODUCT_CATEGORY_NAME)));
@@ -77,7 +75,7 @@ public class ProductCategoryServiceImplMockTest {
     }
 
     @Test
-    public void addCategory() {
+    void addCategory() {
 
         Mockito.when(productCategoryDao.add(any())).thenReturn(createCategory(TEST_FIRST_PRODUCT_CATEGORY_ID,
                 TEST_FIRST_PRODUCT_CATEGORY_NAME));
@@ -88,14 +86,14 @@ public class ProductCategoryServiceImplMockTest {
     }
 
     @Test
-    public void updateCategory() {
+    void updateCategory() {
 
         productCategoryService.update(any(ProductCategory.class));
         Mockito.verify(productCategoryDao, Mockito.times(INVOCATIONS)).update(any());
     }
 
     @Test
-    public void deleteCategory() {
+    void deleteCategory() {
 
         productCategoryService.delete(anyInt());
         Mockito.verify(productCategoryDao, Mockito.times(INVOCATIONS)).delete(anyInt());

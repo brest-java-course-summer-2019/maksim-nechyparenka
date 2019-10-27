@@ -4,23 +4,21 @@ import com.epam.brest.summer.courses2019.dao.ProductDao;
 import com.epam.brest.summer.courses2019.dao.ProductStubDao;
 import com.epam.brest.summer.courses2019.model.Product;
 import com.epam.brest.summer.courses2019.model.stub.ProductStub;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-import static junit.framework.TestCase.assertNotNull;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ProductServiceImplMockTest {
 
     private static final Integer TEST_PRODUCT_ID = 1;
@@ -59,7 +57,7 @@ public class ProductServiceImplMockTest {
     }
 
     @Test
-    public void findAll() {
+    void findAll() {
 
         Mockito.when(productDao.findAll()).thenReturn(Arrays.asList(TEST_FIRST_PRODUCT, TEST_SECOND_PRODUCT));
 
@@ -73,7 +71,7 @@ public class ProductServiceImplMockTest {
     }
 
     @Test
-    public void findAllStubs() {
+    void findAllStubs() {
 
         Mockito.when(productStubDao.findAllStubs()).thenReturn(Arrays.asList(TEST_FIRST_PRODUCT_STUB,
                 TEST_SECOND_PRODUCT_STUB));
@@ -88,7 +86,7 @@ public class ProductServiceImplMockTest {
     }
 
     @Test
-    public void findById() {
+    void findById() {
 
         Mockito.when(productDao.findById(TEST_PRODUCT_ID)).thenReturn(Optional.of(createProduct()));
 
@@ -101,7 +99,7 @@ public class ProductServiceImplMockTest {
     }
 
     @Test
-    public void findStubById() {
+    void findStubById() {
 
         Mockito.when(productStubDao.findStubById(TEST_PRODUCT_ID)).thenReturn(Optional
                 .of(createStub(TEST_PRODUCT_ID, TEST_PRODUCT_PRICE_FIRST)));
@@ -115,7 +113,7 @@ public class ProductServiceImplMockTest {
     }
 
     @Test
-    public void findProductStubsFromPriceIntervalInCategory() {
+    void findProductStubsFromPriceIntervalInCategory() {
 
         Mockito.when(productStubDao.findProductStubsFromPriceIntervalInCategory(any(), any(), any()))
                 .thenReturn(Arrays.asList(TEST_FIRST_PRODUCT_STUB, TEST_SECOND_PRODUCT_STUB));
@@ -133,7 +131,7 @@ public class ProductServiceImplMockTest {
     }
 
     @Test
-    public void update() {
+    void update() {
 
         productService.update(createProduct());
 
@@ -145,7 +143,7 @@ public class ProductServiceImplMockTest {
     }
 
     @Test
-    public void delete() {
+    void delete() {
 
         productService.delete(TEST_PRODUCT_ID);
 
