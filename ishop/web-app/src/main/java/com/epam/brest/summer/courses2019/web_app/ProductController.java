@@ -40,6 +40,7 @@ public class ProductController {
     public final String products(Model model) {
 
         LOGGER.debug("Find all products: ({})", model);
+
         model.addAttribute("products", productService.findAll());
 
         return "products";
@@ -54,6 +55,7 @@ public class ProductController {
     public final String gotoEditExistingProductPage(@PathVariable Integer id, Model model) {
 
         LOGGER.debug("Edit existing product({},{})", id, model);
+
         Product product = productService.findById(id);
         model.addAttribute("product", product);
         return "product";
@@ -68,6 +70,7 @@ public class ProductController {
     public String updateExistingProduct(@Valid Product product, BindingResult result) {
 
         LOGGER.debug("Update existing product({},{})", product, result);
+
         productValidator.validate(product, result);
         if(result.hasErrors()) {
             return "product";
@@ -86,6 +89,7 @@ public class ProductController {
     public final String gotoAddProductPage(Model model) {
 
         LOGGER.debug("Goto add product page({})", model);
+
         Product product = new Product();
         model.addAttribute("isNew", true);
         model.addAttribute("product", product);

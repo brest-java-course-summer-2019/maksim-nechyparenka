@@ -26,10 +26,10 @@ public class ProductStub {
      */
     private Integer productCategoryId;
 
-    /**
-     * Product Category Name {@code productCategory} name
-     */
-    private String productCategoryName;
+//    /**
+//     * Product Category Name {@code productCategory} name
+//     */
+//    private String productCategoryName;
 
     /**
      * Product price {@code productPrice} price
@@ -52,15 +52,12 @@ public class ProductStub {
      *
      * @param productName product name
      * @param productCategoryId product category id
-     * @param productCategoryName product category name
      * @param productPrice product price
      */
-    public ProductStub(String productName, Integer productCategoryId, String productCategoryName,
-                      BigDecimal productPrice) {
+    public ProductStub(String productName, Integer productCategoryId, BigDecimal productPrice) {
 
         this.productName = productName;
         this.productCategoryId = productCategoryId;
-        this.productCategoryName = productCategoryName;
         this.productPrice = productPrice;
     }
 
@@ -91,14 +88,14 @@ public class ProductStub {
         return productCategoryId;
     }
 
-    /**
-     * Returns {@code productCategory} name
-     *
-     * @return {@code String} representing category name
-     */
-    public String getProductCategoryName() {
-        return productCategoryName;
-    }
+//    /**
+//     * Returns {@code productCategory} name
+//     *
+//     * @return {@code String} representing category name
+//     */
+//    public String getProductCategoryName() {
+//        return productCategoryName;
+//    }
 
     /**
      * Returns product price
@@ -127,14 +124,14 @@ public class ProductStub {
         this.productCategoryId = productCategoryId;
     }
 
-    /**
-     * Sets product category name
-     *
-     * @param productCategoryName category name {@code String}
-     */
-    public void setProductCategoryName(String productCategoryName) {
-        this.productCategoryName = productCategoryName;
-    }
+//    /**
+//     * Sets product category name
+//     *
+//     * @param productCategoryName category name {@code String}
+//     */
+//    public void setProductCategoryName(String productCategoryName) {
+//        this.productCategoryName = productCategoryName;
+//    }
 
     /**
      * Sets product name
@@ -167,13 +164,12 @@ public class ProductStub {
         return productId.equals(productStub.productId) &&
                productName.equals(productStub.productName) &&
                productCategoryId.equals(productStub.productCategoryId) &&
-               productCategoryName.equals(productStub.productCategoryName) &&
                productPrice.equals(productStub.productPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, productName, productCategoryId, productCategoryName, productPrice);
+        return Objects.hash(productId, productName, productCategoryId, productPrice);
     }
 
     @Override
@@ -182,7 +178,6 @@ public class ProductStub {
                 "productId=" + productId + '\'' +
                 ", productName=" + productName + '\'' +
                 ", categoryId=" + productCategoryId + '\'' +
-                ", categoryName=" + productCategoryName + '\'' +
                 ", productPrice=" + productPrice +
                 '}';
     }
