@@ -99,7 +99,8 @@ public class ProductRestConsumer implements ProductService {
                 priceStart, priceEnd, productCategoryId);
 
         UriComponentsBuilder uriBuilder = UriComponentsBuilder
-                .fromUriString(url + "/price-category-filter" + "/" + priceStart + priceEnd + productCategoryId)
+                .fromUriString(url + "/price-category-filter" + "/" + priceStart + "-"
+                        + "-" + priceEnd + "-" + productCategoryId)
                 .queryParam("priceStart", priceStart)
                 .queryParam("priceEnd", priceEnd)
                 .queryParam("productCategoryId", productCategoryId);
