@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+
+    <!-- Use @MVC annotations -->
+    <mvc:annotation-driven/>
+
+    <mvc:default-servlet-handler/>
+
+    <!-- Component scan -->
+    <context:component-scan base-package="com.epam.brest.summer.courses2019"/>
+
+    <import resource="classpath*:test-db.xml"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <!--                ProductDao SQL properties-->
+                <value>classpath:ProductDaoSQL/addProductSQL.properties</value>
+                <value>classpath:ProductDaoSQL/deleteProductSQL.properties</value>
+                <value>classpath:ProductDaoSQL/findAllProductsSQL.properties</value>
+                <value>classpath:ProductDaoSQL/findByProductCategoryIdSQL.properties</value>
+                <value>classpath:ProductDaoSQL/findProductByIdSQL.properties</value>
+                <value>classpath:ProductDaoSQL/updateProductSQL.properties</value>
+
+                <!--                ProductStub SQL properties-->
+                <value>classpath:ProductStubSQL/findAllStubsSQL.properties</value>
+                <value>classpath:ProductStubSQL/findProductStubByIdSQL.properties</value>
+                <value>classpath:ProductStubSQL/findProductStubsByCategoryId.properties</value>
+                <value>classpath:ProductStubSQL/productStubsFromPriceIntervalInCategorySQL.properties</value>
+
+                <!--                ProductCategoryDao SQL properties-->
+                <value>classpath:ProductCategoryDaoSQL/addProductCategorySQL.properties</value>
+                <value>classpath:ProductCategoryDaoSQL/findAllProductsCategorySQL.properties</value>
+                <value>classpath:ProductCategoryDaoSQL/findProductCategoryByIdSQL.properties</value>
+                <value>classpath:ProductCategoryDaoSQL/updateProductCategorySQL.properties</value>
+                <value>classpath:ProductCategoryDaoSQL/deleteProductCategorySQL.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+</beans>

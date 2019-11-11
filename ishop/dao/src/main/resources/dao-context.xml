@@ -1,0 +1,35 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+    <bean  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <!--                ProductDao SQL properties-->
+                <value>classpath:ProductDaoSQL/addProductSQL.properties</value>
+                <value>classpath:ProductDaoSQL/deleteProductSQL.properties</value>
+                <value>classpath:ProductDaoSQL/findAllProductsSQL.properties</value>
+                <value>classpath:ProductDaoSQL/findByProductCategoryIdSQL.properties</value>
+                <value>classpath:ProductDaoSQL/findProductByIdSQL.properties</value>
+                <value>classpath:ProductDaoSQL/updateProductSQL.properties</value>
+
+                <!--                ProductStub SQL properties-->
+                <value>classpath:ProductStubSQL/findAllStubsSQL.properties</value>
+                <value>classpath:ProductStubSQL/findProductStubByIdSQL.properties</value>
+                <value>classpath:ProductStubSQL/findProductStubsByCategoryId.properties</value>
+                <value>classpath:ProductStubSQL/productStubsFromPriceIntervalInCategorySQL.properties</value>
+
+                <!--                ProductCategoryDao SQL properties-->
+                <value>classpath:ProductCategoryDaoSQL/addProductCategorySQL.properties</value>
+                <value>classpath:ProductCategoryDaoSQL/findAllProductsCategorySQL.properties</value>
+                <value>classpath:ProductCategoryDaoSQL/findProductCategoryByIdSQL.properties</value>
+                <value>classpath:ProductCategoryDaoSQL/updateProductCategorySQL.properties</value>
+                <value>classpath:ProductCategoryDaoSQL/deleteProductCategorySQL.properties</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>

@@ -17,6 +17,7 @@
     </parent>
 
     <dependencies>
+
         <dependency>
             <groupId>com.epam.brest.summer.courses2019</groupId>
             <artifactId>dao</artifactId>
