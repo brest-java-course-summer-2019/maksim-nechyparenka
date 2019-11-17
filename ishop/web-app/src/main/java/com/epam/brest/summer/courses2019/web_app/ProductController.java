@@ -74,7 +74,7 @@ public class ProductController {
      *
      * @return view name
      */
-    @GetMapping(value = "/products/{id}")
+    @GetMapping(value = "/product/{id}")
     public final String gotoEditExistingProductPage(@PathVariable Integer id, Model model) {
 
         LOGGER.debug("Edit existing product ({},{})", id, model);

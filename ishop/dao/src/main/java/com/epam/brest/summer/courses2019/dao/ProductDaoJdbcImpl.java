@@ -10,12 +10,12 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Repository
 public class ProductDaoJdbcImpl implements ProductDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -29,7 +29,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
     /**
      * SQL query to find all products
      */
-        @Value("${product.findAll}")
+    @Value("${product.findAll}")
     private String findAllProductsSql;
 
     /**

@@ -31,7 +31,7 @@ public class ProductRestConsumer implements ProductService {
 
         LOGGER.debug("Find all products");
 
-        ResponseEntity<List> responseEntity = restTemplate.getForEntity(url, List.class);
+        ResponseEntity<List> responseEntity = restTemplate.getForEntity(url + "/admin", List.class);
         return (List<Product>) responseEntity.getBody();
     }
 
@@ -59,7 +59,7 @@ public class ProductRestConsumer implements ProductService {
         LOGGER.debug("Find productStub with id = {}", productId);
 
         ResponseEntity<ProductStub> responseEntity = restTemplate
-                .getForEntity(url + "/" + productId, ProductStub.class);
+                .getForEntity(url + "/info/" + productId, ProductStub.class);
         return responseEntity.getBody();
     }
 

@@ -23,6 +23,16 @@
 
     <context:property-placeholder location="classpath:application.properties"/>
 
+    <bean id="productService" class="com.epam.brest.summer.courses2019.web_app.consumer.ProductRestConsumer">
+        <constructor-arg index="0" value="${protocol}://${host}:8077/${point.products}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
+    </bean>
+
+    <bean id="productCategoryService" class="com.epam.brest.summer.courses2019.web_app.consumer.ProductCategoryRestConsumer">
+        <constructor-arg index="0" value="${protocol}://${host}:8077/${point.categories}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
+    </bean>
+
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
         <property name="messageConverters">
             <list>
@@ -31,14 +41,15 @@
         </property>
     </bean>
 
-    <bean id="productService" class="com.epam.brest.summer.courses2019.web_app.consumer.ProductRestConsumer">
-        <constructor-arg index="0" value="${protocol}://${host}:8888/${port}/${point.products}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
-    </bean>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*" />
+            <ref bean="localeChangeInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 
-    <bean id="productCategoryService" class="com.epam.brest.summer.courses2019.web_app.consumer.ProductCategoryRestConsumer">
-        <constructor-arg index="0" value="${protocol}://${host}:8888/${port}/${point.products}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
+    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="lang"/>
     </bean>
 
     <!-- Thymeleaf Template Resolver -->

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+
+    <link rel="stylesheet"
+          href="../../resources/static/css/font-awesome.min.css"
+          th:href="@{/resources/static/css/font-awesome.min.css}">
+
+    <title>New Product / Edit Product</title>
+</head>
+<body>
+
+<header>
+    <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                    <a href="products.html"
+                       th:href="@{/products}"
+                       button type="button"
+                       class="btn btn-secondary">Products</button></a>
+                    <a href="categories.html"
+                       th:href="@{/categories}"
+                       button type="button"
+                       class="btn btn-secondary">Categories</button></a>
+                </div>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<nav id="main-header"
+     class="py-1 mb-3 navbar navbar-expand-sm navbar-light bg-light text-dark">
+    <span class="navbar-brand text-uppercase mr-auto"><h1>PRODUCT</h1></span>
+    <span class="navbar-nav float-right">
+            <a href="#"
+               align="absmiddle"
+               class="btn btn-light"
+               title="Add product"
+               data-target="#addProduct"
+               data-toggle="modal"
+               data-placement="left">
+                <i class="fa fa-plus-square fa-3x"></i>
+                <span class="d-none d-sm-inline"></span></a>
+    </span>
+</nav>
+
+
+
+
+
+
+
+
+<footer class="text-center" style="font-size: 12px">
+    <p></p>
+    &copy Maksim Nechyparenka, 2019
+</footer>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://kit.fontawesome.com/b72194b912.js"></script>
+<script src="../../resources/static/js/jquery-3.4.1.slim.min.js"
+        th:src="@{/resources/static/js/jquery-3.4.1.slim.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/resources/static/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.js"
+        th:src="@{/resources/static/js/bootatrap.js}"></script>
+
+
+</body>
+</html>

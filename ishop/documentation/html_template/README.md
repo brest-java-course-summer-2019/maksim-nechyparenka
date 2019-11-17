@@ -1,3 +1,0 @@
-**Frontend templates**
-
-Bootstrap layout
