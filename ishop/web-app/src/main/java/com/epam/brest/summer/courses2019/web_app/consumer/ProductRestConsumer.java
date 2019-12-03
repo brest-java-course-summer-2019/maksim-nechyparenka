@@ -40,7 +40,7 @@ public class ProductRestConsumer implements ProductService {
 
         LOGGER.debug("Find product with id = {}", productId);
 
-        ResponseEntity<Product> responseEntity = restTemplate.getForEntity(url + "/" + productId, Product.class);
+        ResponseEntity<Product> responseEntity = restTemplate.getForEntity(url + "/admin/" + productId, Product.class);
         return responseEntity.getBody();
     }
 
@@ -49,7 +49,7 @@ public class ProductRestConsumer implements ProductService {
 
         LOGGER.debug("Find all ProductStubs");
 
-        ResponseEntity<List> responseEntity = restTemplate.getForEntity(url + "/info", List.class);
+        ResponseEntity<List> responseEntity = restTemplate.getForEntity(url + "/", List.class);
         return (List<ProductStub>) responseEntity.getBody();
     }
 
@@ -59,7 +59,7 @@ public class ProductRestConsumer implements ProductService {
         LOGGER.debug("Find productStub with id = {}", productId);
 
         ResponseEntity<ProductStub> responseEntity = restTemplate
-                .getForEntity(url + "/info/" + productId, ProductStub.class);
+                .getForEntity(url + "/" + productId, ProductStub.class);
         return responseEntity.getBody();
     }
 
@@ -69,7 +69,7 @@ public class ProductRestConsumer implements ProductService {
         LOGGER.debug("Find product by category id = {}", categoryId);
 
         UriComponentsBuilder uriBuilder = UriComponentsBuilder
-                .fromUriString(url + "/category-filter" + "/" + categoryId)
+                .fromUriString(url + "/admin/category-filter" + "/" + categoryId)
                 .queryParam("id", categoryId);
 
         ResponseEntity<List> responseEntity = restTemplate.getForEntity(uriBuilder.toUriString(), List.class);

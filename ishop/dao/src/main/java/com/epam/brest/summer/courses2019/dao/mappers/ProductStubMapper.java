@@ -32,10 +32,10 @@ public class ProductStubMapper implements RowMapper<ProductStub> {
      */
     public static final String PRODUCT_CATEGORY_ID = "product_category_id";
 
-//    /**
-//     * Product category name query parameter name
-//     */
-//    public static final String PRODUCT_CATEGORY_NAME = "product_category_name";
+    /**
+     * Product category name query parameter name
+     */
+    public static final String PRODUCT_CATEGORY_NAME = "product_category_name";
 
     /**
      * Product price query parameter name
@@ -59,7 +59,7 @@ public class ProductStubMapper implements RowMapper<ProductStub> {
         productStub.setProductId(resultSet.getInt(PRODUCT_ID));
         productStub.setProductName(resultSet.getString(PRODUCT_NAME));
         productStub.setProductCategoryId(resultSet.getInt(PRODUCT_CATEGORY_ID));
-//        productStub.setProductCategoryName(resultSet.getString(PRODUCT_CATEGORY_NAME));
+        productStub.setProductCategoryName(resultSet.getString(PRODUCT_CATEGORY_NAME));
         productStub.setProductPrice(resultSet.getBigDecimal(PRODUCT_PRICE));
 
         return productStub;

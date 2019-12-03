@@ -26,10 +26,10 @@ public class ProductStub {
      */
     private Integer productCategoryId;
 
-//    /**
-//     * Product Category Name {@code productCategory} name
-//     */
-//    private String productCategoryName;
+    /**
+     * Product Category Name {@code productCategory} name
+     */
+    private String productCategoryName;
 
     /**
      * Product price {@code productPrice} price
@@ -88,14 +88,14 @@ public class ProductStub {
         return productCategoryId;
     }
 
-//    /**
-//     * Returns {@code productCategory} name
-//     *
-//     * @return {@code String} representing category name
-//     */
-//    public String getProductCategoryName() {
-//        return productCategoryName;
-//    }
+    /**
+     * Returns {@code productCategory} name
+     *
+     * @return {@code String} representing category name
+     */
+    public String getProductCategoryName() {
+        return productCategoryName;
+    }
 
     /**
      * Returns product price
@@ -124,14 +124,14 @@ public class ProductStub {
         this.productCategoryId = productCategoryId;
     }
 
-//    /**
-//     * Sets product category name
-//     *
-//     * @param productCategoryName category name {@code String}
-//     */
-//    public void setProductCategoryName(String productCategoryName) {
-//        this.productCategoryName = productCategoryName;
-//    }
+    /**
+     * Sets product category name
+     *
+     * @param productCategoryName category name {@code String}
+     */
+    public void setProductCategoryName(String productCategoryName) {
+        this.productCategoryName = productCategoryName;
+    }
 
     /**
      * Sets product name

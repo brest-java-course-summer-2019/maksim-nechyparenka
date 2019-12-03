@@ -28,7 +28,7 @@ public class ProductCategoryRestConsumer implements ProductCategoryService {
 
         LOGGER.debug("Find all product categories");
 
-        ResponseEntity<List> responseEntity = restTemplate.getForEntity(url, List.class);
+        ResponseEntity<List> responseEntity = restTemplate.getForEntity(url + "/", List.class);
         return (List<ProductCategory>) responseEntity.getBody();
     }
 

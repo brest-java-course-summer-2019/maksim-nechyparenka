@@ -55,7 +55,7 @@ public class ProductRestController {
      * @param productId id of required {@code product}
      * @return required {@code product}
      */
-    @GetMapping(value = "/{productId}")
+    @GetMapping(value = "/admin/{productId}")
     @ResponseStatus(HttpStatus.OK)
     public Product findById(@PathVariable("productId") Integer productId) {
 
@@ -69,7 +69,7 @@ public class ProductRestController {
      *
      * @return {@code List} of a {@code product stubs Objects}
      */
-    @GetMapping(value = "/info")
+    @GetMapping(value = "/")
     public List<ProductStub> findAllProductStubs() {
 
         LOGGER.debug("Get all productStubs");
@@ -83,7 +83,7 @@ public class ProductRestController {
      * @param productId id of required {@code productStub}
      * @return required {@code productStub}
      */
-    @GetMapping(value = "/info/{productId}")
+    @GetMapping(value = "/{productId}")
     public ProductStub findStubById(@PathVariable("productId") Integer productId) {
 
         LOGGER.debug("Get product by id = {}", productId);

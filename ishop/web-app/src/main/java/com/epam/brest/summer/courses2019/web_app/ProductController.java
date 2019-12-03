@@ -54,17 +54,33 @@ public class ProductController {
     }
 
     /**
-     * Goto Products list page.
+     * Goto all Products list page.
+     *
+     * @param model model
+     * @return view name
+     */
+    @GetMapping(value = "/products/admin")
+    public final String findAllProducts(Model model) {
+
+        LOGGER.debug("Find all products: ({})", model);
+
+        model.addAttribute("products", productService.findAll());
+        model.addAttribute("productCategories", productCategoryService.findAll());
+        return "products";
+    }
+
+    /**
+     * Goto all Product Stubs list page.
      *
      * @param model model
      * @return view name
      */
     @GetMapping(value = "/products")
-    public final String products(Model model) {
+    public final String findAllProductStubs(Model model) {
 
         LOGGER.debug("Find all products: ({})", model);
 
-        model.addAttribute("products", productService.findAll());
+        model.addAttribute("products", productService.findAllStubs());
         model.addAttribute("productCategories", productCategoryService.findAll());
         return "products";
     }
@@ -169,17 +185,40 @@ public class ProductController {
     }
 
     /**
-     *Go to page with list of products in category sorted by price interval
+     *Go to page with list of productStubs in category
      *
      * @param result result object contains information about filter validation
      * @param model model contains information for view rendering
      * @return view template name
      */
-    @PostMapping(value = "/products/price-category-filter")
+    @GetMapping(value = "/products/category-filter")
+    public final String productsByCategory(Integer productCategoryId, BindingResult result, Model model) {
+
+        LOGGER.debug("Find all product stubs from category ({})", productCategoryId);
+
+        model.addAttribute("productCategories", productCategoryService.findAll());
+        model.addAttribute("location", "products");
+
+        if (result.hasErrors()) {
+            return "products";
+        } else {
+            model.addAttribute("products", productService.findStubsByProductCategoryId(productCategoryId));
+            return "products";
+        }
+    }
+
+    /**
+     *Go to page with list of productStubs in category sorted by price interval
+     *
+     * @param result result object contains information about filter validation
+     * @param model model contains information for view rendering
+     * @return view template name
+     */
+    @GetMapping(value = "/products/price-category-filter")
     public final String productsByPriceInterval(BigDecimal priceStart, BigDecimal priceEnd,
                                                 Integer productCategoryId, BindingResult result, Model model) {
 
-        LOGGER.debug("Find all product stubs from price interval in category ({}, {}, {})", priceStart, priceEnd,
+        LOGGER.debug("Find all product stubs from price interval by category ({}, {}, {})", priceStart, priceEnd,
                 productCategoryId);
 
         model.addAttribute("productCategories", productCategoryService.findAll());

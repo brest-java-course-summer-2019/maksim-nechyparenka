@@ -53,7 +53,7 @@ public class ProductCategoryRestController {
      * @return required {@code productCategory}
      */
     @GetMapping(value = "/{productCategoryId}")
-    public ProductCategory findProductCategoryById(@PathVariable() Integer productCategoryId) {
+    public ProductCategory findProductCategoryById(@PathVariable("productCategoryId") Integer productCategoryId) {
 
         LOGGER.debug("Get product category by id = {}", productCategoryId);
 

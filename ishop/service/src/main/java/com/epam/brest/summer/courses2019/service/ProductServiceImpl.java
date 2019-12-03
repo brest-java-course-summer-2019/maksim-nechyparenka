@@ -73,7 +73,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductStub> findStubsByProductCategoryId(Integer productCategoryId) {
 
-        LOGGER.debug("Find Products by product category ID: ({})", productCategoryId);
+        LOGGER.debug("Find ProductStubs by product category ID: ({})", productCategoryId);
 
         return productStubDao.findStubsByProductCategoryId(productCategoryId);
     }
